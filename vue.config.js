@@ -1,5 +1,15 @@
-const { defineConfig } = require('@vue/cli-service')
-module.exports = defineConfig({
-  transpileDependencies: true,
-  lintOnSave: false
-})
+module.exports = {
+	css: {
+     loaderOptions: {
+      less: {
+        
+          modifyVars: {
+            'primary-color': '#1DA57A',
+            'link-color': '#ffffff',
+            'border-radius-base': '2px',
+          },
+          javascriptEnabled: true,
+      },
+    },
+  }
+}
