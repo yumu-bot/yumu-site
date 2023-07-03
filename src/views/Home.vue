@@ -1,13 +1,9 @@
 <!-- eslint-disable vue/multi-word-component-names -->
 <template>
 	<div class="home-page">
-		<div class="nav">
-			<div class="nav-bar">
-			<Navigation></Navigation>
-			</div>
-		</div>
+		<Navigation></Navigation>
 		<div class="page-content">
-		<HomeContent></HomeContent>
+			<HomeContent></HomeContent>
 		</div>
 	</div>
 </template>
@@ -21,37 +17,32 @@ import { onMounted } from 'vue';
 </script>
 
 <style lang="less" scoped>
-.nav {
-	// display: inline-flex;
-	background-color: #54454C;
-	// color: #ffffff;
-	text-align: center;
-width:100%;
-// left:395.04px;
-// height: 60px;
-position:relative;
-z-index: 0;
-}
-.home-page{
+.home-page {
 	// min-width: 1024px;
 	// min-height: 960px;
-	// display: inline;
-	 position: relative;
-// left:395.04px;
+	// display: flex;
+	// position: relative;
+	// left:395.04px;
+	// overflow: hidden;
+	z-index: auto;
 }
-.page-content{
+
+.page-content {
 	background-color: #2A2226;
 	// width:50%;
-	height:1000px;
+	height: auto;
 	// position:fixed;
 	// background-size:50% 100%;
 	// flex-grow: 1;
-	// width: 1129.92px;
-//   position:relative;
-// left:395.04px;
-// right: inherit;
-top:50.28px;
-// text-align: center;
-z-index: -1;
+	width: 1129.92px;
+	position: relative;
+	// left:395.04px;
+	// right: inherit;
+	top: 50.28px;
+	// text-align: center;
+	// z-index: 1;
+	margin: auto; //高度自适应实现垂直居中,父级元素设置display: flex;
+	// padding-top: 44px;
+	// display: inline-block;
 }
 </style>

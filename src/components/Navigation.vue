@@ -1,15 +1,12 @@
 <!-- eslint-disable vue/multi-word-component-names -->
 <template>
 	<div class="nav">
-	<a-affix :offset-top="top">
 		<a-space size="large">
-			<a-span class="nav-title">Yumu Site</a-span>
+			<span class="nav-title">Yumu Site</span>
 			<a-menu class="nav-bar" v-model:selectedKeys="current" mode="horizontal">
-				<a-sub-menu key="home">
-					<template #title>主页</template>
-					<a-menu-item key="setting:1">欢迎页</a-menu-item>
-					<a-menu-item key="setting:2">用户页</a-menu-item>
-				</a-sub-menu>
+				<a-menu-item key="home">
+					主页
+				</a-menu-item>
 				<a-menu-item key="function">
 					功能
 				</a-menu-item>
@@ -28,19 +25,29 @@
 				</a-menu-item> -->
 			</a-menu>
 		</a-space>
-	</a-affix>
 	</div>
 </template>
 
 <script setup>
 import { ref } from "vue"
-import HomeContent from '@/components/HomeContent.vue';
-const activeIndex = ref('1')
-const activeIndex2 = ref('1')
+const current = ref(['home']);
+
 
 </script>
 
 <style lang="less" scoped>
+.nav {
+	// display: inline-flex;
+	background-color: #54454C;
+	// color: #ffffff;
+	text-align: center;
+	width: 100%;
+	// left:395.04px;
+	// height: 60px;
+	position: fixed;
+	z-index: inherit;
+}
+
 .nav-bar {
 	background-color: #54454C;
 	color: #ffffff;
@@ -50,14 +57,13 @@ const activeIndex2 = ref('1')
 	border: #54454C;
 	width: 960px;
 	// position:relative;
-// left: 395.04px;
-
+	// left: 395.04px;
+	// z-index: 4;
 }
 
 .nav-title {
 	font-size: xx-large;
 	// position: relative;
-	
 	// background-color: #54454C;
 	// left: 395.04px;
 }
