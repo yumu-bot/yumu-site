@@ -9,6 +9,7 @@ import 'ant-design-vue/dist/antd.less'
 import '@/assets/css/index.less' // 无需在此处引入全局样式，默认已经引入
 // import '@/assets/iconfont/iconfont.css' // 引入矢量图标样式
 // import '@/assets/iconfont/iconfont.js'
+import 'swiper'
 
 const app = createApp(App)
 // for (const [key, component] of Object.entries(ElementPlusIconsVue)) {
