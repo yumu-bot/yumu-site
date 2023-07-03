@@ -20,11 +20,11 @@ import { onMounted } from 'vue';
 .home-page {
 	// min-width: 1024px;
 	// min-height: 960px;
-	// display: flex;
+	display: flex;
 	// position: relative;
 	// left:395.04px;
 	// overflow: hidden;
-	z-index: auto;
+	// z-index: auto;
 }
 
 .page-content {
@@ -40,9 +40,9 @@ import { onMounted } from 'vue';
 	// right: inherit;
 	top: 50.28px;
 	// text-align: center;
-	// z-index: 1;
-	margin: auto; //高度自适应实现垂直居中,父级元素设置display: flex;
-	// padding-top: 44px;
+	z-index: 1;
+	margin: 0 auto; //高度自适应实现垂直居中,父级元素设置display: flex;
+	padding-top: 30px;
 	// display: inline-block;
 }
 </style>

@@ -43,9 +43,10 @@ const current = ref(['home']);
 	text-align: center;
 	width: 100%;
 	// left:395.04px;
-	// height: 60px;
+	height: auto;
 	position: fixed;
-	z-index: inherit;
+	display: inline;
+	z-index: 2;
 }
 
 .nav-bar {
@@ -53,7 +54,7 @@ const current = ref(['home']);
 	color: #ffffff;
 	// text-align: center;
 	display: inline-block;
-	font-size: x-large;
+	font-size: large;
 	border: #54454C;
 	width: 960px;
 	// position:relative;
@@ -62,7 +63,7 @@ const current = ref(['home']);
 }
 
 .nav-title {
-	font-size: xx-large;
+	font-size: x-large;
 	// position: relative;
 	// background-color: #54454C;
 	// left: 395.04px;
