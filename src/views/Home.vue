@@ -1,7 +1,9 @@
 <!-- eslint-disable vue/multi-word-component-names -->
+<!-- 首页路由 -->
 <template>
 	<div class="home-page">
 		<Navigation></Navigation>
+		<!-- 主页内容展示 -->
 		<div class="page-content">
 			<HomeContent></HomeContent>
 		</div>
