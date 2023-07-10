@@ -24,11 +24,18 @@
 					</a>
 				</a-menu-item> -->
 			</a-menu>
+			<!-- 用户信息展示 -->
+			<span class="user-name">Muziyami</span>
+			<a-avatar class="user-avatar" :size="{ xs: 24, sm: 32, md: 40, lg: 48, xl: 48, xxl: 48 }"
+				src="src\assets\img\avatar\Head_yuyuko_Qiqi.png">
+			</a-avatar>
 		</a-space>
+
 	</div>
 </template>
 
 <script setup>
+import { AntDesignOutlined } from '@ant-design/icons-vue';
 import { ref } from "vue"
 const current = ref(['home']);
 
@@ -56,7 +63,8 @@ const current = ref(['home']);
 	display: inline-block;
 	font-size: x-large;
 	border: #54454C;
-	width: 960px;
+	width: 790px;
+	// font-weight: 500;
 	// position:relative;
 	// left: 395.04px;
 	// z-index: 4;
@@ -67,5 +75,16 @@ const current = ref(['home']);
 	// position: relative;
 	// background-color: #54454C;
 	// left: 395.04px;
+}
+
+.user-avatar {
+	// padding-bottom: -2px;
+	margin-bottom: 6px;
+	// margin-right: 20px;
+}
+
+.user-name {
+	font-size: large;
+	// padding-right: 10px;
 }
 </style>
