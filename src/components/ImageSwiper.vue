@@ -1,3 +1,4 @@
+<!-- 图片滑动展示组件 -->
 <template>
 	<div class="swiperbox">
 		<swiper :slidesPerView="1" :spaceBetween="30" :loop="true" :centeredSlides="true" :pagination="{
@@ -36,7 +37,7 @@ const modules = [Autoplay, Pagination, Navigation, A11y];
 <style lang="less" scoped>
 .mySwiper {
 	width: inherit;
-	height: 200px;
+	height: 250px;
 }
 
 .swiper-slide {
