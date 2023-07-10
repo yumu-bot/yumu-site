@@ -1,25 +1,29 @@
+<!-- 首页内容展示 -->
 <template>
   <div class="home-content">
+    <!-- 图片滑动展示 -->
     <div class="image-swiper">
       <ImageSwiper></ImageSwiper>
     </div>
     <!-- <a-space direction="vertical"> -->
-    <span style="padding: 20px;">功能</span>
+    <!-- 功能快捷入口 -->
+    <h3 class="home-header" style="padding-left: 20px;">功能</h3>
     <div class="function-content">
-      <img src="src\assets\img\function\Function_Map.jpg">
+      <img class="large-item" src="src\assets\img\function\Function_Map.jpg">
       <div class="function-item">
-        <a-row :gutter="[32, 16]">
+        <a-row :gutter="[51, 16]">
           <a-col :span="12"><img class="small-item" src="src\assets\img\function\Function_Map.jpg"></a-col>
           <a-col :span="12"><img class="small-item" src="src\assets\img\function\Function_Map.jpg"></a-col>
         </a-row>
-        <a-row :gutter="[32, 16]" style="padding-top: 60px;">
+        <a-row :gutter="[51, 16]" style="padding-top: 40px;">
           <a-col :span="12"><img class="small-item" src="src\assets\img\function\Function_Map.jpg"></a-col>
           <a-col :span="12"><img class="small-item" src="src\assets\img\function\Function_Map.jpg"></a-col>
         </a-row>
       </div>
     </div>
+    <!-- 推荐快捷入口 -->
     <div class="suggest-content">
-      <span>推荐</span>
+      <h3 class="home-header">推荐</h3>
       <a-row :gutter="[44, 8]">
         <a-col :span="6"><img class="small-item" src="src\assets\img\function\Function_Map.jpg"></a-col>
         <a-col :span="6"><img class="small-item" src="src\assets\img\function\Function_Map.jpg"></a-col>
@@ -27,8 +31,13 @@
         <a-col :span="6"><img class="small-item" src="src\assets\img\function\Function_Map.jpg"></a-col>
       </a-row>
     </div>
+    <!-- 活跃数据展示 -->
     <div class="activity-show">
-      <span>活跃</span>
+      <h3 class="home-header">活跃</h3>
+      <a-row :gutter="[8, 8]">
+        <a-col :span="12" style="width: 100.47px;height: 100px;border-radius: 20px;background-color: #382E32;"></a-col>
+        <a-col :span="12" style="width: 100.47px;height: 100px;border-radius: 20px;background-color: #382E32;"></a-col>
+      </a-row>
     </div>
     <!-- </a-space> -->
   </div>
@@ -58,10 +67,11 @@ import ImageSwiper from '@/components/ImageSwiper.vue';
 }
 
 .function-item {
+  //功能入口键
   display: flex;
   flex-wrap: wrap;
-  padding-right: 20px;
-  padding-left: 20px;
+  padding-right: 10px;
+  padding-left: 42px;
   // // flex-direction: column;
   // align-items: center;
   // justify-content: center;
@@ -75,9 +85,10 @@ import ImageSwiper from '@/components/ImageSwiper.vue';
 .activity-show {
   padding-left: 20px;
   padding-right: 20px;
-  // top: 5px;
+  padding-top: 1px;
 
 }
+
 
 img {
   border-radius: 20px;
@@ -85,5 +96,9 @@ img {
 
 .small-item {
   width: 240px;
+}
+
+.large-item {
+  width: 523.47px;
 }
 </style>
