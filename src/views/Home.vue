@@ -2,11 +2,12 @@
 <!-- 首页路由 -->
 <template>
 	<div class="home-page">
-		<Navigation></Navigation>
 		<!-- 主页内容展示 -->
+		<!-- 二级路由 -->
 		<div class="page-content">
-			<HomeContent></HomeContent>
+			<router-view></router-view>
 		</div>
+
 	</div>
 </template>
 
