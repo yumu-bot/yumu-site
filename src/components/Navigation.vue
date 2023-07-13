@@ -5,7 +5,7 @@
 			<span class="nav-title">Yumu Site</span>
 			<a-menu class="nav-bar" v-model:selectedKeys="current" mode="horizontal">
 				<a-menu-item key="home">
-					主页
+					<router-link to="/">主页</router-link>
 				</a-menu-item>
 				<a-menu-item key="function">
 					功能
@@ -16,7 +16,7 @@
 				<a-menu-item key="realtime">
 					实时
 				</a-menu-item><a-menu-item key="about">
-					关于
+					<router-link to="/about">关于</router-link>
 				</a-menu-item>
 				<!-- <a-menu-item key="alipay">
 					<a href="https://antdv.com" target="_blank" rel="noopener noreferrer">
@@ -30,7 +30,6 @@
 				src="src\assets\img\avatar\Head_yuyuko_Qiqi.png">
 			</a-avatar>
 		</a-space>
-
 	</div>
 </template>
 
