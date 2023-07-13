@@ -9,15 +9,20 @@
     <!-- 功能快捷入口 -->
     <h3 class="home-header" style="padding-left: 20px;">功能</h3>
     <div class="function-content">
-      <img class="large-item" src="src\assets\img\function\Function_Map.jpg">
+      <img class="large-item" :title="`ppm`" src="src\assets\img\function\Function_Map.jpg"
+        @click="router.push(`/about`)">
       <div class="function-item">
         <a-row :gutter="[51, 16]">
-          <a-col :span="12"><img class="small-item" src="src\assets\img\function\Function_Map.jpg"></a-col>
-          <a-col :span="12"><img class="small-item" src="src\assets\img\function\Function_Map.jpg"></a-col>
+          <a-col :span="12"><img class="small-item" :title="`bpht`"
+              src="src\assets\img\function\Function_Map.jpg"></a-col>
+          <a-col :span="12"><img class="small-item" :title="`ymra`"
+              src="src\assets\img\function\Function_Map.jpg"></a-col>
         </a-row>
         <a-row :gutter="[51, 16]" style="padding-top: 40px;">
-          <a-col :span="12"><img class="small-item" src="src\assets\img\function\Function_Map.jpg"></a-col>
-          <a-col :span="12"><img class="small-item" src="src\assets\img\function\Function_Map.jpg"></a-col>
+          <a-col :span="12"><img class="small-item" :title="`ymmn`"
+              src="src\assets\img\function\Function_Map.jpg"></a-col>
+          <a-col :span="12"><img class="small-item" :title="`info`"
+              src="src\assets\img\function\Function_Map.jpg"></a-col>
         </a-row>
       </div>
     </div>
@@ -25,8 +30,10 @@
     <div class="suggest-content">
       <h3 class="home-header">推荐</h3>
       <a-row :gutter="[44, 8]">
-        <a-col :span="6"><img class="small-item" src="src\assets\img\function\Function_Map.jpg"></a-col>
-        <a-col :span="6"><img class="small-item" src="src\assets\img\function\Function_Map.jpg"></a-col>
+        <a-col :span="6"><img class="small-item" :title="`Baidu`" src="src\assets\img\function\Function_Map.jpg"
+            @click="jump"></a-col>
+        <a-col :span="6"><img class="small-item" :title="`Bilibili`"
+            src="src\assets\img\function\Function_Map.jpg"></a-col>
         <a-col :span="6"><img class="small-item" src="src\assets\img\function\Function_Map.jpg"></a-col>
         <a-col :span="6"><img class="small-item" src="src\assets\img\function\Function_Map.jpg"></a-col>
       </a-row>
@@ -40,11 +47,19 @@
       </a-row>
     </div>
     <!-- </a-space> -->
+    <!-- <button>{{ current1 }}</button> -->
   </div>
 </template>
 
 <script setup>
 import ImageSwiper from '@/components/ImageSwiper.vue';
+import router from '../router/index.js'
+import { inject } from 'vue';
+// import current from '../components/Navigation.vue'
+// const current = inject("current", {});
+function jump() {
+  // router.push()
+}
 </script>
 
 <style lang="less" scoped>
@@ -92,6 +107,18 @@ import ImageSwiper from '@/components/ImageSwiper.vue';
 
 img {
   border-radius: 20px;
+  // css过渡
+  transition-property: all;
+  transition-duration: 0.5s;
+  transition-timing-function: ease;
+  transition-delay: 0s;
+}
+
+img:hover {
+  transform: scale(1.03);
+  // 图片高亮
+  -webkit-filter: brightness(90%);
+  filter: brightness(90%);
 }
 
 .small-item {
