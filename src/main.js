@@ -10,6 +10,7 @@ import '@/assets/css/index.less' // 无需在此处引入全局样式，默认�
 // import '@/assets/iconfont/iconfont.css' // 引入矢量图标样式
 // import '@/assets/iconfont/iconfont.js'
 import 'swiper'
+// import bus from '../src/utils/bus.js'
 
 const app = createApp(App)
 // for (const [key, component] of Object.entries(ElementPlusIconsVue)) {
@@ -17,7 +18,10 @@ const app = createApp(App)
 // }
 app.use(router)
 app.use(antd)
+// app.config.globalProperties.$bus = bus;
 app.mount('#app')
+
+
 
 // const debounce = (fn, delay) => {
 //   let timer = null;
