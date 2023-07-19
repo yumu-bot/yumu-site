@@ -55,6 +55,9 @@ import router from '../router/index.js'
 import { inject, onMounted, ref } from 'vue';
 import bus from '../utils/bus';
 export default {
+  components: {
+    ImageSwiper,
+  },
   data() {
     return {
       headMenu: "",
