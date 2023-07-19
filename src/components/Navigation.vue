@@ -118,6 +118,7 @@ export default {
 
 .user-avatar {
 	// padding-bottom: -2px;
+	margin-top: 6px;
 	margin-bottom: 6px;
 	// margin-right: 20px;
 }
