@@ -9,12 +9,11 @@
     <!-- 功能快捷入口 -->
     <h3 class="home-header" style="padding-left: 20px;">功能</h3>
     <div class="function-content">
-      <img class="large-item" :title="`ppm`" src="src\assets\img\function\Function_Map.jpg"
-        @click="router.push(`/about`)">
+      <img class="large-item" :title="`ppm`" src="src\assets\img\function\Function_Map.jpg" @click="jumpPage('about')">
       <div class="function-item">
         <a-row :gutter="[51, 16]">
-          <a-col :span="12"><img class="small-item" :title="`bpht`"
-              src="src\assets\img\function\Function_Map.jpg"></a-col>
+          <a-col :span="12"><img class="small-item" :title="`bpht`" src="src\assets\img\function\Function_Map.jpg"
+              @click="jumpPage('function')"></a-col>
           <a-col :span="12"><img class="small-item" :title="`ymra`"
               src="src\assets\img\function\Function_Map.jpg"></a-col>
         </a-row>
@@ -30,8 +29,7 @@
     <div class="suggest-content">
       <h3 class="home-header">推荐</h3>
       <a-row :gutter="[44, 8]">
-        <a-col :span="6"><img class="small-item" :title="`Baidu`" src="src\assets\img\function\Function_Map.jpg"
-            @click="jump"></a-col>
+        <a-col :span="6"><img class="small-item" :title="`Baidu`" src="src\assets\img\function\Function_Map.jpg"></a-col>
         <a-col :span="6"><img class="small-item" :title="`Bilibili`"
             src="src\assets\img\function\Function_Map.jpg"></a-col>
         <a-col :span="6"><img class="small-item" src="src\assets\img\function\Function_Map.jpg"></a-col>
@@ -51,15 +49,32 @@
   </div>
 </template>
 
-<script setup>
+<script>
 import ImageSwiper from '@/components/ImageSwiper.vue';
 import router from '../router/index.js'
-import { inject } from 'vue';
-// import current from '../components/Navigation.vue'
-// const current = inject("current", {});
-function jump() {
-  // router.push()
+import { inject, onMounted, ref } from 'vue';
+import bus from '../utils/bus';
+export default {
+  data() {
+    return {
+      headMenu: "",
+
+    }
+  }, methods: {
+    // 路由跳转
+    jumpPage(headMenu) {
+      router.push({ path: `/${headMenu}` });
+      // console.log("jumped to " + headMenu);
+      this.handleClick(headMenu);
+    },
+    // 路由传值(通过事件总线传值给导航栏组件)
+    handleClick(headMenu) {
+      bus.$emit("currentMenu", headMenu);
+    }
+  }
 }
+
+
 </script>
 
 <style lang="less" scoped>
