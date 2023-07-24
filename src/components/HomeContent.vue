@@ -10,20 +10,20 @@
       <!-- 功能快捷入口 -->
       <h3 class="home-header function-header" style="">功能</h3>
       <div class="function-content">
-        <img class="large-item" :title="`ppm`" src="src\assets\img\function\Function_Map.jpg" @click="jumpPage('about')">
+        <img class="large-item" :title="`ppm`" src="src\assets\img\function\Function_Map.jpg" @click="jumpPage('ppm')">
         <div class="function-content-right">
           <!-- 使用antd的flex布局(UI内置) -->
           <a-row :gutter="[51, 16]">
             <a-col :span="12"><img class="small-item" :title="`bpht`" src="src\assets\img\function\Function_Map.jpg"
-                @click="jumpPage('function')"></a-col>
+                @click="jumpPage('bpht')"></a-col>
             <a-col :span="12"><img class="small-item" :title="`ymra`"
                 src="src\assets\img\function\Function_Map.jpg"></a-col>
           </a-row>
           <a-row :gutter="[51, 16]" style="padding-top: 40px;">
             <a-col :span="12"><img class="small-item" :title="`ymmn`"
                 src="src\assets\img\function\Function_Map.jpg"></a-col>
-            <a-col :span="12"><img class="small-item" :title="`info`"
-                src="src\assets\img\function\Function_Map.jpg"></a-col>
+            <a-col :span="12"><img class="small-item" :title="`info`" src="src\assets\img\function\Function_Map.jpg"
+                @click="jumpPage('info')"></a-col>
           </a-row>
           <!-- 未使用antd的flex布局 -->
           <!-- <img class="small-item" :title="`bpht`" src="src\assets\img\function\Function_Map.jpg"
@@ -71,7 +71,6 @@ export default {
   data() {
     return {
       headMenu: "",
-
     }
   }, methods: {
     // 路由跳转
