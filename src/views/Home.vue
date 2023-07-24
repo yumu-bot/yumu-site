@@ -53,7 +53,7 @@ import { onMounted } from 'vue';
 @media screen and (max-width: 480px) {
 	.page-content {
 		width: 100%;
-		padding-top: 22.208333vw;
+		padding-top: 24.208333vw;
 	}
 }
 
