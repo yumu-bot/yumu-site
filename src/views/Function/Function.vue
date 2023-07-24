@@ -1,6 +1,6 @@
 <template>
 	<div class="function-nav">
-		<a-menu :selectedKeys="currentMenu" mode="horizontal">
+		<a-menu :selectedKeys="currentMenu" mode="horizontal" style="font-size: large;">
 			<a-menu-item v-for="(item) in menuList" :key="item.title" @click="changeMenuByNavbar(item.title, item.path)">{{
 				item.header }}
 			</a-menu-item>
@@ -43,7 +43,7 @@ export default {
 		"$route"() {
 			// 监听路由是否前进/后退，发生变化则触发导航栏切换高亮
 			if (this.$router.push) {
-				console.log(this.$route.name, this.$route.path);
+				// console.log(this.$route.name, this.$route.path);
 				let selectedMenu = this.$route.name;
 				let path = this.$route.path;
 				this.changeMenuByNavbar(selectedMenu, path);
