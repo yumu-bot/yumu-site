@@ -50,34 +50,45 @@ import { onMounted } from 'vue';
 	// display: inline-block;
 }
 
-@media screen and (max-width: 640px) {
+@media screen and (max-width: 480px) {
 	.page-content {
 		width: 100%;
+		padding-top: 22.208333vw;
+	}
+}
 
+@media screen and (min-width: 481px) and (max-width: 640px) {
+	.page-content {
+		width: 100%;
+		padding-top: 120px;
 	}
 }
 
 @media screen and (min-width: 641px) and (max-width: 768px) {
 	.page-content {
 		width: 86%;
+		padding-top: 90px;
 	}
 }
 
 @media screen and (min-width: 769px) and (max-width: 960px) {
 	.page-content {
 		width: 77%;
+		padding-top: 60px;
 	}
 }
 
 @media screen and (min-width: 961px) and (max-width: 1098px) {
 	.page-content {
 		width: 73%;
+		padding-top: 50px;
 	}
 }
 
 @media screen and (min-width: 1099px) and (max-width:1280px) {
 	.page-content {
 		width: 69%;
+		padding-top: 40px;
 	}
 }
 
