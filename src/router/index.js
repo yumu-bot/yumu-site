@@ -11,18 +11,31 @@ const routes = [
     children: [
     {
         path: "/home",
-      name:"home",
+        name:"home",
         component: () => import("../components/HomeContent.vue"),
         meta: {
           title: "yumu site | 主页"
         }
       }, {
         path: "/function",
+        redirect: "/ppm",
         name:"function",
         component: () => import("../views/Function/Function.vue"),
         meta: {
           title:"yumu site | 功能"
-        }
+        }, children: [{
+          path: "/ppm",
+          name: "ppm",
+          component:()=>import("../views/Function/PPM.vue")
+        }, {
+          path: "/bpht",
+          name: "bpht",
+          component:()=>import("../views/Function/BPHT.vue")
+          }, {
+          path: "/info",
+          name: "info",
+          component:()=>import("../views/Function/INFO.vue")
+        }]
       },
       {
         path: "/about",
