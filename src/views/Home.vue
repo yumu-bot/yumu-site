@@ -23,7 +23,7 @@ import { onMounted } from 'vue';
 .home-page {
 	// min-width: 1024px;
 	// min-height: 960px;
-	display: flex;
+	// display: flex;
 	// position: relative;
 	// left:395.04px;
 	// overflow: hidden;
@@ -37,7 +37,8 @@ import { onMounted } from 'vue';
 	// position:fixed;
 	// background-size:50% 100%;
 	// flex-grow: 1;
-	width: 1129.92px;
+	// width: 1129.92px;
+	width: 60%;
 	position: relative;
 	// left:395.04px;
 	// right: inherit;
@@ -47,5 +48,54 @@ import { onMounted } from 'vue';
 	margin: 0 auto; //高度自适应实现垂直居中,父级元素设置display: flex;
 	padding-top: 30px;
 	// display: inline-block;
+}
+
+@media screen and (max-width: 640px) {
+	.page-content {
+		width: 100%;
+
+	}
+}
+
+@media screen and (min-width: 641px) and (max-width: 768px) {
+	.page-content {
+		width: 86%;
+	}
+}
+
+@media screen and (min-width: 769px) and (max-width: 960px) {
+	.page-content {
+		width: 77%;
+	}
+}
+
+@media screen and (min-width: 961px) and (max-width: 1098px) {
+	.page-content {
+		width: 73%;
+	}
+}
+
+@media screen and (min-width: 1099px) and (max-width:1280px) {
+	.page-content {
+		width: 69%;
+	}
+}
+
+@media screen and (min-width: 1281px) and (max-width:1536px) {
+	.page-content {
+		width: 64%;
+	}
+}
+
+@media screen and (min-width: 1537px) and (max-width:1919px) {
+	.page-content {
+		width: 61%;
+	}
+}
+
+@media screen and (min-width: 1921px) {
+	.page-content {
+		width: 50%;
+	}
 }
 </style>

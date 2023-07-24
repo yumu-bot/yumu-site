@@ -127,4 +127,10 @@ export default {
 	font-size: large;
 	// padding-right: 10px;
 }
+
+@media screen and (min-width: 1921px) {
+	.nav-bar {
+		width: 650px;
+	}
+}
 </style>
