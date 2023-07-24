@@ -43,7 +43,7 @@ export default {
 	data() {
 		return {
 			menuList: [{ key: "0", title: "home", path: "/home", header: "主页" },
-			{ key: "1", title: "function", path: "/function", header: "功能" },
+			{ key: "1", title: "function", path: "/ppm", header: "功能" },
 			// { key: "2", title: "feature", path: "/feature", header: "特色" },
 			// { key: "3", title: "realtime", path: "/realtime", header: "实时" },
 			{ key: "4", title: "about", path: "/about", header: "关于" }],
@@ -53,7 +53,7 @@ export default {
 	}, methods: {
 		// 任意处路由跳转切换导航栏高亮
 		changeMenuByRandom() {
-			bus.$on("currentMenu", (res) => { this.currentMenu.pop(); this.currentMenu.push(res) });//兄弟组件事件总线通信
+			// bus.$on("currentMenu", (res) => { this.currentMenu.pop(); this.currentMenu.push(res) });//兄弟组件事件总线通信
 		},
 		// 导航栏切换高亮
 		changeMenuByNavbar(selectedMenu, path) {
