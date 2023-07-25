@@ -1,18 +1,21 @@
 <template>
 	<div class="ppm-page">
 		<div class="search-bar">
-			<a-input placeholder="请输入用户名" enter-button="点击查询" size="large" style="width: 100%;">
-			</a-input>
-			<a-select style="width: 20%;" placeholder="default" size="large">
-				<a-select-option value="osu">osu</a-select-option>
-				<a-select-option value="taiko">taiko</a-select-option>
-				<a-select-option value="catch">catch</a-select-option>
-				<a-select-option value="mania">mania</a-select-option>
-			</a-select>
-			<a-button :icon="h(SearchOutlined)" style="width: auto;" size="large">Search</a-button>
+			<a-space direction="horizontal">
+				<a-input placeholder="请输入用户名" enter-button="点击查询" size="large" style="width: 810px;">
+				</a-input>
+				<a-select style="width:110px;" placeholder="游戏模式" size="large">
+					<a-select-option value="osu">osu</a-select-option>
+					<a-select-option value="taiko">taiko</a-select-option>
+					<a-select-option value="catch">catch</a-select-option>
+					<a-select-option value="mania">mania</a-select-option>
+				</a-select>
+				<a-button style="width: auto;" size="large">复制到剪贴板</a-button>
+				<a-button style="width: auto;" size="large">生成!</a-button>
+			</a-space>
 		</div>
 		<div class="search-result">
-			<a-spin />
+			少女祈祷中……
 		</div>
 	</div>
 </template>
@@ -23,19 +26,27 @@ import { SearchOutlined } from '@ant-design/icons-vue';
 
 </script>
 
-<style lang="less" scoped>
+<style lang="scss" scoped>
+.ppm-page {
+	width: 100%;
+}
+
 .search-bar {
-	padding-top: 5px;
+	padding: 10px 0;
 	display: flex;
 	flex-direction: row;
+	flex-wrap: nowrap;
+	// flex:1;
+	width: inherit;
+	background-color: #54454C;
 }
 
 .search-result {
 	text-align: center;
-	background: rgba(0, 0, 0, 0.05);
-	border-radius: 4px;
-	margin-bottom: 20px;
-	padding: 30px 50px;
-	margin: 20px 0;
+	background-color: #54454C;
+	// border-radius: 4px;
+	// margin-bottom: 20px;
+	padding: 30% 0px;
+	margin: 10px 0;
 }
 </style>
