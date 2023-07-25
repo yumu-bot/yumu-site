@@ -83,7 +83,9 @@ export default {
 
 </script>
 
-<style lang="less" scoped>
+<style lang="scss" scoped>
+@import "../assets/css/variables.scss";
+
 .nav {
 	// display: inline-flex;
 	background-color: #54454C;
@@ -98,6 +100,16 @@ export default {
 	margin-top: -8px;
 	margin-left: -8px;
 	color: #ffffff;
+
+	@media screen and (max-width:$xl) {}
+
+	@media screen and (max-width:$md) {}
+
+	@media screen and (max-width:$sm) {}
+
+	@media screen and (max-width:$xs) {
+		// text-align: left;
+	}
 }
 
 
@@ -109,17 +121,57 @@ export default {
 	font-size: x-large;
 	border: #54454C;
 	width: 790px;
+
 	// font-weight: 500;
 	// position:relative;
 	// left: 395.04px;
 	// z-index: 4;
+	@media screen and (max-width:$xl) {
+		width: 400px;
+		font-size: large;
+	}
+	@media screen and (max-width:$lg) {
+		width: 400px;
+		font-size: larger;
+	}
+
+	@media screen and (max-width:$md) {
+		width: 380px;
+		font-size: medium;
+	}
+
+	@media screen and (max-width:$sm) {
+		width: 350px;
+		font-size: small;
+	}
+
+	@media screen and (max-width:$xs) {
+		width: 200px;
+		font-size: smaller;
+	}
 }
 
 .nav-title {
 	font-size: xx-large;
+
 	// position: relative;
 	// background-color: #54454C;
 	// left: 395.04px;
+	@media screen and (max-width:$xl) {
+		font-size: x-large;
+	}
+	@media screen and (max-width:$lg) {
+		font-size: larger;
+	}
+	@media screen and (max-width:$md) {
+		font-size: large;
+	}
+	@media screen and (max-width:$sm) {
+		font-size: medium;
+	}
+	@media screen and (max-width:$xs) {
+		font-size: small;
+	}
 }
 
 .user-avatar {
@@ -134,11 +186,21 @@ export default {
 	font-size: large;
 	// padding-right: 10px;
 	float: right;
-}
+	@media screen and (max-width:$xl) {
+		font-size: x-large;
+	}
+	@media screen and (max-width:$lg) {
+		font-size: larger;
+	}
+	@media screen and (max-width:$md) {
+		font-size: large;
+	}
+	@media screen and (max-width:$sm) {
+		font-size: small;
+	}
 
-@media screen and (min-width: 1921px) {
-	.nav-bar {
-		// width: 650px;
+	@media screen and (max-width:$xs) {
+		font-size: smaller;
 	}
 }
 </style>
