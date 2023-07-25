@@ -22,5 +22,6 @@ const contentHeight = window.outerHeight;
 	text-align: center;
 	line-height: 400%;
 	vertical-align: middle;
+	padding-bottom: 17%;
 }
 </style>
