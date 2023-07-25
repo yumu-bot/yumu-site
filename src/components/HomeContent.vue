@@ -89,7 +89,9 @@ export default {
 
 </script>
 
-<style lang="less" scoped>
+<style lang="scss" scoped>
+@import "../assets/css/variables.scss";
+
 .home-content {
   // color: #fff;
   font-size: large;
@@ -155,139 +157,60 @@ img:hover {
 
 .small-item {
   width: 240px;
+
+  @media screen and (max-width:$xxl) {
+    width: 210px;
+  }
+
+  @media screen and (max-width:$xl) {
+    width: 140px;
+  }
+
+  @media screen and (max-width:$lg) {
+    width: 121px;
+  }
+
+  @media screen and (max-width:$md) {
+    width: 120px;
+  }
+
+  @media screen and (max-width:$sm) {}
+
+  @media screen and (max-width:$xs) {
+    width: 80px;
+  }
+
+  @media screen and (max-width:$xxs) {
+    width: 60px;
+  }
 }
 
 .large-item {
   width: 527.3px;
-}
 
-@media screen and (max-width: 640px) {
-  .large-item {
-    width: 38%;
+  @media screen and (max-width:$xxl) {
+    width: 465px;
   }
 
-  .function-content-right {
-    padding-left: 13.773958vw;
+  @media screen and (max-width:$xl) {
+    width: 330px;
   }
 
-  .suggest-content {
-    padding-right: 7.7vw;
+  @media screen and (max-width:$lg) {
+    width: 293px;
   }
 
-
-}
-
-@media screen and (min-width: 641px) and (max-width: 768px) {
-  .large-item {
-    width: 32.85vw;
+  @media screen and (max-width:$md) {
+    width: 278px;
   }
 
-  .function-content-right {
-    padding-left: 7.773958vw;
+  @media screen and (max-width:$sm) {}
+
+  @media screen and (max-width:$xs) {
+    width: 193px;
   }
 
-  .suggest-content {
-    padding-right: 0.7vw;
+  @media screen and (max-width:$xxs) {
+    width: 152px;
   }
-
-  .main-content {
-    padding-left: 95px;
-    padding-right: 75px;
-  }
-
-}
-
-@media screen and (min-width: 769px) and (max-width: 960px) {
-  .large-item {
-    width: 31.25vw;
-  }
-
-  .function-content-right {
-    padding-left: 6.173958vw;
-  }
-
-  .suggest-content {
-    padding-right: 0.241667vw;
-  }
-
-  .main-content {
-    padding-left: 45px;
-    padding-right: 70px;
-  }
-}
-
-@media screen and (min-width: 961px) and (max-width: 1098px) {
-  .large-item {
-    width: 30.05vw;
-  }
-
-  .function-content-right {
-    padding-left: 5.373958vw;
-  }
-
-  .suggest-content {
-    padding-right: 0.441667vw;
-  }
-
-  .main-content {
-    padding-left: 45px;
-    padding-right: 45px;
-  }
-}
-
-@media screen and (min-width: 1099px) and (max-width:1280px) {
-  .large-item {
-    width: 29.45vw;
-  }
-
-  .function-content-right {
-    padding-left: 4.373958vw;
-  }
-
-  .suggest-content {
-    padding-right: 1.541667vw;
-  }
-
-  .main-content {
-    padding-left: 32px;
-    padding-right: 12px;
-  }
-
-}
-
-@media screen and (min-width: 1281px) and (max-width:1536px) {
-  .large-item {
-    width: 28.164583vw;
-  }
-
-  .function-content-right {
-    padding-left: 3.073958vw;
-  }
-
-  .main-content {
-    padding-left: 18px;
-    padding-right: 18px;
-  }
-}
-
-@media screen and (min-width: 1921px) {
-  .function-content {
-    .large-item {
-      width: 45%;
-    }
-
-    .small-item {
-      width: 90%;
-    }
-  }
-
-  .suggest-content {
-    .small-item {
-      width: 95%;
-    }
-  }
-
-
-
-}
-</style>
+}</style>
