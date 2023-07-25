@@ -1,15 +1,16 @@
 <!-- eslint-disable vue/multi-word-component-names -->
 <template>
 	<div class="nav">
-		<a-space size="large">
-			<span class="nav-title">Yumu Site</span>
-			<a-menu class="nav-bar" :selectedKeys="currentMenu" mode="horizontal">
-				<a-menu-item v-for="(item) in menuList" :key="item.title"
-					@click="changeMenuByNavbar(item.title, item.path)">{{
-						item.header }}
-				</a-menu-item>
-				<!-- 暂未实现的页面 -->
-				<!-- <a-menu-item key="function">
+		<div class="nav-bar">
+			<a-space size="large">
+				<span class="nav-title">Yumu Site</span>
+				<a-menu class="nav-menu" :selectedKeys="currentMenu" mode="horizontal">
+					<a-menu-item v-for="(item) in menuList" :key="item.title"
+						@click="changeMenuByNavbar(item.title, item.path)">{{
+							item.header }}
+					</a-menu-item>
+					<!-- 暂未实现的页面 -->
+					<!-- <a-menu-item key="function">
 					功能
 				</a-menu-item>
 				<a-menu-item key="feature">
@@ -20,18 +21,19 @@
 				</a-menu-item><a-menu-item key="about">
 					<router-link to="/about">关于</router-link>
 				</a-menu-item> -->
-				<!-- <a-menu-item key="alipay">
+					<!-- <a-menu-item key="alipay">
 					<a href="https://antdv.com" target="_blank" rel="noopener noreferrer">
 						Navigation Four - Link
 					</a>
 				</a-menu-item> -->
-			</a-menu>
-			<!-- 用户信息展示 -->
-			<span class="user-name">Muziyami</span>
-			<a-avatar class="user-avatar" :size="{ xs: 24, sm: 32, md: 40, lg: 48, xl: 48, xxl: 48 }"
-				src="src\assets\img\avatar\Head_yuyuko_Qiqi.png">
-			</a-avatar>
-		</a-space>
+				</a-menu>
+				<!-- 用户信息展示 -->
+				<span class="user-name">Muziyami</span>
+				<a-avatar class="user-avatar" :size="{ xs: 24, sm: 32, md: 40, lg: 48, xl: 48, xxl: 48 }"
+					src="src\assets\img\avatar\Head_yuyuko_Qiqi.png">
+				</a-avatar>
+			</a-space>
+		</div>
 	</div>
 </template>
 
@@ -93,13 +95,17 @@ export default {
 	position: fixed;
 	display: inline;
 	z-index: 2;
+	margin-top: -8px;
+	margin-left: -8px;
+	color: #ffffff;
 }
 
-.nav-bar {
+
+.nav-menu {
 	background-color: #54454C;
 	color: #ffffff;
-	// text-align: center;
-	display: inline-block;
+	text-align: left;
+	// display: inline-block;
 	font-size: x-large;
 	border: #54454C;
 	width: 790px;
@@ -121,16 +127,18 @@ export default {
 	margin-top: 6px;
 	margin-bottom: 6px;
 	// margin-right: 20px;
+	float: right;
 }
 
 .user-name {
 	font-size: large;
 	// padding-right: 10px;
+	float: right;
 }
 
 @media screen and (min-width: 1921px) {
 	.nav-bar {
-		width: 650px;
+		// width: 650px;
 	}
 }
 </style>
