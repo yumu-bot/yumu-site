@@ -6,7 +6,7 @@
 			// colorInfo: '#2a2226',
 			fontSize: 14,
 			wireframe: true,
-			borderRadius: 0,
+			borderRadius: 14,
 			// colorBgContainer: '#2A2226',
 			// colorText: '#ffffff',
 			// colorItemText:'#ffffff',
@@ -17,16 +17,27 @@
 				// colorTextPlaceholder: 'rgba(255,255,255,0.45)'
 			},
 			Select: {
-				// colorText: 'rgba(42,34,38,0.5)',
-				// colorTextPlaceholder: '#ffffff',
+				colorText: '#ffffff',
+				// colorPrimary: '#2a2226',
+				colorBgContainer: '#2A2226',
+				colorTextPlaceholder: '#ffffff',
 				// colorPrimaryHover: '#ffffff',
 				// controlItemBgActive: '#ffffff',
-				// colorTextQuaternary: '#ffffff'
+				colorTextQuaternary: '#ffffff',
+				// colorTextTertiary: '#46393F',
+				controlItemBgHover: 'rgba(255,255,255,0.45)',
+				controlItemBgActive: 'rgba(255,255,255,0.65)',
+				colorBgElevated: '#46393F'
 			},
 			Menu: {
 				// borderRadius:16
-				// colorItemBg: '#2A2226',
-				// colorText: '#ffffff',
+				colorItemBg: '#54454C',
+				colorPrimary: '#ffffff',
+				colorItemText: '#ffffff'
+			},
+			Button: {
+				colorBgContainer: '#2A2226',
+				colorText: '#ffffff'
 			}
 		}
 	}">
@@ -34,7 +45,7 @@
 </template>
 
 <script setup>
-import { Menu, Select, theme } from 'ant-design-vue';
+import { Button, Menu, Select, theme } from 'ant-design-vue';
 </script>
 
 <style></style>
