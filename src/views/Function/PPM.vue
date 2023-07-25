@@ -1,18 +1,18 @@
 <template>
 	<div class="ppm-page">
 		<div class="search-bar">
-			<a-input placeholder="请输入用户名" enter-button="点击查询" size="large" style="width: 80%;">
+			<a-input placeholder="请输入用户名" enter-button="点击查询" size="large" style="width: 100%;">
 			</a-input>
-			<a-select style="width: 10%;" placeholder="default" size="large">
+			<a-select style="width: 20%;" placeholder="default" size="large">
 				<a-select-option value="osu">osu</a-select-option>
 				<a-select-option value="taiko">taiko</a-select-option>
 				<a-select-option value="catch">catch</a-select-option>
 				<a-select-option value="mania">mania</a-select-option>
 			</a-select>
-			<a-button :icon="h(SearchOutlined)" style="width: 10%;" size="large">Search</a-button>
+			<a-button :icon="h(SearchOutlined)" style="width: auto;" size="large">Search</a-button>
 		</div>
 		<div class="search-result">
-			<!-- <a-spin /> -->
+			<a-spin />
 		</div>
 	</div>
 </template>
