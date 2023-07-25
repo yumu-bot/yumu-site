@@ -100,16 +100,6 @@ export default {
 	margin-top: -8px;
 	margin-left: -8px;
 	color: #ffffff;
-
-	@media screen and (max-width:$xl) {}
-
-	@media screen and (max-width:$md) {}
-
-	@media screen and (max-width:$sm) {}
-
-	@media screen and (max-width:$xs) {
-		// text-align: left;
-	}
 }
 
 
@@ -126,12 +116,17 @@ export default {
 	// position:relative;
 	// left: 395.04px;
 	// z-index: 4;
+	@media screen and (max-width:$xxl) {
+		width: 500px;
+	}
+
 	@media screen and (max-width:$xl) {
-		width: 400px;
+		width: 450px;
 		font-size: large;
 	}
+
 	@media screen and (max-width:$lg) {
-		width: 400px;
+		width: 420px;
 		font-size: larger;
 	}
 
@@ -146,6 +141,11 @@ export default {
 	}
 
 	@media screen and (max-width:$xs) {
+		width: 250px;
+		font-size: smaller;
+	}
+
+	@media screen and (max-width:$xxs) {
 		width: 200px;
 		font-size: smaller;
 	}
@@ -160,15 +160,19 @@ export default {
 	@media screen and (max-width:$xl) {
 		font-size: x-large;
 	}
+
 	@media screen and (max-width:$lg) {
 		font-size: larger;
 	}
+
 	@media screen and (max-width:$md) {
 		font-size: large;
 	}
+
 	@media screen and (max-width:$sm) {
 		font-size: medium;
 	}
+
 	@media screen and (max-width:$xs) {
 		font-size: small;
 	}
@@ -186,17 +190,21 @@ export default {
 	font-size: large;
 	// padding-right: 10px;
 	float: right;
+
 	@media screen and (max-width:$xl) {
-		font-size: x-large;
-	}
-	@media screen and (max-width:$lg) {
 		font-size: larger;
 	}
-	@media screen and (max-width:$md) {
-		font-size: large;
+
+	@media screen and (max-width:$lg) {
+		font-size: medium;
 	}
-	@media screen and (max-width:$sm) {
+
+	@media screen and (max-width:$md) {
 		font-size: small;
+	}
+
+	@media screen and (max-width:$sm) {
+		font-size: smaller;
 	}
 
 	@media screen and (max-width:$xs) {
