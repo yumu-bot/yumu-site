@@ -54,4 +54,9 @@ export default {
 }
 </script>
 
-<style lang="less" scoped></style>
+<style lang="scss" scoped>
+.function-nav {
+	background-color: #54454C;
+	padding-bottom: 10px;
+}
+</style>
