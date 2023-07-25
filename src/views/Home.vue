@@ -33,7 +33,8 @@ import { onMounted } from 'vue';
 	color: #ffffff;
 
 	@media screen and (min-width: 1921px) {
-		width: 90%;
+		width: 100%;
+		height: 100%;
 		margin: 0 auto;
 	}
 }
