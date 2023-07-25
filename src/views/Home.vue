@@ -28,6 +28,7 @@ import { onMounted } from 'vue';
 	// left:395.04px;
 	// overflow: hidden;
 	// z-index: auto;
+	color: #ffffff;
 }
 
 .page-content {
