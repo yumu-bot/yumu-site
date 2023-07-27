@@ -26,15 +26,24 @@ const routes = [
         }, children: [{
           path: "/ppm",
           name: "ppm",
-          component:()=>import("../views/Function/PPM.vue")
+          component: () => import("../views/Function/PPM.vue"),
+          meta:{
+            title:"yumu site | 功能 | ppm"
+          }
         }, {
           path: "/bpht",
           name: "bpht",
-          component:()=>import("../views/Function/BPHT.vue")
+          component: () => import("../views/Function/BPHT.vue"),
+          meta:{
+            title:"yumu site | 功能 | bpht"
+          }
           }, {
           path: "/info",
           name: "info",
-          component:()=>import("../views/Function/INFO.vue")
+          component: () => import("../views/Function/INFO.vue"),
+            meta:{
+            title:"yumu site | 功能 | info"
+          }
         }]
       },
       {
