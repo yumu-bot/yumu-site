@@ -17,27 +17,19 @@ export default {
 			menuList: [{ key: "0", title: "ppm", path: "/ppm", header: "ppm" },
 			{ key: "1", title: "bpht", path: "/bpht", header: "bpht" },
 			{ key: "2", title: "info", path: "/info", header: "info" }],
-			currentMenu: [""], // 配合antd的:selectedKeys属性，定义currentMenu为字符串数组，home是默认值
+			currentMenu: ["function"], // 配合antd的:selectedKeys属性，定义currentMenu为字符串数组，home是默认值
 		}
 	}, methods: {
-		// 任意处路由跳转切换导航栏高亮
-		changeMenuByRandom() {
-			bus.$on("currentMenu", (res) => {
-				this.currentMenu.pop();
-				this.currentMenu.push(res);
-				console.log(this.currentMenu)
-			});//兄弟组件事件总线通信
-		},
 		// 导航栏切换高亮
 		changeMenuByNavbar(selectedMenu, path) {
 			// console.log(this.currentMenu);
 			// console.log(menu);
-			this.currentMenu.pop();
-			this.currentMenu.push(selectedMenu);
+			// this.currentMenu.pop();
+			// this.currentMenu.push(selectedMenu);
 			this.$router.push(path);
 		},
 	}, mounted() {
-		this.changeMenuByRandom();
+
 	}
 	, watch: {
 		"$route"() {
@@ -48,9 +40,8 @@ export default {
 				let path = this.$route.path;
 				this.changeMenuByNavbar(selectedMenu, path);
 			}
-		}
-	}
-
+		},
+	},
 }
 </script>
 
