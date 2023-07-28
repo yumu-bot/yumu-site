@@ -45,7 +45,7 @@ export default {
 	data() {
 		return {
 			menuList: [{ key: "0", title: "home", path: "/home", header: "主页" },
-			{ key: "1", title: "function", path: "/ppm", header: "功能" },
+			{ key: "1", title: "function", path: "/function", header: "功能" },
 			// { key: "2", title: "feature", path: "/feature", header: "特色" },
 			// { key: "3", title: "realtime", path: "/realtime", header: "实时" },
 			{ key: "4", title: "about", path: "/about", header: "关于" }],
