@@ -6,41 +6,64 @@
 			</a-menu-item>
 		</a-menu>
 	</div>
-	<router-view></router-view>
+	<!-- <router-views></router-views> -->
+	<div>
+		<PPM v-show="current[0] === 'ppm'"></PPM>
+		<BPHT v-if="current[0] === 'bpht'"></BPHT>
+		<INFO v-if="current[0] === 'info'"></INFO>
+	</div>
 </template>
 
 <script>
 import bus from '../../utils/bus';
+import PPM from './PPM.vue';
+import BPHT from './BPHT.vue';
+import INFO from './INFO.vue';
+import { nextTick } from 'vue';
 export default {
 	data() {
 		return {
-			menuList: [{ key: "0", title: "ppm", path: "/ppm", header: "ppm" },
-			{ key: "1", title: "bpht", path: "/bpht", header: "bpht" },
-			{ key: "2", title: "info", path: "/info", header: "info" }],
-			currentMenu: ["function"], // 配合antd的:selectedKeys属性，定义currentMenu为字符串数组，home是默认值
+			menuList: [{ key: "0", title: "ppm", path: "/function/ppm", header: "ppm" },
+			{ key: "1", title: "bpht", path: "/function/bpht", header: "bpht" },
+			{ key: "2", title: "info", path: "/function/info", header: "info" }],
+			currentMenu: [], // 配合antd的:selectedKeys属性，定义currentMenu为字符串数组，home是默认值
+			current: ["ppm"],
 		}
+	},
+	components: {
+		PPM,
+		BPHT,
+		INFO
 	}, methods: {
+		// 任意处路由跳转切换导航栏高亮
+		changeMenuByRandom() {
+			//兄弟组件事件总线通信
+			bus.$on("currentMenu", (res) => {
+				this.changeMenuByNavbar(res);
+			})
+		},
 		// 导航栏切换高亮
-		changeMenuByNavbar(selectedMenu, path) {
+		changeMenuByNavbar(selectedMenu) {
 			// console.log(this.currentMenu);
 			// console.log(menu);
-			// this.currentMenu.pop();
-			// this.currentMenu.push(selectedMenu);
-			this.$router.push(path);
-		},
+			this.current.pop();
+			this.current.push(selectedMenu);
+			// console.log(this.current);
+		}
+	}, created() {
+	},
+	onBeforeMount() {
+		// bus.$off("currentMenu")
 	}, mounted() {
-
-	}
-	, watch: {
-		"$route"() {
-			// 监听路由是否前进/后退，发生变化则触发导航栏切换高亮
-			if (this.$router.push) {
-				// console.log(this.$route.name, this.$route.path);
-				let selectedMenu = this.$route.name;
-				let path = this.$route.path;
-				this.changeMenuByNavbar(selectedMenu, path);
-			}
-		},
+		this.changeMenuByRandom();
+	}, watch: {
+		// current: {
+		// 	handler(oldVal, newVal) {
+		// 		console.log("watching:" + oldVal, newVal);
+		// 		// this.changeMenuByNavbar(newVal);
+		// 	},
+		// 	immediate: true
+		// }
 	},
 }
 </script>
