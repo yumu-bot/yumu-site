@@ -51,12 +51,11 @@ export default {
 			// console.log(this.current);
 		}
 	}, created() {
-		this.changeMenuByRandom();
 	},
 	onBeforeMount() {
 		// bus.$off("currentMenu")
 	}, mounted() {
-		// this.changeMenuByRandom();
+		this.changeMenuByRandom();
 	}, watch: {
 		// current: {
 		// 	handler(oldVal, newVal) {
