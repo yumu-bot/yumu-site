@@ -75,14 +75,16 @@ export default {
   }, methods: {
     // 路由跳转
     jumpPage(headMenu) {
-      router.push({ path: `/${headMenu}` });
-      // console.log("jumped to " + headMenu);
-      this.handleClick(headMenu);
+      // router.push({ path: `/function/${headMenu}` });
+      router.push({ path: "/function" });
+      setTimeout(() => {
+        bus.$emit("currentMenu", headMenu);
+        // console.log("ok", headMenu);
+      }, 100)
+
     },
-    // 路由传值(通过事件总线传值给导航栏组件)
-    handleClick(headMenu) {
-      bus.$emit("currentMenu", headMenu);
-    }
+  }, unmounted() {
+    bus.$emit("currentMenu");
   }
 }
 
@@ -213,4 +215,5 @@ img:hover {
   @media screen and (max-width:$xxs) {
     width: 152px;
   }
-}</style>
+}
+</style>
