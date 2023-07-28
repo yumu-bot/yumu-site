@@ -20,10 +20,12 @@
 	</div>
 </template>
 
-<script setup>
+<script>
 import { h } from 'vue';
 import { SearchOutlined } from '@ant-design/icons-vue';
+export default {
 
+}
 </script>
 
 <style lang="scss" scoped>
