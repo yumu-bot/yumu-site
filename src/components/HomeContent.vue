@@ -75,16 +75,19 @@ export default {
   }, methods: {
     // 路由跳转
     jumpPage(headMenu) {
+      this.headMenu = headMenu;
       // router.push({ path: `/function/${headMenu}` });
       router.push({ path: "/function" });
-      setTimeout(() => {
-        bus.$emit("currentMenu", headMenu);
-        // console.log("ok", headMenu);
-      }, 100)
+      bus.$emit("currentMenu", headMenu);
+      // console.log("ok", headMenu);
 
     },
   }, unmounted() {
-    bus.$emit("currentMenu");
+    let headMenu = this.headMenu;
+    if (headMenu === "") {
+      headMenu = "ppm";
+    }
+    this.jumpPage(headMenu);
   }
 }
 
