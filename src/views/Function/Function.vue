@@ -51,14 +51,20 @@ export default {
 			// console.log(this.current);
 		}
 	}, created() {
-		this.changeMenuByNavbar("ppm");
-		this.changeMenuByRandom();
-	},
-	onBeforeMount() {
-		// bus.$off("currentMenu")
-	}, mounted() {
+		// this.changeMenuByNavbar("ppm");
 		// this.changeMenuByRandom();
-	}, watch: {
+	},
+	beforeMount() {
+		// this.changeMenuByNavbar("ppm");
+		this.changeMenuByRandom();
+	}, mounted() {
+		this.changeMenuByRandom();
+	}, beforeUpdate() {
+		// this.changeMenuByRandom();
+	}, updated() {
+		// this.changeMenuByRandom();
+	}
+	, watch: {
 		// current: {
 		// 	handler(oldVal, newVal) {
 		// 		console.log("watching:" + oldVal, newVal);
