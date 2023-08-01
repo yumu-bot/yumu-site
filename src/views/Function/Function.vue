@@ -39,7 +39,12 @@ export default {
 		changeMenuByRandom() {
 			//兄弟组件事件总线通信
 			bus.$on("currentMenu", (res) => {
-				this.changeMenuByNavbar(res);
+				// console.log("accepted", res);
+				if (res === undefined) {
+					this.changeMenuByNavbar("ppm");
+				} else {
+					this.changeMenuByNavbar(res);
+				}
 			})
 		},
 		// 导航栏切换高亮
@@ -51,18 +56,10 @@ export default {
 			// console.log(this.current);
 		}
 	}, created() {
-		// this.changeMenuByNavbar("ppm");
-		// this.changeMenuByRandom();
-	},
-	beforeMount() {
-		// this.changeMenuByNavbar("ppm");
 		this.changeMenuByRandom();
-	}, mounted() {
-		this.changeMenuByRandom();
-	}, beforeUpdate() {
+	}, unmounted() {
 		// this.changeMenuByRandom();
-	}, updated() {
-		// this.changeMenuByRandom();
+		// bus.$off("currentMenu")
 	}
 	, watch: {
 		// current: {
