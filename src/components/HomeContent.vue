@@ -84,6 +84,7 @@ export default {
     },
   }, unmounted() {
     let headMenu = this.headMenu;
+    // 功能页的默认组件显示逻辑交给触发方法，传递默认值以便在created()中一起渲染
     if (headMenu === "") {
       headMenu = "ppm";
     }
