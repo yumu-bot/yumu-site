@@ -74,7 +74,7 @@ export default {
       ]
     }
   }, methods: {
-    // 路由跳转
+    // 快捷入口跳转(站内)
     jumpPage(headMenu) {
       this.headMenu = headMenu;
       // router.push({ path: `/function/${headMenu}` });
@@ -93,7 +93,10 @@ export default {
     if (headMenu === "") {
       headMenu = "ppm";
     }
-    this.jumpPage(headMenu);
+    // 只有不是导航栏之间跳转时才触发快捷入口跳转方法
+    if (!this.$router.push) {
+      this.jumpPage(headMenu);
+    }
   }
 }
 
