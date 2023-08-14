@@ -53,7 +53,7 @@ export default {
       //功能快捷键集合
       functionItems: [
         { title: "bpht", src: "src/assets/img/function/b106.png", headMenu: "bpht" },
-        { title: "ymra", src: "src/assets/img/function/b119.png", headMenu: "ymra" },
+        { title: "ymra", src: "src/assets/img/function/b119.png", headMenu: "" },
         { title: "ymmn", src: "src/assets/img/function/b121.png", headMenu: "" },
         { title: "info", src: "src/assets/img/function/b128.png", headMenu: "info" },
       ],
@@ -88,6 +88,9 @@ export default {
     // 只有不是导航栏之间跳转时才触发快捷入口跳转方法
     if (!this.$router.push) {
       this.jumpPage(headMenu);
+    } else {
+      this.headMenu = headMenu;
+      bus.$emit("currentMenu", headMenu);
     }
   }
 }
