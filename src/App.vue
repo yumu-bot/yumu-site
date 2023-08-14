@@ -8,4 +8,4 @@ import Navigation from '@/components/Navigation.vue';
 import Theme from './components/Theme/Theme.vue';
 </script>
 
-<style lang="less" scoped></style>
+<style lang="scss" scoped></style>
