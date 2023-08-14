@@ -5,6 +5,15 @@
 		<h1>关于Yumu Site</h1>
 		<h2>Main Designer: Muziyami</h2>
 		<h2>Developer: -Spring Night- Truncle SIyuyuko</h2>
+		<div class="website-list">
+			<h3>
+				<a href="http://git.365246692.xyz/bot/yumu-site" target="_blank">Git</a>
+			</h3>
+
+			<h3>
+				<a href="https://bot.365246692.xyz/" target="_blank">yumu site(old)</a>
+			</h3>
+		</div>
 		<footer>
 			<span>Copyright © 2021-2023 Yumubot, All Rights Reserved.</span>
 		</footer>
@@ -17,11 +26,30 @@ import { ref } from "vue";
 const contentHeight = window.outerHeight;
 </script>
 
-<style lang="less" scoped>
+<style lang="scss" scoped>
 .about-page {
 	text-align: center;
-	line-height: 400%;
 	vertical-align: middle;
-	padding-bottom: 17%;
+	line-height: 300%;
+	padding-bottom: 12%;
+	overflow: hidden;
+
+	a {
+		color: #ffffff;
+	}
+
+	a:hover {
+		color: #54454C;
+	}
+
+	a:active {
+		color: rgb(84, 69, 76, 0.5);
+	}
+}
+
+.website-list {
+	display: flex;
+	justify-content: center;
+	column-gap: 20px;
 }
 </style>
