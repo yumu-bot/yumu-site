@@ -13,7 +13,7 @@
         <img class="large-item" title="ppm" src="src\assets\img\function\Function_Map.jpg" @click="jumpPage('ppm')">
         <div class="function-content-right">
           <img class="small-item" v-for="(item, index) in functionItems" :key="index" :title=item.title :src="item.src"
-            @click="jumpPage(item.headMenu)">
+            @click="jumpPage(item.headMenu)" style="object-fit: cover;">
         </div>
       </div>
       <!-- 推荐快捷入口 -->
@@ -21,7 +21,7 @@
       <div class="content-box">
         <div class="suggest-content">
           <img class="small-item" v-for="(item, index) in suggestItems" :key="index" :title=item.title :src="item.src"
-            link="" @click="jumpSite(item)">
+            @click="jumpSite(item)" style="object-fit: cover;">
         </div>
       </div>
       <!-- 活跃数据展示(静态) -->
@@ -52,17 +52,17 @@ export default {
       headMenu: "",//目标跳转路由(目录)
       //功能快捷键集合
       functionItems: [
-        { title: "bpht", src: "src/assets/img/function/Function_Map.jpg", headMenu: "bpht" },
-        { title: "ymra", src: "src/assets/img/function/Function_Map.jpg", headMenu: "ymra" },
-        { title: "ymmn", src: "src/assets/img/function/Function_Map.jpg", headMenu: "" },
-        { title: "info", src: "src/assets/img/function/Function_Map.jpg", headMenu: "info" },
+        { title: "bpht", src: "src/assets/img/function/b106.png", headMenu: "bpht" },
+        { title: "ymra", src: "src/assets/img/function/b119.png", headMenu: "ymra" },
+        { title: "ymmn", src: "src/assets/img/function/b121.png", headMenu: "" },
+        { title: "info", src: "src/assets/img/function/b128.png", headMenu: "info" },
       ],
       // 推荐快捷键集合
       suggestItems: [
-        { title: "Ant Design Vue", src: "src/assets/img/function/Function_Map.jpg", link: "https://antdv.com/components/overview-cn" },
-        { title: "Vite | 下一代的前端工具链", src: "src/assets/img/function/Function_Map.jpg", link: "https://cn.vitejs.dev/" },
-        { title: "渐进式 JavaScript 框架 | Vue.js", src: "src/assets/img/function/Function_Map.jpg", link: "https://cn.vuejs.org/" },
-        { title: "MDN Web Docs", src: "src/assets/img/function/Function_Map.jpg", link: "https://developer.mozilla.org/zh-CN/" },
+        { title: "Ant Design Vue", src: "src/assets/img/suggest/ant_design.png", link: "https://antdv.com/components/overview-cn" },
+        { title: "Vite | 下一代的前端工具链", src: "src/assets/img/suggest/vite.png", link: "https://cn.vitejs.dev/" },
+        { title: "渐进式 JavaScript 框架 | Vue.js", src: "src/assets/img/suggest/vue.jpg", link: "https://cn.vuejs.org/" },
+        { title: "MDN Web Docs", src: "src/assets/img/suggest/mdn.jpg", link: "https://developer.mozilla.org/zh-CN/" },
       ]
     }
   }, methods: {
@@ -159,6 +159,7 @@ img:hover {
 
 .small-item {
   width: 240px;
+  height: 140px;
 
   @media screen and (max-width:$xxl) {
     width: 210px;
