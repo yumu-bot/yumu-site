@@ -37,7 +37,7 @@ const activeIndex2 = ref('1')
 
 </script>
 
-<style lang="less" scoped>
+<style lang="scss" scoped>
 .nav-bar {
 	background-color: #54454C;
 	color: #ffffff;
