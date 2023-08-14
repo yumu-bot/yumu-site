@@ -8,50 +8,37 @@
     <div class="main-content">
       <!-- <a-space direction="vertical"> -->
       <!-- 功能快捷入口 -->
-      <h3 class="home-header function-header" style="">功能</h3>
-      <div class="function-content">
-        <img class="large-item" :title="`ppm`" src="src\assets\img\function\Function_Map.jpg" @click="jumpPage('ppm')">
+      <h3 class="content-header" style="">功能</h3>
+      <div class="content-box">
+        <img class="large-item" title="ppm" src="src\assets\img\function\Function_Map.jpg" @click="jumpPage('ppm')">
         <div class="function-content-right">
-          <!-- 使用antd的flex布局(UI内置) -->
-          <a-row :gutter="[51, 16]">
-            <a-col :span="12"><img class="small-item" :title="`bpht`" src="src\assets\img\function\Function_Map.jpg"
-                @click="jumpPage('bpht')"></a-col>
-            <a-col :span="12"><img class="small-item" :title="`ymra`"
-                src="src\assets\img\function\Function_Map.jpg"></a-col>
-          </a-row>
-          <a-row :gutter="[51, 16]" style="padding-top: 40px;">
-            <a-col :span="12"><img class="small-item" :title="`ymmn`"
-                src="src\assets\img\function\Function_Map.jpg"></a-col>
-            <a-col :span="12"><img class="small-item" :title="`info`" src="src\assets\img\function\Function_Map.jpg"
-                @click="jumpPage('info')"></a-col>
-          </a-row>
-          <!-- 未使用antd的flex布局 -->
-          <!-- <img class="small-item" :title="`bpht`" src="src\assets\img\function\Function_Map.jpg"
-          @click="jumpPage('function')">
-        <img class="small-item" :title="`ymra`" src="src\assets\img\function\Function_Map.jpg">
-        <img class="small-item" :title="`ymmn`" src="src\assets\img\function\Function_Map.jpg">
-        <img class="small-item" :title="`info`" src="src\assets\img\function\Function_Map.jpg"> -->
+          <img class="small-item" v-for="(item, index) in functionItems" :key="index" :title=item.title :src="item.src"
+            @click="jumpPage(item.headMenu)">
         </div>
       </div>
       <!-- 推荐快捷入口 -->
-      <div class="suggest-content">
-        <h3 class="home-header">推荐</h3>
-        <a-row :gutter="[44, 8]">
+      <h3 class="content-header">推荐</h3>
+      <div class="content-box">
+        <!-- <a-row :gutter="[44, 8]">
           <a-col :span="6"><img class="small-item" :title="`Baidu`"
               src="src\assets\img\function\Function_Map.jpg"></a-col>
           <a-col :span="6"><img class="small-item" :title="`Bilibili`"
               src="src\assets\img\function\Function_Map.jpg"></a-col>
           <a-col :span="6"><img class="small-item" src="src\assets\img\function\Function_Map.jpg"></a-col>
           <a-col :span="6"><img class="small-item" src="src\assets\img\function\Function_Map.jpg"></a-col>
-        </a-row>
+        </a-row> -->
+        <div class="suggest-content">
+          <img class="small-item" v-for="(item, index) in suggestItems" :key="index" :title=item.title :src="item.src"
+            link="" @click="jumpSite(item)">
+        </div>
       </div>
-      <!-- 活跃数据展示 -->
-      <div class="activity-show">
-        <h3 class="home-header">活跃</h3>
-        <a-row :gutter="[8, 8]">
-          <a-col :span="12" style="width: 100.47px;height: 100px;border-radius: 20px;background-color: #382E32;"></a-col>
-          <a-col :span="12" style="width: 100.47px;height: 100px;border-radius: 20px;background-color: #382E32;"></a-col>
-        </a-row>
+      <!-- 活跃数据展示(静态) -->
+      <h3 class="content-header">活跃</h3>
+      <div class="content-box">
+        <div class="active-content">
+          <div style="width: 520px;height: 100px;border-radius: 20px;background-color: #382E32;"></div>
+          <div style="width: 520px;height: 100px;border-radius: 20px;background-color: #382E32;"></div>
+        </div>
       </div>
     </div>
     <!-- </a-space> -->
@@ -70,7 +57,21 @@ export default {
   },
   data() {
     return {
-      headMenu: "",
+      headMenu: "",//目标跳转路由(目录)
+      //功能快捷键集合
+      functionItems: [
+        { title: "bpht", src: "src/assets/img/function/Function_Map.jpg", headMenu: "bpht" },
+        { title: "ymra", src: "src/assets/img/function/Function_Map.jpg", headMenu: "ymra" },
+        { title: "ymmn", src: "src/assets/img/function/Function_Map.jpg", headMenu: "" },
+        { title: "info", src: "src/assets/img/function/Function_Map.jpg", headMenu: "info" },
+      ],
+      // 推荐快捷键集合
+      suggestItems: [
+        { title: "Ant Design Vue", src: "src/assets/img/function/Function_Map.jpg", link: "https://antdv.com/components/overview-cn" },
+        { title: "Vite | 下一代的前端工具链", src: "src/assets/img/function/Function_Map.jpg", link: "https://cn.vitejs.dev/" },
+        { title: "渐进式 JavaScript 框架 | Vue.js", src: "src/assets/img/function/Function_Map.jpg", link: "https://cn.vuejs.org/" },
+        { title: "MDN Web Docs", src: "src/assets/img/function/Function_Map.jpg", link: "https://developer.mozilla.org/zh-CN/" },
+      ]
     }
   }, methods: {
     // 路由跳转
@@ -80,8 +81,12 @@ export default {
       router.push({ path: "/function" });
       bus.$emit("currentMenu", headMenu);
       // console.log("ok", headMenu);
-
     },
+    // 外部网站跳转
+    jumpSite(item) {
+      window.open(item.link, "_blank");
+    }
+
   }, unmounted() {
     let headMenu = this.headMenu;
     // 功能页的默认组件显示逻辑交给触发方法，传递默认值以便在created()中一起渲染
@@ -110,40 +115,36 @@ export default {
 
 }
 
-.function-header {
+.content-header {
   padding-left: 20px;
 }
 
-.function-content {
+.content-box {
   display: flex;
   flex-wrap: nowrap;
-  // flex-grow: 5;
+  padding: 0 20px;
+
+  .suggest-content {
+    justify-content: space-between;
+    display: flex;
+    width: 100%;
+  }
+
+  .active-content {
+    justify-content: space-between;
+    display: flex;
+    width: 100%;
+  }
 }
 
 .function-content-right {
   //功能入口键
   display: flex;
   flex-wrap: wrap;
-  padding-right: 10px;
-  padding-left: 47.5px;
-  // padding-left: 2.6875vw;
-  // // flex-direction: column;
-  // align-items: center;
-  // justify-content: center;
-  // // overflow: hidden;
-  // flex-grow: 6;
-  // flex-shrink: 10;
+  padding-left: 43px;
+  justify-content: space-between;
+  row-gap: 40px;
 }
-
-.function-content,
-.suggest-content,
-.activity-show {
-  padding-left: 20px;
-  padding-right: 20px;
-  padding-top: 1px;
-
-}
-
 
 img {
   border-radius: 20px;
