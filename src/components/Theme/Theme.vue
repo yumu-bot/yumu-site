@@ -43,8 +43,12 @@
 			},
 			// 按钮
 			Button: {
-				colorBgContainer: '#2A2226',
-				colorText: '#ffffff'
+				colorBgContainer: '#2A2226',//按钮背景填充色
+				colorText: '#ffffff',//按钮文本色
+				colorPrimaryActive: 'rgba(255,255,255,0.65)',//按钮激活色(含文本)
+				colorPrimaryHover: 'rgba(255,255,255,0.45)',//按钮悬浮色
+				// colorBgTextActive: 'rgba(255,255,255,0.65)',//按钮背景文本激活色
+				// colorBgTextHover: 'rgba(255,255,255,0.45)',//按钮背景文本悬浮色
 			}
 		}
 	}">
