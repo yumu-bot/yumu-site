@@ -5,7 +5,7 @@
 			<a-space size="large">
 				<span class="nav-title">Yumu Site</span>
 				<a-menu class="nav-menu" :selectedKeys="currentMenu" mode="horizontal">
-					<a-menu-item v-for="(item) in menuList" :key="item.title"
+					<a-menu-item v-for="(item, index) in menuList" :key="index"
 						@click="changeMenuByNavbar(item.title, item.path)">{{
 							item.header }}
 					</a-menu-item>
