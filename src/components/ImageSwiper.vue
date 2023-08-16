@@ -34,7 +34,7 @@ import 'swiper/css/pagination';
 const modules = [Autoplay, Pagination, Navigation, A11y];
 </script>
 
-<style lang="less" scoped>
+<style lang="scss" scoped>
 .mySwiper {
 	width: inherit;
 	height: 250px;
