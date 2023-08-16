@@ -1,7 +1,7 @@
 <template>
 	<div class="about-page" :style="{ height: contentHeight }">
 		<!-- 关于内容展示 -->
-		<a-image src="src\assets\img\avatar\Head_yuyuko_Qiqi.png" alt="关于页图片说明" :width="300" :preview="false"></a-image>
+		<a-image src="/img/avatar/Head_yuyuko_Qiqi.png" alt="关于页图片说明" :width="300" :preview="false"></a-image>
 		<h1>关于Yumu Site</h1>
 		<h2>Main Designer: Muziyami</h2>
 		<h2>Developer: -Spring Night- Truncle SIyuyuko</h2>
@@ -11,7 +11,7 @@
 			</h3>
 
 			<h3>
-				<a href="https://bot.365246692.xyz/" target="_blank">yumu site(old)</a>
+				<a href="https://bot.365246692.xyz/" target="_blank">yumu site(online)</a>
 			</h3>
 		</div>
 		<footer>
