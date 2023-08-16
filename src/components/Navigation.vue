@@ -30,7 +30,7 @@
 				<!-- 用户信息展示 -->
 				<span class="user-name">Muziyami</span>
 				<a-avatar class="user-avatar" :size="{ xs: 24, sm: 32, md: 40, lg: 48, xl: 48, xxl: 48 }"
-					src="src\assets\img\avatar\Head_yuyuko_Qiqi.png">
+					src="src/assets/img/avatar/Head_yuyuko_Qiqi.png">
 				</a-avatar>
 			</a-space>
 		</div>
