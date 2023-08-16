@@ -18,7 +18,7 @@ import { onMounted } from 'vue';
 // onMounted(()=>{windowResize();});
 </script>
 
-<style lang="less" scoped>
+<style lang="scss" scoped>
 .nav {
 	// display: inline-flex;
 	background-color: #54454C;
