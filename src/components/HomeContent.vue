@@ -10,7 +10,7 @@
       <!-- 功能快捷入口 -->
       <h3 class="content-header" style="">功能</h3>
       <div class="content-box">
-        <img class="large-item" title="ppm" src="src\assets\img\function\Function_Map.jpg" @click="jumpPage('ppm')">
+        <img class="large-item" title="ppm" src="@/assets/img/function/Function_Map.jpg" @click="jumpPage('ppm')">
         <div class="function-content-right">
           <img class="small-item" v-for="(item, index) in functionItems" :key="index" :title=item.title :src="item.src"
             @click="jumpPage(item.headMenu)" style="object-fit: cover;">
@@ -52,17 +52,17 @@ export default {
       headMenu: "",//目标跳转路由(目录)
       //功能快捷键集合
       functionItems: [
-        { title: "bpht", src: "src/assets/img/function/b106.png", headMenu: "bpht" },
-        { title: "ymra", src: "src/assets/img/function/b119.png", headMenu: "" },
-        { title: "ymmn", src: "src/assets/img/function/b121.png", headMenu: "" },
-        { title: "info", src: "src/assets/img/function/b128.png", headMenu: "info" },
+        { title: "bpht", src: "@/assets/img/function/b106.png", headMenu: "bpht" },
+        { title: "ymra", src: "@/assets/img/function/b119.png", headMenu: "" },
+        { title: "ymmn", src: "@/assets/img/function/b121.png", headMenu: "" },
+        { title: "info", src: "@/assets/img/function/b128.png", headMenu: "info" },
       ],
       // 推荐快捷键集合
       suggestItems: [
-        { title: "Ant Design Vue", src: "src/assets/img/suggest/ant_design.png", link: "https://antdv.com/components/overview-cn" },
-        { title: "Vite | 下一代的前端工具链", src: "src/assets/img/suggest/vite.png", link: "https://cn.vitejs.dev/" },
-        { title: "渐进式 JavaScript 框架 | Vue.js", src: "src/assets/img/suggest/vue.jpg", link: "https://cn.vuejs.org/" },
-        { title: "MDN Web Docs", src: "src/assets/img/suggest/mdn.jpg", link: "https://developer.mozilla.org/zh-CN/" },
+        { title: "Ant Design Vue", src: "@/assets/img/suggest/ant_design.png", link: "https://antdv.com/components/overview-cn" },
+        { title: "Vite | 下一代的前端工具链", src: "@/assets/img/suggest/vite.png", link: "https://cn.vitejs.dev/" },
+        { title: "渐进式 JavaScript 框架 | Vue.js", src: "@/assets/img/suggest/vue.jpg", link: "https://cn.vuejs.org/" },
+        { title: "MDN Web Docs", src: "@/assets/img/suggest/mdn.jpg", link: "https://developer.mozilla.org/zh-CN/" },
       ]
     }
   }, methods: {

@@ -7,9 +7,9 @@
 	delay: 2500,
 	disableOnInteraction: false
 }" :navigation="true" :modules="modules" class="mySwiper">
-			<swiper-slide><img src="src/assets/img/swiper/Banner_1.jpg" alt="" /></swiper-slide>
-			<swiper-slide><img src="src/assets/img/swiper/Banner_2.jpg" alt="" /></swiper-slide>
-			<swiper-slide><img src="src/assets/img/swiper/Banner_3.jpg" alt="" /></swiper-slide>
+			<swiper-slide><img src="@/assets/img/swiper/Banner_1.jpg" alt="" /></swiper-slide>
+			<swiper-slide><img src="@/assets/img/swiper/Banner_2.jpg" alt="" /></swiper-slide>
+			<swiper-slide><img src="@/assets/img/swiper/Banner_3.jpg" alt="" /></swiper-slide>
 		</swiper>
 	</div>
 </template>
