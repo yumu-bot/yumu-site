@@ -13,31 +13,30 @@
 			</a-tooltip>
 			<a-button style="width: 70px;" size="large" @click="getPPM">生成!</a-button>
 		</div>
-		<SearchResultBanner :status="status" :imgUrl="imgUrl" :spinning="spinning"></SearchResultBanner>
+		<SearchResultBanner :status="status" :imgUrl="imgUrl" :spinning="spinning" @changeStatus="changeStatus"
+			@isSpinning="isSpinning"></SearchResultBanner>
 	</div>
 </template>
 
 <script>
-import { getPPM } from '../../api/data_api';
 import { message } from 'ant-design-vue';
 import SearchResultBanner from '../../components/SearchResult/SearchResultBanner.vue';
 export default {
 	data() {
 		return {
-			username: "",
-			imgUrl: "",
-			spinning: false,
-			status: "fetching",
-			loaded: false,
-			preImgUrl: "",
-			mode: "osu",
+			username: "",//用户名
+			imgUrl: "",//图片地址
+			spinning: false,//加载状态
+			status: "fetching",//查询状态
+			mode: "osu",//指定查询mode
+			// 游戏模式列表
 			modes: [
 				{ label: "osu", value: "osu", id: "0" },
 				{ label: "taiko", value: "taiko", id: "1" },
 				{ label: "catch", value: "catch", id: "2" },
 				{ label: "mania", value: "mania", id: "3" },
 			],
-			PPMCommand: ""
+			PPMCommand: "",//ppm静态指令
 		}
 	}, props: {
 
@@ -51,36 +50,16 @@ export default {
 			if (this.username === "") {
 				message.warning("用户名不能为空")
 			} else {
-				this.spinning = true;
+				this.spinning = true;//图片正在加载
 				this.status = "loading";
 				let paramsObj = {
 					u1: this.username,
 					mode: this.mode,
 				}
-				await getPPM(paramsObj).then((res) => {
-					this.preImgUrl = this.imgUrl;
-					if (res.status === 200) {
-						this.imgUrl = "";
-						// console.log(res)
-						let url = `https://bot.365246692.xyz/pub/ppm?u1=${paramsObj.u1}&mode=${paramsObj.mode}`;
-						this.imgUrl = url;
-						console.log(this.imgUrl);
-						this.status = "success";
-						this.spinning = false;
-					} else {
-
-					}
-				}).catch((e) => {
-					message.warning("用户不存在");
-					this.spinning = false;
-					this.status = "error";
-					// console.log(e)
-				}).finally(() => {
-				})
+				this.imgUrl = `https://bot.365246692.xyz/pub/ppm?u1=${paramsObj.u1}&mode=${paramsObj.mode}`
 			}
-
 		},
-		// 获取文字指令
+		// 获取静态指令
 		getPPMCommand(mode, username) {
 			let modeId;
 			for (let i = 0; i < this.modes.length; i++) {
@@ -89,7 +68,18 @@ export default {
 				}
 			}
 			this.PPMCommand = "!ppm:" + modeId + " " + username;
+		},
+		//修改查询状态(emit)
+		changeStatus(status) {
+			this.status = status;
+		},
+		// 修改加载状态(emit)
+		isSpinning() {
+			this.spinning = false;//图片加载成功
 		}
+	},
+	created() {
+		this.imgUrl = "";
 	}
 }
 </script>
