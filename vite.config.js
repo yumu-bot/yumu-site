@@ -33,8 +33,8 @@ export default defineConfig({
         
       }
     }
-  }
-  , css: {
+  },
+  css: {
     // ant designer v4以前的自定义主题引入方案(使用less) 
     // preprocessorOptions: {
     //   less: {
@@ -51,7 +51,7 @@ export default defineConfig({
     //       javascriptEnabled: true,
     //     }, 
      },
-      postcss: {
+  postcss: {
         plugins: [
           // 屏幕自适应插件
           postcsspxtoviewport({
@@ -70,7 +70,10 @@ export default defineConfig({
           landscape: false // 是否处理横屏情况
         })
         ]
-  },
+  }, 
+  esbuild: {
+    drop:['console','debugger']
+  }
     },
 )
 
