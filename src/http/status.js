@@ -1,6 +1,7 @@
+import { message } from "ant-design-vue";
 // 管理接口返回状态码
 export const showMessage = (status) => {
-    let message = "";
+    let msg = "";
     switch (status) {
         case 400:
             message = "请求错误(400)";
@@ -38,5 +39,6 @@ export const showMessage = (status) => {
         default:
             message = `连接出错(${status})!`;
     }
-    return `${message}，请检查网络或联系管理员！`;
+    // return `${message}，请检查网络或联系管理员！`;
+    message.info(msg);
 };
