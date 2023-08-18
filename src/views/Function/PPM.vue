@@ -1,15 +1,21 @@
 <template>
 	<div class="ppm-page">
 		<div class="search-bar">
-			<a-input placeholder="请输入用户名" enter-button="点击查询" size="large" style="width:810px;" v-model:value=username
-				allow-clear @keyup.enter="getPPM">
+			<a-input placeholder="请输入用户名" size="large" style="width:810px;" v-model:value=username allow-clear
+				@keyup.enter="getPPM">
 			</a-input>
 			<a-select style="width:110px;" :options="modes" size="large" v-model:value=mode>
 				<a-select-option v-for="(item, index) in modes" :key="index" :label="item.label"
 					:value="item.value"></a-select-option>
 			</a-select>
 			<a-tooltip :title=PPMCommand arrow-point-at-center>
-				<a-button style="width: 130px;" size="large" @mouseenter="getPPMCommand(mode, username)">复制到剪贴板</a-button>
+				<a-button style="width: 130px;" size="large" @mouseenter="getPPMCommand(mode, username)">
+					<div class="copy-button">
+						<span>复制到剪贴板</span>
+						<a-typography-paragraph :copyable="{ tooltip: false, text: PPMCommand }">
+						</a-typography-paragraph>
+					</div>
+				</a-button>
 			</a-tooltip>
 			<a-button style="width: 70px;" size="large" @click="getPPM">生成!</a-button>
 		</div>
@@ -97,5 +103,26 @@ export default {
 	justify-content: space-between; // flex:1;
 	width: inherit;
 	background-color: #54454C;
+}
+
+.copy-button {
+	display: flex;
+	justify-content: space-around;
+
+	:deep(.anticon) {
+		color: #ffffff;
+
+		:hover {
+			color: #ffffff79;
+		}
+
+		:active {
+			color: #ffffff28;
+		}
+
+		svg {
+			padding-top: 6px;
+		}
+	}
 }
 </style>
