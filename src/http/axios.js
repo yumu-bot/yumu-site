@@ -46,7 +46,7 @@ axios.interceptors.response.use(
 );
 
 // 封装 GET POST 请求并导出
-export default function request(url='', params={}, type='post'){
+export  function request(url='', params={}, type='post'){
 	//设置 url params type 的默认值
 	return new Promise((resolve, reject) => {
 		let promise
@@ -70,4 +70,5 @@ export default function request(url='', params={}, type='post'){
 		})
 	})
 }
+export default axios;
 
