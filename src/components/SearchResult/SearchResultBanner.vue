@@ -14,13 +14,19 @@
 			</a-spin>
 		</div>
 		<div class="progress-icon">
-			<!-- 等待用户查询 -->
-			<a-image v-if="status === 'fetching'" src="/img/component/Index_Fetching.png" :preview="false"></a-image>
-			<!-- 查询中&加载中 -->
-			<a-image v-if="status === 'loading'" src="/img/component/Index_Waiting.png" :preview="false"></a-image>
-			<a-spin :spinning="status === 'loading'" />
-			<!-- 查询失败 -->
-			<a-image v-if="status === 'error'" src="/img/component/Index_Error.png" :preview="false"></a-image>
+			<div v-show="status === 'fetching'">
+				<!-- 等待用户查询 -->
+				<a-image src="/img/component/Index_Fetching.png" :preview="false"></a-image>
+			</div>
+			<div class="progress-icon-loading" v-show="status === 'loading'">
+				<!-- 查询中&加载中 -->
+				<a-image src="/img/component/Index_Loading.png" :preview="false"></a-image>
+				<a-spin :spinning="status === 'loading'" />
+			</div>
+			<div v-show="status === 'error'">
+				<!-- 查询失败 -->
+				<a-image src="/img/component/Index_Error.png" :preview="false"></a-image>
+			</div>
 		</div>
 	</div>
 </template>
@@ -93,5 +99,10 @@ export default {
 	padding-top: 250px;
 	display: inline-flex;
 	flex-direction: column;
+
+	.progress-icon-loading {
+		display: inline-flex;
+		flex-direction: column;
+	}
 }
 </style>
