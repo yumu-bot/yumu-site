@@ -1,4 +1,8 @@
-import request from "../http/axios.js";
-export function getPPM(params){
-	return request("/pub/ppm",params,'get')
+import axios from "../http/axios.js";
+export const getPPM =params=>{
+	return axios({
+		method: 'get',
+		url:"/pub/ppm",
+	   params
+	})
 }
