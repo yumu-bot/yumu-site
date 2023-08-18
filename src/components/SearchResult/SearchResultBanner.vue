@@ -13,20 +13,18 @@
 		</div>
 		<!-- 查询成功&加载中 -->
 		<div class="progress-icon" v-if="visible === true">
-			<a-image class="result-image" src="src/assets/img/component/Index_Loading.png" :preview="false">
+			<a-image class="result-image" src="/img/component/Index_Loading.png" :preview="false">
 			</a-image>
 			<a-spin />
 		</div>
 		<div class="progress-icon" v-if="status !== 'success'">
 			<!-- 等待用户发送请求 -->
-			<a-image v-if="status === 'fetching'" src="src/assets/img/component/Index_Fetching.png"
-				:preview="false"></a-image>
+			<a-image v-if="status === 'fetching'" src="/img/component/Index_Fetching.png" :preview="false"></a-image>
 			<!-- 查询中 -->
-			<a-image v-if="status === 'loading'" src="src/assets/img/component/Index_Waiting.png"
-				:preview="false"></a-image>
+			<a-image v-if="status === 'loading'" src="/img/component/Index_Waiting.png" :preview="false"></a-image>
 			<a-spin :spinning="spinning" />
 			<!-- 查询失败 -->
-			<a-image v-if="status === 'error'" src="src/assets/img/component/Index_Error.png" :preview="false"></a-image>
+			<a-image v-if="status === 'error'" src="/img/component/Index_Error.png" :preview="false"></a-image>
 		</div>
 	</div>
 </template>
