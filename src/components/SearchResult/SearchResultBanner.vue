@@ -8,67 +8,66 @@
 <template>
 	<div class="search-result">
 		<!-- 加载成功 -->
-		<div v-show="loaded === true">
-			<img class="result-image" @load="imgLoaded" :src=imgUrl>
+		<div class="result" v-show="loaded" v-if="imgUrl">
+			<a-spin :spinning="spinning" tip="Loading...">
+				<img :src=imgUrl class="result-image" @load="imgLoaded" @error="imgLoadError">
+			</a-spin>
 		</div>
-		<!-- 查询成功&加载中 -->
-		<div class="progress-icon" v-if="visible === true">
-			<a-image class="result-image" src="/img/component/Index_Loading.png" :preview="false">
-			</a-image>
-			<a-spin />
-		</div>
-		<div class="progress-icon" v-if="status !== 'success'">
-			<!-- 等待用户发送请求 -->
+		<div class="progress-icon">
+			<!-- 等待用户查询 -->
 			<a-image v-if="status === 'fetching'" src="/img/component/Index_Fetching.png" :preview="false"></a-image>
-			<!-- 查询中 -->
+			<!-- 查询中&加载中 -->
 			<a-image v-if="status === 'loading'" src="/img/component/Index_Waiting.png" :preview="false"></a-image>
-			<a-spin :spinning="spinning" />
+			<a-spin :spinning="status === 'loading'" />
 			<!-- 查询失败 -->
 			<a-image v-if="status === 'error'" src="/img/component/Index_Error.png" :preview="false"></a-image>
 		</div>
 	</div>
 </template>
 <script>
+import { message } from 'ant-design-vue';
 export default {
 	data() {
 		return {
-			loaded: false,
-			visible: false,//图片加载时是否展示loading(false:查询中)
+			loaded: false,///图片是否加载成功
 		}
 	},
 	props: {
+		// 查询状态
 		status: {
 			type: String,
 			default: "fetching"
 		},
+		// 图片地址
 		imgUrl: {
 			type: String,
-			default: ""
+			default: "#"
 		},
+		// 是否正在加载
 		spinning: {
 			type: Boolean,
 			default: false,
 		},
-		// loaded: {
-		// 	type: Boolean,
-		// 	default: null,
-		// }
-	}, methods: {
+	},
+	methods: {
 		// 图片加载成功时调用
 		imgLoaded() {
 			this.loaded = true;
-			this.visible = false;
+			this.$emit("isSpinning");
+		},
+		//图片加载失败时
+		imgLoadError(event) {
+			message.warning("用户不存在");
+			this.loaded = false;
+			let status = "error";
+			this.$emit("changeStatus", status);
 		}
 	},
 	watch: {
-		status: {
-			handler(val) {
-				this.visible = val === "success" ? true : false;//监听查询状态,若查询成功则触发loading显示
-				if (val !== "success") {
-					this.loaded = false;
-				}
-			}, immediate: true
-		}
+
+	},
+	created() {
+
 	}
 }
 </script>
@@ -79,6 +78,10 @@ export default {
 	padding: 10px 0px;
 	height: 712px;
 	overflow: hidden;
+
+	.result :deep(.ant-spin) {
+		position: unset;
+	}
 }
 
 .result-image {
