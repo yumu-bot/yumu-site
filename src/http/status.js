@@ -1,4 +1,3 @@
-import { message } from "ant-design-vue";
 // 管理接口返回状态码
 export const showMessage = (status) => {
     let msg = "";
@@ -40,5 +39,4 @@ export const showMessage = (status) => {
             message = `连接出错(${status})!`;
     }
     // return `${message}，请检查网络或联系管理员！`;
-    message.info(msg);
 };
