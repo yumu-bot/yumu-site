@@ -10,7 +10,7 @@
       <!-- 功能快捷入口 -->
       <h3 class="content-header" style="">功能</h3>
       <div class="content-box">
-        <img class="large-item" title="ppm" src="/img/function/Function_Map.jpg" @click="jumpPage('ppm')">
+        <img class="large-item" title="玩家查询" src="/img/function/Function_Map.jpg" @click="jumpPage('user')">
         <div class="function-content-right">
           <img class="small-item" v-for="(item, index) in functionItems" :key="index" :title=item.title :src="item.src"
             @click="jumpPage(item.headMenu)" style="object-fit: cover;">
@@ -50,13 +50,12 @@ export default {
   data() {
     return {
       headMenu: "",//目标跳转路由(目录)
-      src: '@',
       //功能快捷键集合
       functionItems: [
-        { title: "bpht", src: "/img/function/b106.png", headMenu: "bpht" },
-        { title: "ymra", src: "/img/function/b119.png", headMenu: "" },
-        { title: "ymmn", src: "/img/function/b121.png", headMenu: "" },
-        { title: "info", src: "/img/function/b128.png", headMenu: "info" },
+        { title: "玩家对比", src: "/img/function/b119.png", headMenu: "uservs" },
+        { title: "比赛查询", src: "/img/function/b121.png", headMenu: "match" },
+        { title: "谱面查询", src: "/img/function/b128.png", headMenu: "beatmap" },
+        { title: "娱乐", src: "/img/function/b106.png", headMenu: "entertainment" },
       ],
       //开发文档快捷键集合
       devItems: [
