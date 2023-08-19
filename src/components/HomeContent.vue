@@ -20,7 +20,7 @@
       <h3 class="content-header">推荐</h3>
       <div class="content-box">
         <div class="suggest-content">
-          <img class="small-item" v-for="(item, index) in suggestItems" :key="index" :title=item.title :src="item.src"
+          <img class="small-item" v-for="(item, index) in suggestList" :key="index" :title=item.title :src="item.src"
             @click="jumpSite(item)" style="object-fit: cover;">
         </div>
       </div>
@@ -58,13 +58,22 @@ export default {
         { title: "ymmn", src: "/img/function/b121.png", headMenu: "" },
         { title: "info", src: "/img/function/b128.png", headMenu: "info" },
       ],
-      // 推荐快捷键集合
-      suggestItems: [
+      //开发文档快捷键集合
+      devItems: [
         { title: "Ant Design Vue", src: "/img/suggest/ant_design.png", link: "https://antdv.com/components/overview-cn" },
         { title: "Vite | 下一代的前端工具链", src: "/img/suggest/vite.png", link: "https://cn.vitejs.dev/" },
         { title: "渐进式 JavaScript 框架 | Vue.js", src: "/img/suggest/vue.jpg", link: "https://cn.vuejs.org/" },
         { title: "MDN Web Docs", src: "/img/suggest/mdn.jpg", link: "https://developer.mozilla.org/zh-CN/" },
-      ]
+      ],
+      //推荐快捷键集合
+      suggestItems: [
+        { title: "o!tsu - 国内滴osu!比赛服务小站~", src: "/img/suggest/Recommend_Otsu.jpg", link: "http://otsu.fun/home" },
+        { title: "osu! - 萌娘百科 万物皆可萌的百科全书", src: "/img/suggest/Recommend_Moegirl.jpg", link: "https://zh.moegirl.org.cn/Osu!" },
+        { title: "你好osu", src: "/img/suggest/Recommend_Hiosu.jpg", link: "https://www.hiosu.com/" },
+        { title: "Sayobot osu! 镜像站 | Beatmap mirror", src: "/img/suggest/Recommend_Sayo.jpg", link: "https://osu.sayobot.cn/home" },
+      ],
+      suggestList: null,//推荐列表
+
     }
   }, methods: {
     // 快捷入口跳转(站内)
@@ -80,7 +89,11 @@ export default {
       window.open(item.link, "_blank");
     }
 
-  }, unmounted() {
+  },
+  created() {
+    this.suggestList = window.location.href.includes("bot") ? this.suggestItems : this.devItems;
+  }
+  , unmounted() {
     let headMenu = this.headMenu;
     // 功能页的默认组件显示逻辑交给触发方法，传递默认值以便在created()中一起渲染
     if (headMenu === "") {
@@ -122,6 +135,7 @@ export default {
   display: flex;
   flex-wrap: nowrap;
   padding: 0 20px;
+  column-gap: 20px;
 
   .suggest-content {
     justify-content: space-between;
@@ -140,9 +154,8 @@ export default {
   //功能入口键
   display: flex;
   flex-wrap: wrap;
-  padding-left: 43px;
-  justify-content: space-between;
-  row-gap: 40px;
+  row-gap: 20px;
+  column-gap: 20px;
 }
 
 img {
@@ -162,63 +175,63 @@ img:hover {
 }
 
 .small-item {
-  width: 240px;
-  height: 140px;
+  width: 258px;
+  height: 147.39px;
 
-  @media screen and (max-width:$xxl) {
-    width: 210px;
-  }
+  // @media screen and (max-width:$xxl) {
+  //   width: 210px;
+  // }
 
-  @media screen and (max-width:$xl) {
-    width: 140px;
-  }
+  // @media screen and (max-width:$xl) {
+  //   width: 140px;
+  // }
 
-  @media screen and (max-width:$lg) {
-    width: 121px;
-  }
+  // @media screen and (max-width:$lg) {
+  //   width: 121px;
+  // }
 
-  @media screen and (max-width:$md) {
-    width: 120px;
-  }
+  // @media screen and (max-width:$md) {
+  //   width: 120px;
+  // }
 
-  @media screen and (max-width:$sm) {}
+  // @media screen and (max-width:$sm) {}
 
-  @media screen and (max-width:$xs) {
-    width: 80px;
-  }
+  // @media screen and (max-width:$xs) {
+  //   width: 80px;
+  // }
 
-  @media screen and (max-width:$xxs) {
-    width: 60px;
-  }
+  // @media screen and (max-width:$xxs) {
+  //   width: 60px;
+  // }
 }
 
 .large-item {
-  width: 527.3px;
+  width: 537px;
 
-  @media screen and (max-width:$xxl) {
-    width: 465px;
-  }
+  // @media screen and (max-width:$xxl) {
+  //   width: 465px;
+  // }
 
-  @media screen and (max-width:$xl) {
-    width: 330px;
-  }
+  // @media screen and (max-width:$xl) {
+  //   width: 330px;
+  // }
 
-  @media screen and (max-width:$lg) {
-    width: 293px;
-  }
+  // @media screen and (max-width:$lg) {
+  //   width: 293px;
+  // }
 
-  @media screen and (max-width:$md) {
-    width: 278px;
-  }
+  // @media screen and (max-width:$md) {
+  //   width: 278px;
+  // }
 
-  @media screen and (max-width:$sm) {}
+  // @media screen and (max-width:$sm) {}
 
-  @media screen and (max-width:$xs) {
-    width: 193px;
-  }
+  // @media screen and (max-width:$xs) {
+  //   width: 193px;
+  // }
 
-  @media screen and (max-width:$xxs) {
-    width: 152px;
-  }
+  // @media screen and (max-width:$xxs) {
+  //   width: 152px;
+  // }
 }
 </style>
