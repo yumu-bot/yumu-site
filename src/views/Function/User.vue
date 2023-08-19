@@ -93,7 +93,7 @@ export default {
 	},
 	created() {
 		this.imgUrl = "";
-		this.baseUrl = window.location.href.includes("bot") ? import.meta.env.VITE_BASEURL + "/pub" : import.meta.env.VITE_BASEURL;
+		this.baseUrl = import.meta.env.VITE_BASEURL;
 	}
 }
 </script>
