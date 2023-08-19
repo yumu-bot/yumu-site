@@ -13,7 +13,7 @@
 				<img :src=imgUrl class="result-image" @load="imgLoaded" @error="imgLoadError">
 			</a-spin>
 		</div>
-		<div class="progress-icon">
+		<div class="progress-icon" v-show="!loaded">
 			<div v-show="status === 'fetching'">
 				<!-- 等待用户查询 -->
 				<a-image src="/img/component/Index_Fetching.png" :preview="false"></a-image>
