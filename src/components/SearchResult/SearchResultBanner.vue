@@ -60,12 +60,14 @@ export default {
 		imgLoaded() {
 			this.loaded = true;
 			this.$emit("isSpinning");
+			let status = "";//改变status状态,隐藏loading
+			this.$emit("changeStatus", status);
 		},
 		//图片加载失败时
 		imgLoadError(event) {
 			message.warning("用户不存在");
 			this.loaded = false;
-			let status = "error";
+			let status = "error";//改变status状态,显示error
 			this.$emit("changeStatus", status);
 		}
 	},
@@ -92,7 +94,7 @@ export default {
 
 .result-image {
 	width: -webkit-fill-available;
-
+	border-radius: 14px;
 }
 
 .progress-icon {
