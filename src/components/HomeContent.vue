@@ -96,7 +96,7 @@ export default {
     let headMenu = this.headMenu;
     // 功能页的默认组件显示逻辑交给触发方法，传递默认值以便在created()中一起渲染
     if (headMenu === "") {
-      headMenu = "ppm";
+      headMenu = "user";
     }
     // 只有不是导航栏之间跳转时才触发快捷入口跳转方法
     if (!this.$router.push) {
