@@ -1,5 +1,5 @@
 <template>
-	<div class="about-page" :style="{ height: contentHeight }">
+	<div class="about-page">
 		<!-- 关于内容展示 -->
 		<a-image src="/img/avatar/Head_yuyuko_Qiqi.png" alt="关于页图片说明" :width="300" :preview="false"></a-image>
 		<h1>关于Yumu Site</h1>
