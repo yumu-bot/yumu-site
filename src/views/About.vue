@@ -9,9 +9,11 @@
 			<h3>
 				<a href="http://git.365246692.xyz/bot/yumu-site" target="_blank">Git</a>
 			</h3>
-
-			<h3>
+			<h3 v-if="isDevelopment">
 				<a href="https://bot.365246692.xyz/" target="_blank">yumu site(online)</a>
+			</h3>
+			<h3 v-if="isDevelopment">
+				<a href="http://disk.365246692.xyz/" target="_blank">Web Disk</a>
 			</h3>
 		</div>
 		<footer>
@@ -20,10 +22,17 @@
 	</div>
 </template>
 
-<script setup>
-import { ref } from "vue";
-
-const contentHeight = window.outerHeight;
+<script>
+export default {
+	data() {
+		return {
+			isDevelopment: true,//是否处于开发环境
+		}
+	},
+	created() {
+		this.isDevelopment = window.location.href.includes("bot") ? false : true;
+	}
+}
 </script>
 
 <style lang="scss" scoped>
