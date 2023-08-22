@@ -14,9 +14,9 @@
 			</a-spin>
 		</div>
 		<div class="progress-icon" v-show="!loaded">
-			<div v-show="status === 'fetching'">
+			<div v-show="status === 'waiting'">
 				<!-- 等待用户查询 -->
-				<a-image src="/img/component/Index_Fetching.png" :preview="false"></a-image>
+				<a-image src="/img/component/Index_Waiting.png" :preview="false"></a-image>
 			</div>
 			<div class="progress-icon-loading" v-show="status === 'loading'">
 				<!-- 查询中&加载中 -->
@@ -42,7 +42,7 @@ export default {
 		// 查询状态
 		status: {
 			type: String,
-			default: "fetching"
+			default: "waiting"
 		},
 		// 图片地址
 		imgUrl: {
@@ -85,7 +85,7 @@ export default {
 	background-color: #54454C;
 	padding: 10px 0px;
 	height: 712px;
-	overflow: hidden;
+	// overflow: hidden;
 
 	.result :deep(.ant-spin) {
 		position: unset;

@@ -19,14 +19,14 @@
 		<!-- score/scores功能附加项  -->
 		<div class="plus-bar" v-show="type === 1">
 			<!-- 子功能类型:pr/re/bp/score -->
-			<a-select :options="scoreTypeList" size="large" style="width:220px;" v-model:value=scoreType>
+			<a-select :options="scoreTypeList" size="large" style="width:155px;" v-model:value=scoreType>
 				<a-select-option v-for="(item, index) in scoreTypeList" :key="index" :label="item.label"
 					:value="item.value"></a-select-option>
 			</a-select>
 			<!-- pr/bp范围查询 -->
 			<a-tooltip :title="'查询范围(1-' + maxRange + ')'" arrow-point-at-center>
 				<a-input-number v-model:value=key :min="1" :max="maxRange" v-show="scoreType !== 'score'"
-					style="width:80px;" size="large" @keyup.enter="emitParams()"></a-input-number>
+					style="width:80px;" size="large" @keyup.enter="emitParams()" placeholder="1"></a-input-number>
 			</a-tooltip>
 			<!-- 谱面成绩查询 -->
 			<a-input placeholder="谱面id" v-model:value=bid v-show="scoreType === 'score'" size="large" style="width:130px;"
@@ -82,17 +82,17 @@ export default {
 			],
 			//单个成绩查询类型
 			scoreTypes: [
-				{ label: "最近成绩", value: "re" },
-				{ label: "最近通过成绩", value: "pr" },
+				{ label: "最近", value: "re" },
+				{ label: "最近通过", value: "pr" },
 				{ label: "最好成绩", value: "bp" },
 				{ label: "谱面成绩", value: "score" },
 			],
 			//多个成绩查询类型
 			scoresTypes: [
-				{ label: "最近成绩", value: "re" },
-				{ label: "最近通过成绩", value: "pr" },
-				{ label: "最好成绩(指定bp范围)", value: "bp-range" },
-				{ label: "最好成绩(指定天数范围)", value: "bp-days" },
+				{ label: "最近", value: "re" },
+				{ label: "最近通过", value: "pr" },
+				{ label: "最好(bp范围)", value: "bp-range" },
+				{ label: "最好(天数范围)", value: "bp-days" },
 			],
 			scoreTypeList: [],
 			// 游玩模组列表
@@ -215,7 +215,7 @@ export default {
 					} else {
 						this.mods[i].disabled = this.mods[i].value === "HR" ? true : false;
 					}
-				} else if(val.includes("SD") || val.includes("PF")){
+				} else if (val.includes("SD") || val.includes("PF")) {
 					let e;
 					this.mods.map((item) => {
 						if (item.value === "NM") {
@@ -277,21 +277,21 @@ export default {
 </script>
 <style lang="scss" scoped>
 .search-bar {
-	padding: 10px 0;
+	padding: 10px 20px;
 	display: flex;
 	flex-direction: row;
 	flex-wrap: nowrap;
 	justify-content: space-between;
-	width: inherit;
+	width: -webkit-fill-available;
 	background-color: #54454C;
-	column-gap: 5px;
+	column-gap: 20px;
 
 	.plus-bar {
 		display: flex;
 		flex-direction: row;
 		flex-wrap: nowrap;
 		justify-content: space-between;
-		column-gap: 5px;
+		column-gap: 20px;
 	}
 }
 

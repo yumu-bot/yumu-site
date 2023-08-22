@@ -26,7 +26,7 @@ export default {
 			username: "",//用户名
 			imgUrl: "",//图片地址
 			spinning: false,//加载状态
-			status: "fetching",//查询状态
+			status: "waiting",//查询状态
 			mode: "osu",//指定查询mode,默认为osu
 			// 游戏模式列表
 			modes: [
@@ -76,7 +76,8 @@ export default {
 				let timer = setTimeout(() => {
 					if (this.status !== "") {
 						this.status = "error";
-						message.warning("图片加载超时,请稍后再试(可尝试连接vpn改善网络状况)")
+						message.warning("图片加载超时,请稍后再试(可尝试连接vpn改善网络状况)");
+						clearTimeout(timer);
 					} else {
 						// 若加载成功,清除定时器
 						clearTimeout(timer);

@@ -206,7 +206,7 @@ img:hover {
 
 .large-item {
   width: 537px;
-
+  height: 314.78px;
   // @media screen and (max-width:$xxl) {
   //   width: 465px;
   // }
