@@ -8,7 +8,7 @@
 <template>
 	<!-- 功能导航栏 -->
 	<div class="function-nav">
-		<a-menu :selectedKeys="currentMenu" mode="horizontal" style="font-size: large;">
+		<a-menu :selectedKeys="currentMenu" mode="horizontal" style="font-size: large;color: #ffffff;">
 			<a-menu-item v-for="(item) in menuList" :key="item.title" @click="changeMenuByNavbar(item.title, item.path)">{{
 				item.header }}
 			</a-menu-item>
