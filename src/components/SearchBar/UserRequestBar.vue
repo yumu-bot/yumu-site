@@ -56,7 +56,7 @@
 			</a-tooltip>
 		</div>
 		<!-- 查询按钮 -->
-		<a-button style="width: 70px;" size="large" @click="emitParams()">生成!</a-button>
+		<a-button style="width: 70px;" size="large" @click="emitParams()" :disabled="isInvalid">生成!</a-button>
 	</div>
 </template>
 <script>
@@ -97,19 +97,22 @@ export default {
 			scoreTypeList: [],
 			// 游玩模组列表
 			mods: [
-				{ label: "NM", value: "NM" },
-				{ label: "DT", value: "DT" },
-				{ label: "HD", value: "HD" },
-				{ label: "HR", value: "HR" },
-				{ label: "NC", value: "NC" },
-				{ label: "EZ", value: "EZ" },
-				{ label: "SO", value: "SO" },
-				{ label: "NF", value: "NF" },
-				{ label: "SD", value: "SD" },
-				{ label: "HT", value: "HT" },
+				{ label: "NM", value: "NM", disabled: false },
+				{ label: "DT", value: "DT", disabled: false },
+				{ label: "HD", value: "HD", disabled: false },
+				{ label: "HR", value: "HR", disabled: false },
+				{ label: "NC", value: "NC", disabled: false },
+				{ label: "EZ", value: "EZ", disabled: false },
+				{ label: "SO", value: "SO", disabled: false },
+				{ label: "NF", value: "NF", disabled: false },
+				{ label: "SD", value: "SD", disabled: false },
+				{ label: "HT", value: "HT", disabled: false },
+				{ label: "PF", value: "PF", disabled: false },
+				{ label: "FL", value: "FL", disabled: false },
+
 			],
 			maxRange: 100,//查询范围上限 bp-days时为999,其余情况为100
-
+			isInvalid: false,//是否满足请求条件
 		}
 	},
 	props: {
@@ -152,23 +155,85 @@ export default {
 		},
 		// 传递请求参数
 		emitParams() {
-			let data = {
-				username: this.username,
-				mode: this.mode,
-				nowfunction: this.nowfunction,
-				type: this.type,
-				scoreType: this.scoreType,
-				key: this.key === "" ? 1 : this.key,
-				bid: this.bid,
-				mod: this.mod,
+			if (this.isInvalid) {
+
+			} else {
+				let data = {
+					username: this.username,
+					mode: this.mode,
+					nowfunction: this.nowfunction,
+					type: this.type,
+					scoreType: this.scoreType,
+					key: this.key === "" ? 1 : this.key,
+					bid: this.bid,
+					mod: this.mod,
+				}
+				this.init(data);
 			}
-			this.init(data);
 		},
 		// 获取选定功能类型
 		getFunctionType() {
 			for (let i = 0; i < this.functionList.length; i++) {
 				if (this.functionList[i].includes(this.nowfunction)) {
 					this.type = i;
+				}
+			}
+		},
+		// mod组合验证
+		// nm- sd / pf
+		// ez- hr
+		// ht - dt / nc
+		// fl - hd(骂娘特供)(暂不支持mania)
+		checkMods(val) {
+			for (let i = 0; i < this.mods.length; i++) {
+				// NM不能与其他mod组合
+				if (val.length >= 1 && val.includes("NM")) {
+					if (this.mods[i].value !== "NM") {
+						this.mods[i].disabled = true;
+						this.isInvalid = val.length > 1 ? true : false;//选择包含NM的其他mod组合禁止请求
+					}
+				} else if (val.includes("DT") || val.includes("NC")) {
+					let e;
+					this.mods.map((item) => {
+						if (item.value === "HT") {
+							e = this.mods.indexOf(item)
+						}
+					})
+					//DT/NC不能共存，不能与HT组合
+					if (val.includes("DT")) {
+						this.mods[i].disabled = this.mods[i].value === "NC" ? true : false;
+						this.mods[e].disabled = true;
+					} else {
+						this.mods[i].disabled = this.mods[i].value === "DT" ? true : false;
+						this.mods[e].disabled = true;
+					}
+				} else if (val.includes("HR") || val.includes("EZ")) {
+					//EZ/HR不能组合
+					if (val.includes("HR")) {
+						this.mods[i].disabled = this.mods[i].value === "EZ" ? true : false;
+
+					} else {
+						this.mods[i].disabled = this.mods[i].value === "HR" ? true : false;
+					}
+				} else if(val.includes("SD") || val.includes("PF")){
+					let e;
+					this.mods.map((item) => {
+						if (item.value === "NM") {
+							e = this.mods.indexOf(item)
+						}
+					})
+					//SD/PF不能共存，不能与NM组合
+					if (val.includes("SD")) {
+						this.mods[i].disabled = this.mods[i].value === "PF" ? true : false;
+						this.mods[e].disabled = true;
+					} else {
+						this.mods[i].disabled = this.mods[i].value === "SD" ? true : false;
+						this.mods[e].disabled = true;
+					}
+				}
+				else {
+					this.mods[i].disabled = false;
+					this.isInvalid = false;
 				}
 			}
 		}
@@ -189,12 +254,7 @@ export default {
 		},
 		mod: {
 			handler(val) {
-				if (val.length > 1 && val.includes("NM")) {
-					message.warning("非NM成绩查询时请不要勾选NM哦");
-				};
-				if (val.includes("DT") === true && val.includes("NC") === true) {
-					message.warning("DT成绩查询时只能选对应游玩mod哦");
-				}
+				this.checkMods(val);
 			}
 		},
 		scoreType: {
