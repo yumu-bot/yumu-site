@@ -65,7 +65,7 @@ export default {
 		},
 		//图片加载失败时
 		imgLoadError(event) {
-			message.warning("用户不存在或加载失败");
+			message.error("用户不存在或加载失败");
 			this.loaded = false;
 			let status = "error";//改变status状态,显示error
 			this.$emit("changeStatus", status);
