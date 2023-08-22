@@ -37,10 +37,17 @@ export default {
 			],
 			// 功能列表
 			functions: [
-				{ label: "ppm", value: "ppm" },
-				{ label: "bpa", value: "bpa" },
+				{ label: "PP-", value: "ppm" },
+				{ label: "分析最好成绩", value: "bpa" },
+				{ label: "查询单个成绩", value: "score" },
+				{ label: "查询多个成绩", value: "scores" },
 			],
 			nowfunction: "ppm",//指定查询功能,默认为ppm
+			type: 0,//功能类型
+			key: 0,//
+			bid: "",//
+			scoreType: "",//成绩功能类型
+			mod: ""
 		}
 	}, props: {
 
@@ -49,7 +56,7 @@ export default {
 		UserRequestBar,
 	}
 	, methods: {
-		//查询ppm
+		//发送查询请求
 		async sendRequest() {
 			// 表单验证
 			if (this.username === "") {
@@ -57,22 +64,24 @@ export default {
 			} else {
 				this.spinning = true;//图片正在加载
 				this.status = "loading";
-				let paramsObj = {
-					u1: this.username,
-					mode: this.mode,
+				// 支持用户名+mode查询传参
+				if (this.type === 0) {
+					this.getPerformancePoint();
 				}
-				this.imgUrl = this.baseUrl + `/${this.nowfunction}?u1=${paramsObj.u1}&mode=${paramsObj.mode}`;
+				// 支持用户名+mode+可选附加项传参
+				if (this.type === 1) {
+					this.getScore();
+				}
 				// 图片加载超时切换状态为error,超时限制为1分钟
 				let timer = setTimeout(() => {
 					if (this.status !== "") {
 						this.status = "error";
-						message.error("图片加载超时,请稍后再试(可尝试连接vpn改善网络状况)")
+						message.warning("图片加载超时,请稍后再试(可尝试连接vpn改善网络状况)")
+					} else {
+						// 若加载成功,清除定时器
+						clearTimeout(timer);
 					}
-				}, 10000);
-				// 若加载成功,清除定时器
-				if (this.status === "") {
-					clearTimeout(timer);
-				}
+				}, 60000);
 			}
 		},
 		//修改查询状态(emit)
@@ -84,11 +93,50 @@ export default {
 			this.spinning = false;//图片加载成功
 		},
 		// 初始化传递参数,触发查询
-		init(username, mode, nowfunction) {
-			this.username = username;
-			this.mode = mode;
-			this.nowfunction = nowfunction;
+		init(data) {
+			this.username = data.username;
+			this.mode = data.mode;
+			this.nowfunction = data.nowfunction;
+			this.type = data.type;
+			this.scoreType = data.scoreType;
+			this.key = data.key;
+			this.bid = data.bid;
+			this.mod = data.mod;
 			this.sendRequest();
+		},
+		// 查询ppm/bpa
+		getPerformancePoint() {
+			let paramsObj = {
+				u1: this.username,
+				mode: this.mode,
+			}
+			this.imgUrl = this.baseUrl + `/${this.nowfunction}?u1=${paramsObj.u1}&mode=${paramsObj.mode}`;
+		},
+		// 查询score/scores
+		getScore() {
+			let paramsObj = {
+				u1: this.username,
+				mode: this.mode,
+				scoreType: this.scoreType,//score类型:pr/re/bp/score scores类型:bp-days/bp-range/pr/re
+				value: this.key,//查询序号/范围(1-x) x为100或999
+				bid: parseInt(this.bid),//谱面id
+				mod: this.mod,//游玩mod
+			}
+			//发送查询请求
+			if (paramsObj.scoreType === this.nowfunction) {
+				let mod = paramsObj.mod === [] ? "" : paramsObj.mod.toString().replaceAll(/,/g, "");
+				// 查询谱面成绩
+				if (mod === "") {
+					// 不查询指定mod(默认查询分数最高成绩)
+					this.imgUrl = this.baseUrl + `/${this.nowfunction}?u1=${paramsObj.u1}&mode=${paramsObj.mode}&bid=${paramsObj.bid}`;
+				} else {
+					// 查询指定mod
+					this.imgUrl = this.baseUrl + `/${this.nowfunction}?u1=${paramsObj.u1}&mode=${paramsObj.mode}&bid=${paramsObj.bid}&mods=${mod}`;
+				}
+			} else {
+				// 查询pr/re/bp/bp-days/bp-range
+				this.imgUrl = this.baseUrl + `/${this.nowfunction}/${paramsObj.scoreType}?u1=${paramsObj.u1}&mode=${paramsObj.mode}&n=${paramsObj.value}`;
+			}
 		}
 	},
 	created() {
