@@ -39,7 +39,7 @@
 				// borderRadius:16
 				colorItemBg: '#54454C',
 				colorPrimary: '#ffffff',
-				colorItemText: '#ffffff'
+				// colorItemText: '#ffffff',//目录菜单主文本色
 			},
 			// 按钮
 			Button: {
