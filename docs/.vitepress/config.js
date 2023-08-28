@@ -1,6 +1,5 @@
 module.exports = {
-  title: 'Hello VitePress',
-  description: 'Just playing around.',
+  title: 'Hello Yumu',
+  description: 'Yumu Bot Help Docs.',
   dest: 'public',
-  base:'/bot/yumu-site',
 }
