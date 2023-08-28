@@ -48,7 +48,7 @@
 			</a-tooltip>
 		</div>
 		<!-- 查询按钮 -->
-		<a-button style="width: 70px;" size="large" @click="emitParams()" :disabled="isInvalid">生成!</a-button>
+		<a-button style="width: 70px;" size="large" @click="emitParams()">生成!</a-button>
 	</div>
 </template>
 <script>
@@ -82,7 +82,9 @@ export default {
 			let functionName = this.nowfunction === "match" ? "ymmn" : "ymra";
 			let isRestart = r ? " r" : "";
 			let isFail = f ? " f" : "";
-			this.command = `!${functionName} ${matchId}` + ` ${k} ${d}${isRestart}${isFail}`;
+			if (matchId !== "") {
+				this.command = `!${functionName} ${matchId}` + ` ${k} ${d}${isRestart}${isFail}`;
+			}
 		},
 		// 传递请求参数
 		emitParams() {
