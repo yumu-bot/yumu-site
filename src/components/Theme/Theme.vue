@@ -49,6 +49,10 @@
 				colorPrimaryHover: 'rgba(255,255,255,0.45)',//按钮悬浮色
 				// colorBgTextActive: 'rgba(255,255,255,0.65)',//按钮背景文本激活色
 				// colorBgTextHover: 'rgba(255,255,255,0.45)',//按钮背景文本悬浮色
+			},
+			// 多选框
+			Checkbox: {
+				colorText: '#ffffff',//文本色
 			}
 		}
 	}">
