@@ -1,0 +1,15 @@
+default:
+  tags:
+    - master
+  
+variables:
+    GIT_STRATEGY: none
+
+stages:
+  - update
+
+job-updae:
+  stage: update
+  needs: []
+  script:
+    - ~/sh/bot-site.sh
