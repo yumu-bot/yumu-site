@@ -8,14 +8,18 @@
 <template>
 	<div class="search-bar">
 		<!-- 查询功能切换 -->
-		<a-select style="width:150px;" :options="functions" size="large" v-model:value=nowfunction>
-			<a-select-option v-for="(item, index) in functions" :key="index" :label="item.label"
-				:value="item.value"></a-select-option>
-		</a-select>
+		<div>
+			<a-select class="function-bar" :options="functions" size="large" v-model:value=nowfunction>
+				<a-select-option v-for="(item, index) in functions" :key="index" :label="item.label"
+					:value="item.value"></a-select-option>
+			</a-select>
+		</div>
 		<!-- 用户名输入框 -->
-		<a-input placeholder="请输入用户名" size="large" style="width:600px;" v-model:value=username allow-clear
-			@keyup.enter="emitParams()">
-		</a-input>
+		<div>
+			<a-input class="input-bar" :class="isWideScreen" :style="inputBarStyle" placeholder="请输入用户名" size="large"
+				v-model:value=username allow-clear @keyup.enter="emitParams()">
+			</a-input>
+		</div>
 		<!-- score/scores功能附加项  -->
 		<div class="plus-bar" v-show="type === 1">
 			<!-- 子功能类型:pr/re/bp/score -->
@@ -113,6 +117,11 @@ export default {
 			],
 			maxRange: 100,//查询范围上限 bp-days时为999,其余情况为100
 			isInvalid: false,//是否满足请求条件
+			screenWidth: null,
+			isWideScreen: true,
+			inputBarStyle: {
+				width: "570px",
+			}
 		}
 	},
 	props: {
@@ -236,9 +245,18 @@ export default {
 					this.isInvalid = false;
 				}
 			}
+		},
+		getScreenWidth() {
+			this.screenWidth = window.screen.width;
+			this.isWideScreen = this.screenWidth === 1920 || this.screenWidth > 1920 ? true : false;
 		}
 	},
 	created() {
+		setInterval(() => {
+			this.getScreenWidth();
+		}, 1000);
+	},
+	mounted() {
 	},
 	watch: {
 		nowfunction: {
@@ -260,15 +278,40 @@ export default {
 		scoreType: {
 			handler(val) {
 				this.maxRange = val === 'bp-days' ? 999 : 100;
-			}
+				if (this.isWideScreen) {
+					this.inputBarStyle.width = val === 'score' ? "200px" : "460px";
+				}
+			},
+			immediate: true,
 		},
 		bid: {
 			handler(val) {
 				if (isNaN(val)) {
-					console.log(parseInt(val))
+					// console.log(parseInt(val))
 					message.warning("谱面id应该为纯数字");
 				}
 			},
+		},
+		type: {
+			handler(val) {
+				if (this.isWideScreen) {
+					this.inputBarStyle.width = val === 1 ? "460px" : "570px";
+				}
+			},
+			immediate: true,
+		},
+		isWideScreen: {
+			handler(val) {
+				if (!val) {
+					this.inputBarStyle = {};
+				} else {
+					this.inputBarStyle.width = this.type === 1 ? "460px" : "570px";
+					if (this.type === 1) {
+						this.inputBarStyle.width = this.scoreType === 'score' ? "200px" : "460px";
+					}
+				}
+			},
+			immediate: true,
 		}
 
 	}
@@ -276,6 +319,8 @@ export default {
 
 </script>
 <style lang="scss" scoped>
+@import "src/assets/css/variables.scss";
+
 .search-bar {
 	padding: 10px 20px;
 	display: flex;
@@ -285,6 +330,14 @@ export default {
 	width: -webkit-fill-available;
 	background-color: #54454C;
 	column-gap: 20px;
+
+	.function-bar {
+		width: 160px;
+	}
+
+	.input-bar {
+		width: 570px;
+	}
 
 	.plus-bar {
 		display: flex;
@@ -312,6 +365,59 @@ export default {
 
 		svg {
 			padding-top: 6px;
+		}
+	}
+}
+
+// 媒体查询
+@media screen and (max-width:$xl) {
+	.search-bar {
+		flex-wrap: wrap;
+		flex-direction: row;
+		justify-content: flex-start;
+		row-gap: 20px;
+
+		.function-bar {
+			width: 140px;
+		}
+
+		.input-bar {
+			width: 300px;
+		}
+	}
+}
+
+@media screen and (max-width:$lg) {}
+
+@media screen and (max-width:$md) {}
+
+@media screen and (max-width:$sm) {
+	.search-bar {
+		.function-bar {
+			width: 140px;
+		}
+
+		.input-bar {
+			width: 370px;
+		}
+
+		.plus-bar {
+			flex-wrap: wrap;
+			justify-content: flex-start;
+			column-gap: 20px;
+			row-gap: 20px;
+		}
+	}
+}
+
+@media screen and (max-width:$xs) {
+	.search-bar {
+		.function-bar {
+			width: 140px;
+		}
+
+		.input-bar {
+			width: 265px;
 		}
 	}
 }

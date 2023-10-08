@@ -10,7 +10,9 @@
       <!-- 功能快捷入口 -->
       <h3 class="content-header" style="">功能</h3>
       <div class="content-box">
+        <div class="function-content-left">
         <img class="large-item" title="玩家查询" src="/img/function/Function_Map.jpg" @click="jumpPage('user')">
+        </div>
         <div class="function-content-right">
           <img class="small-item" v-for="(item, index) in functionItems" :key="index" :title=item.title :src="item.src"
             @click="jumpPage(item.headMenu)" style="object-fit: cover;">
@@ -110,127 +112,3 @@ export default {
 
 
 </script>
-
-<style lang="scss" scoped>
-@import "../assets/css/variables.scss";
-
-.home-content {
-  // color: #fff;
-  font-size: large;
-  // width: 960px;
-  // border-block-width: 20px;
-  // position: relative;
-  // text-align: left;
-  // left:395.04px;
-  // z-index: -3;
-
-}
-
-.content-header {
-  padding-left: 20px;
-}
-
-.content-box {
-  display: flex;
-  flex-wrap: nowrap;
-  padding: 0 20px;
-  column-gap: 20px;
-
-  .suggest-content {
-    justify-content: space-between;
-    display: flex;
-    width: 100%;
-  }
-
-  .active-content {
-    justify-content: space-between;
-    display: flex;
-    width: 100%;
-  }
-}
-
-.function-content-right {
-  //功能入口键
-  display: flex;
-  flex-wrap: wrap;
-  row-gap: 20px;
-  column-gap: 20px;
-}
-
-img {
-  border-radius: 20px;
-  // css过渡
-  transition-property: all;
-  transition-duration: 0.5s;
-  transition-timing-function: ease;
-  transition-delay: 0s;
-}
-
-img:hover {
-  transform: scale(1.03);
-  // 图片高亮
-  -webkit-filter: brightness(90%);
-  filter: brightness(90%);
-}
-
-.small-item {
-  width: 258px;
-  height: 147.39px;
-
-  // @media screen and (max-width:$xxl) {
-  //   width: 210px;
-  // }
-
-  // @media screen and (max-width:$xl) {
-  //   width: 140px;
-  // }
-
-  // @media screen and (max-width:$lg) {
-  //   width: 121px;
-  // }
-
-  // @media screen and (max-width:$md) {
-  //   width: 120px;
-  // }
-
-  // @media screen and (max-width:$sm) {}
-
-  // @media screen and (max-width:$xs) {
-  //   width: 80px;
-  // }
-
-  // @media screen and (max-width:$xxs) {
-  //   width: 60px;
-  // }
-}
-
-.large-item {
-  width: 537px;
-  height: 314.78px;
-  // @media screen and (max-width:$xxl) {
-  //   width: 465px;
-  // }
-
-  // @media screen and (max-width:$xl) {
-  //   width: 330px;
-  // }
-
-  // @media screen and (max-width:$lg) {
-  //   width: 293px;
-  // }
-
-  // @media screen and (max-width:$md) {
-  //   width: 278px;
-  // }
-
-  // @media screen and (max-width:$sm) {}
-
-  // @media screen and (max-width:$xs) {
-  //   width: 193px;
-  // }
-
-  // @media screen and (max-width:$xxs) {
-  //   width: 152px;
-  // }
-}
-</style>

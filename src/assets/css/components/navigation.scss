@@ -1,0 +1,128 @@
+.nav {
+	// display: inline-flex;
+	background-color: #54454C;
+	// color: #ffffff;
+	text-align: center;
+	width: 100%;
+	// left:395.04px;
+	height: auto;
+	position: fixed;
+	display: inline;
+	z-index: 2;
+	margin-top: -8px;
+	margin-left: -8px;
+	color: #ffffff;
+}
+
+
+.nav-menu {
+	background-color: #54454C;
+	color: #ffffff;
+	text-align: left;
+	// display: inline-block;
+	font-size: x-large;
+	border: #54454C;
+	width: 790px;
+	// font-weight: 500;
+	// position:relative;
+	// left: 395.04px;
+	// z-index: 4;
+}
+
+.nav-title {
+	font-size: xx-large;
+	// position: relative;
+	// background-color: #54454C;
+	// left: 395.04px;
+}
+
+.user-avatar {
+	// padding-bottom: -2px;
+	margin-top: 6px;
+	margin-bottom: 6px;
+	// margin-right: 20px;
+	float: right;
+}
+
+.user-name {
+	font-size: large;
+	// padding-right: 10px;
+	float: right;
+}
+
+// 媒体查询
+@media screen and (max-width:$xl) {
+	.nav-menu {
+		width: 690px;
+		font-size: large;
+	}
+
+	.nav-title {
+		font-size: x-large;
+	}
+
+	.user-name {
+		font-size: larger;
+	}
+}
+
+@media screen and (max-width:$lg) {
+	.nav-menu {
+		width: 465px;
+		font-size: larger;
+	}
+
+	.nav-title {
+		font-size: larger;
+	}
+
+	.user-name {
+		font-size: medium;
+	}
+}
+
+@media screen and (max-width:$md) {
+	.nav-menu {
+		width: 390px;
+		font-size: medium;
+	}
+
+	.nav-title {
+		font-size: large;
+	}
+
+	.user-name {
+		font-size: small;
+	}
+}
+
+@media screen and (max-width:$sm) {
+	.nav-menu {
+		width: 220px;
+		font-size: small;
+	}
+
+	.nav-title {
+		font-size: medium;
+	}
+
+	.user-name {
+		font-size: smaller;
+	}
+
+}
+
+@media screen and (max-width:$xs) {
+	.nav-menu {
+		width: 175px;
+		font-size: smaller;
+	}
+
+	.nav-title {
+		font-size: small;
+	}
+
+	.user-name {
+		font-size: smaller;
+	}
+}

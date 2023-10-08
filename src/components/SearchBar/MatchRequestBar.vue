@@ -8,16 +8,18 @@
 <template>
 	<div class="search-bar">
 		<!-- 查询功能切换 -->
-		<div class="switch-bar">
-			<a-select style="width:140px;" :options="functions" size="large" v-model:value=nowfunction>
+		<div>
+			<a-select class="switch-bar" :options="functions" size="large" v-model:value=nowfunction>
 				<a-select-option v-for="(item, index) in functions" :key="index" :label="item.label"
 					:value="item.value"></a-select-option>
 			</a-select>
 		</div>
 		<!-- 比赛id输入框 -->
-		<a-input placeholder="请输入比赛id" size="large" style="width:600px;" v-model:value=matchId allow-clear
-			@keyup.enter="emitParams()">
-		</a-input>
+		<div>
+			<a-input class="input-bar" placeholder="请输入比赛id" size="large" v-model:value=matchId allow-clear
+				@keyup.enter="emitParams()">
+			</a-input>
+		</div>
 		<!-- 跳过开头对局 -->
 		<a-tooltip title="跳过开头对局" arrow-point-at-center>
 			<a-input-number v-model:value=skipBegin :min="0" style="width:80px;" size="large" @keyup.enter="emitParams()"
@@ -102,6 +104,8 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
+@import "src/assets/css/variables.scss";
+
 .search-bar {
 	padding: 10px 20px;
 	display: flex;
@@ -112,6 +116,14 @@ export default {
 	height: 40px;
 	background-color: #54454C;
 	column-gap: 20px;
+
+	.switch-bar {
+		width: 140px;
+	}
+
+	.input-bar {
+		width: 435px;
+	}
 
 	.check-bar {
 		width: 125px;
@@ -138,6 +150,50 @@ export default {
 
 		svg {
 			padding-top: 6px;
+		}
+	}
+}
+
+// 媒体查询
+@media screen and (max-width:$xl) {
+	.search-bar {
+		flex-wrap: wrap;
+		flex-direction: row;
+		justify-content: flex-start;
+		row-gap: 20px;
+
+		.input-bar {
+			width: 700px;
+		}
+
+		.check-bar {
+			width: 90px;
+		}
+	}
+}
+
+@media screen and (max-width:$lg) {}
+
+@media screen and (max-width:$md) {
+	.search-bar {
+		.input-bar {
+			width: 400px;
+		}
+	}
+}
+
+@media screen and (max-width:$sm) {
+	.search-bar {
+		.input-bar {
+			width: 370px;
+		}
+	}
+}
+
+@media screen and (max-width:$xs) {
+	.search-bar {
+		.input-bar {
+			width: 265px;
 		}
 	}
 }

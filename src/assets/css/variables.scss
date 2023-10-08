@@ -1,8 +1,16 @@
 // Responsive Breakpoints
-$xxs: 384px;
-$xs: 480px;
-$sm: 576px;
-$md: 768px;
-$lg: 992px;
-$xl: 1200px;
-$xxl: 1600px;
+
+// narrow mobile
+$xs: 419px;
+
+// wide mobile
+$sm: 719px;
+
+// narrow desktop / ipad
+$md: 959px;
+
+// desktop
+$lg: 1280px;
+
+// wide screen
+$xl: 1440px;
