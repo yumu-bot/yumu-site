@@ -19,7 +19,7 @@
 import { message } from 'ant-design-vue';
 import SearchResultBanner from '../../components/SearchResult/SearchResultBanner.vue';
 import UserRequestBar from '../../components/SearchBar/UserRequestBar.vue'
-import { ref, reactive, onMounted } from 'vue';
+import { provide, reactive, onMounted } from 'vue';
 const state = reactive({
 	baseUrl: "",
 	username: "",//用户名
@@ -39,7 +39,8 @@ const state = reactive({
 		{ label: "PP-", value: "ppm" },
 		{ label: "分析最好成绩", value: "bpa" },
 		{ label: "查询单个成绩", value: "score" },
-		{ label: "查询多个成绩", value: "scores" },
+		// { label: "查询多个成绩", value: "scores" },
+		{ label: "谱面成绩查询", value: "mapScore" },
 	],
 	nowfunction: "ppm",//指定查询功能,默认为ppm
 	type: 0,//功能类型
@@ -58,11 +59,11 @@ async function sendRequest() {
 		state.status = "loading";
 		// 支持用户名+mode查询传参
 		if (state.type === 0) {
-			state.getPerformancePoint();
+			getPerformancePoint();
 		}
 		// 支持用户名+mode+可选附加项传参
-		if (state.type === 1) {
-			state.getScore();
+		if (state.type === 1 || state.type === 2) {
+			getScore();
 		}
 		// 图片加载超时切换状态为error,超时限制为1分钟
 		let timer = setTimeout(() => {
@@ -77,6 +78,8 @@ async function sendRequest() {
 		}, 60000);
 	}
 };
+provide("modes", state.modes);
+
 //修改查询状态(emit)
 function changeStatus(status) {
 	state.status = status;
@@ -95,7 +98,7 @@ function init(data) {
 	state.key = data.key;
 	state.bid = data.bid;
 	state.mod = data.mod;
-	state.sendRequest();
+	sendRequest();
 };
 // 查询ppm/bpa
 function getPerformancePoint() {
@@ -116,15 +119,18 @@ function getScore() {
 		mod: state.mod,//游玩mod
 	}
 	//发送查询请求
-	if (paramsObj.scoreType === state.nowfunction) {
+	// debugger
+	if (state.nowfunction === "mapScore") {
 		let mod = paramsObj.mod === "" ? "" : paramsObj.mod.toString().replaceAll(/,/g, "");
 		// 查询谱面成绩
 		if (mod === "") {
 			// 不查询指定mod(默认查询分数最高成绩)
-			state.imgUrl = state.baseUrl + `/${state.nowfunction}?u1=${paramsObj.u1}&mode=${paramsObj.mode}&bid=${paramsObj.bid}`;
+			// state.imgUrl = state.baseUrl + `/${state.nowfunction}?u1=${paramsObj.u1}&mode=${paramsObj.mode}&bid=${paramsObj.bid}`;
+			state.imgUrl = state.baseUrl + `/score?u1=${paramsObj.u1}&mode=${paramsObj.mode}&bid=${paramsObj.bid}`;
 		} else {
 			// 查询指定mod
-			state.imgUrl = state.baseUrl + `/${state.nowfunction}?u1=${paramsObj.u1}&mode=${paramsObj.mode}&bid=${paramsObj.bid}&mods=${mod}`;
+			// state.imgUrl = state.baseUrl + `/${state.nowfunction}?u1=${paramsObj.u1}&mode=${paramsObj.mode}&bid=${paramsObj.bid}&mods=${mod}`;
+			state.imgUrl = state.baseUrl + `/score?u1=${paramsObj.u1}&mode=${paramsObj.mode}&bid=${paramsObj.bid}&mods=${mod}`;
 		}
 	} else {
 		// 查询pr/re/bp/bp-days/bp-range

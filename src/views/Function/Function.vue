@@ -36,11 +36,11 @@ export default {
 		return {
 			// 功能导航栏列表
 			menuList: [
-				{ key: "0", title: "user", path: "/function/user", header: "user" },
-				{ key: "1", title: "uservs", path: "/function/uservs", header: "uservs" },
-				{ key: "2", title: "match", path: "/function/match", header: "match" },
-				{ key: "3", title: "beatmap", path: "/function/beatmap", header: "beatmap" },
-				{ key: "4", title: "entertainment", path: "/function/entertainment", header: "entertainment" },
+				{ key: "0", title: "user", path: "/function/user", header: "玩家数据" },
+				{ key: "1", title: "uservs", path: "/function/uservs", header: "玩家对比" },
+				{ key: "2", title: "match", path: "/function/match", header: "比赛查询" },
+				{ key: "3", title: "beatmap", path: "/function/beatmap", header: "谱面查询" },
+				{ key: "4", title: "entertainment", path: "/function/entertainment", header: "娱乐功能(WIP)" },
 			],
 			currentMenu: [], // 配合antd的:selectedKeys属性，定义currentMenu为字符串数组，home是默认值
 			current: ["user"],

@@ -15,6 +15,9 @@
 			<h3 v-if="isDevelopment">
 				<a href="http://disk.365246692.xyz/" target="_blank">Web Disk</a>
 			</h3>
+			<h3>
+				<a href="https://docs.365246692.xyz/" target="_blank">Yumu Docs</a>
+			</h3>
 		</div>
 		<footer>
 			<span>Copyright © 2021-2023 Yumubot, All Rights Reserved.</span>

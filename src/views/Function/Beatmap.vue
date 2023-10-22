@@ -1,5 +1,5 @@
 <template>
-	beatmap
+	施工中。。。
 </template>
 
 <script>

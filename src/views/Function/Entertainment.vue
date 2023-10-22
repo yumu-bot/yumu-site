@@ -1,5 +1,5 @@
 <template>
-	entertainment
+	施工中。。。
 </template>
 
 <script>

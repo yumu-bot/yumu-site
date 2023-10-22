@@ -3,7 +3,7 @@
  * @fileName: UserRequestBar.vue 
  * @author: SIyuyuko 
  * @date: 2023-08-19 14:22:38
- * @version: V1.0.0 
+ * @others:
 !-->
 <template>
 	<div class="search-bar">
@@ -14,60 +14,18 @@
 					:value="item.value"></a-select-option>
 			</a-select>
 		</div>
-		<!-- 用户名输入框 -->
-		<div>
-			<a-input class="input-bar" :class="state.isWideScreen" :style="state.inputBarStyle" placeholder="请输入用户名"
-				size="large" v-model:value=state.username allow-clear @keyup.enter="emitParams()">
-			</a-input>
-		</div>
-		<!-- score/scores功能附加项  -->
-		<div class="plus-bar" v-show="state.type === 1">
-			<!-- 子功能类型:pr/re/bp/score -->
-			<a-select :options="state.scoreTypeList" size="large" style="width:155px;" v-model:value=state.scoreType>
-				<a-select-option v-for="(item, index) in state.scoreTypeList" :key="index" :label="item.label"
-					:value="item.value"></a-select-option>
-			</a-select>
-			<!-- pr/bp范围查询 -->
-			<a-tooltip :title="'查询范围(1-' + state.maxRange + ')'" arrow-point-at-center>
-				<a-input-number v-model:value=state.key :min="1" :max="state.maxRange" v-show="state.scoreType !== 'score'"
-					style="width:80px;" size="large" @keyup.enter="emitParams()" placeholder="1"></a-input-number>
-			</a-tooltip>
-			<!-- 谱面成绩查询 -->
-			<a-input placeholder="谱面id" v-model:value=state.bid v-show="state.scoreType === 'score'" size="large"
-				style="width:130px;" allow-clear @keyup.enter="emitParams()"></a-input>
-			<!-- 附加参数:游玩mods(仅支持谱面成绩查询) -->
-			<a-select mode="multiple" :options="state.mods" size="large" style="width:150px;" v-model:value=state.mod
-				v-show="state.scoreType === 'score'" :max-tag-count="1" :max-tag-text-length="2" allow-clear
-				placeholder="游玩mod">
-				<a-select-option v-for="(item, index) in state.mods" :key="index" :label="item.label"
-					:value="item.value"></a-select-option>
-			</a-select>
-		</div>
-		<!-- 游戏模式切换 -->
-		<a-select style="width:110px;" :options="props.modes" size="large" v-model:value=state.mode>
-			<a-select-option v-for="(item, index) in props.modes" :key="index" :label="item.label"
-				:value="item.value"></a-select-option>
-		</a-select>
-		<!-- 静态指令复制 -->
-		<div v-show="state.type === 0">
-			<a-tooltip :title=state.command arrow-point-at-center>
-				<a-button style="width: 130px;" size="large"
-					@mouseenter="getCommand(state.nowfunction, state.mode, state.username)">
-					<div class="copy-button">
-						<span>复制到剪贴板</span>
-						<a-typography-paragraph :copyable="{ tooltip: false, text: state.command }">
-						</a-typography-paragraph>
-					</div>
-				</a-button>
-			</a-tooltip>
-		</div>
-		<!-- 查询按钮 -->
-		<a-button style="width: 70px;" size="large" @click="emitParams()" :disabled="state.isInvalid">生成!</a-button>
+		<Infos v-if="state.type === 0" :state="state" :emitParams="emitParams" :getCommand="getCommand"></Infos>
+		<Scores v-if="state.type === 1" :state="state" :emitParams="emitParams"></Scores>
+		<MapScore v-if="state.type === 2" :state="state" :emitParams="emitParams">
+		</MapScore>
 	</div>
 </template>
 <script setup>
 import { message } from 'ant-design-vue';
 import { reactive, onMounted, watch } from 'vue';
+import Infos from '../UserRequest/Infos.vue';
+import Scores from '../UserRequest/Scores.vue';
+import MapScore from '../UserRequest/MapScore.vue';
 const state = reactive({
 	username: "",//用户名
 	nowfunction: "ppm",//指定查询功能,默认为ppm
@@ -83,13 +41,14 @@ const state = reactive({
 	functionList: [
 		["ppm", "bpa"],//支持用户名+mode查询 type:0
 		["score", "scores"],//支持用户名+mode+可选附加参数查询 type:1
+		["mapScore"],
 	],
 	//单个成绩查询类型
 	scoreTypes: [
 		{ label: "最近", value: "re" },
 		{ label: "最近通过", value: "pr" },
 		{ label: "最好成绩", value: "bp" },
-		{ label: "谱面成绩", value: "score" },
+		// { label: "谱面成绩", value: "score" },
 	],
 	//多个成绩查询类型
 	scoresTypes: [
@@ -141,6 +100,7 @@ const props = defineProps({
 	}
 
 });
+
 // 获取静态指令
 // 当前支持指令:ppm/bpa
 function getCommand(nowfunction, mode, username) {
@@ -254,43 +214,56 @@ onMounted(() => {
 		getScreenWidth();
 	}, 1000);
 });
+// 监听功能列表选择切换下拉项
 watch(() => state.nowfunction, (val) => {
 	getFunctionType();
 	if (val === "score") {
 		state.scoreTypeList = state.scoreTypes;
+		state.scoreType = "pr";//默认选择最近通过项
 	};
 	if (val === "scores") {
 		state.scoreTypeList = state.scoresTypes;
+		state.scoreType = "bp-range";//默认选择最好成绩(bp范围)项
 	};
 });
+// 监听游玩mod选项进行mod组合校验
 watch(() => state.mod, (val) => {
 	checkMods(val);
 })
+// 监听切换查询范围
 watch(() => state.scoreType, (val) => {
 	state.maxRange = val === 'bp-days' ? 999 : 100;
 	if (state.isWideScreen) {
 		state.inputBarStyle.width = val === 'score' ? "200px" : "460px";
 	};
 });
-watch(() => state.bid, (val) => {
-	if (isNaN(val)) {
-		// console.log(parseInt(val))
+// 监听谱面id规范(表单验证)
+watch(() => state.bid, (oldVal, newVal) => {
+	if (isNaN(newVal)) {
 		message.warning("谱面id应该为纯数字");
+		state.isInvalid = true;
+	} else if (oldVal == "" || newVal === "") {
+		state.isInvalid = true;
+	} else {
+		state.isInvalid = false;
 	};
 });
 watch(() => state.type, (val) => {
 	if (state.isWideScreen) {
 		state.inputBarStyle.width = val === 1 ? "460px" : "570px";
 	}
+	if (val === 2) {
+		state.inputBarStyle.width = "400px";
+	}
 });
 watch(() => state.isWideScreen, (val) => {
 	if (!val) {
 		state.inputBarStyle = {};
 	} else {
-		state.inputBarStyle.width = state.type === 1 ? "460px" : "570px";
+		// state.inputBarStyle.width = state.type === 1 ? "460px" : "570px";
 		if (state.type === 1) {
 			state.inputBarStyle.width = state.scoreType === 'score' ? "200px" : "460px";
-		}
+		};
 	}
 });
 
@@ -312,9 +285,9 @@ watch(() => state.isWideScreen, (val) => {
 		width: 160px;
 	}
 
-	.input-bar {
-		width: 570px;
-	}
+	// .input-bar {
+	// 	width: 570px;
+	// }
 
 	.plus-bar {
 		display: flex;

@@ -18,7 +18,7 @@
       <h3 class="content-header" style="">功能</h3>
       <div class="content-box">
         <div class="function-content-left">
-          <img class="large-item" title="玩家查询" src="/img/function/Function_Map.jpg" @click="jumpPage('user')">
+          <img class="large-item" title="玩家数据" src="/img/function/Function_Map.jpg" @click="jumpPage('user')">
         </div>
         <div class="function-content-right">
           <img class="small-item" v-for="(item, index) in state.functionItems" :key="index" :title=item.title
@@ -59,7 +59,7 @@ const state = reactive({
     { title: "玩家对比", src: "/img/function/b119.png", headMenu: "uservs" },
     { title: "比赛查询", src: "/img/function/b121.png", headMenu: "match" },
     { title: "谱面查询", src: "/img/function/b128.png", headMenu: "beatmap" },
-    { title: "娱乐", src: "/img/function/b106.png", headMenu: "entertainment" },
+    { title: "娱乐功能", src: "/img/function/b106.png", headMenu: "entertainment" },
   ],
   //开发文档快捷键集合
   devItems: [

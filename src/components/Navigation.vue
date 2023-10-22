@@ -39,7 +39,7 @@
 
 <script setup>
 import { AntDesignOutlined } from '@ant-design/icons-vue';
-import { ref, provide, onMounted, onUnmounted, defineProps, watch, watchEffect, reactive, inject } from "vue";
+import { ref, provide, onMounted, onUnmounted, watch, watchEffect, reactive, inject } from "vue";
 import { useRoute, useRouter } from 'vue-router';
 import bus from '../utils/bus';
 const state = reactive({
