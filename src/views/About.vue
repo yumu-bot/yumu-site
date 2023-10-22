@@ -22,17 +22,13 @@
 	</div>
 </template>
 
-<script>
-export default {
-	data() {
-		return {
-			isDevelopment: true,//是否处于开发环境
-		}
-	},
-	created() {
-		this.isDevelopment = window.location.href.includes("bot") ? false : true;
-	}
-}
+<script setup>
+import { onMounted, ref } from 'vue'
+const isDevelopment = ref(true);
+onMounted(() => {
+	isDevelopment.value = window.location.href.includes("bot") ? false : true;
+});
+
 </script>
 
 <style lang="scss" scoped>

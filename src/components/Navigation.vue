@@ -4,8 +4,8 @@
 		<div class="nav-bar">
 			<a-space size="large">
 				<span class="nav-title">Yumu Site</span>
-				<a-menu class="nav-menu" :selectedKeys="currentMenu" mode="horizontal">
-					<a-menu-item v-for="(item, index) in menuList" :key="index"
+				<a-menu class="nav-menu" :selectedKeys="state.currentMenu" mode="horizontal">
+					<a-menu-item v-for="(item, index) in state.menuList" :key="index"
 						@click="changeMenuByNavbar(item.title, item.path)">{{
 							item.header }}
 					</a-menu-item>
@@ -37,48 +37,49 @@
 	</div>
 </template>
 
-<script>
+<script setup>
 import { AntDesignOutlined } from '@ant-design/icons-vue';
-import { ref, provide, onMounted, onUnmounted, defineProps, watch, watchEffect, reactive, inject } from "vue"
+import { ref, provide, onMounted, onUnmounted, defineProps, watch, watchEffect, reactive, inject } from "vue";
+import { useRoute, useRouter } from 'vue-router';
 import bus from '../utils/bus';
-export default {
-	data() {
-		return {
-			menuList: [{ key: "0", title: "home", path: "/home", header: "主页" },
-			{ key: "1", title: "function", path: "/function", header: "功能" },
-			// { key: "2", title: "feature", path: "/feature", header: "特色" },
-			// { key: "3", title: "realtime", path: "/realtime", header: "实时" },
-			{ key: "4", title: "about", path: "/about", header: "关于" }],
-			currentMenu: ["home"], // 配合antd的:selectedKeys属性，定义currentMenu为字符串数组，home是默认值
-			navIndex: 0,
-		}
-	}, methods: {
-		// 任意处路由跳转切换导航栏高亮
-		changeMenuByRandom() {
-			// bus.$on("currentMenu", (res) => { this.currentMenu.pop(); this.currentMenu.push(res) });//兄弟组件事件总线通信
-		},
-		// 导航栏切换高亮
-		changeMenuByNavbar(selectedMenu, path) {
-			// console.log(this.currentMenu);
-			// console.log(menu);
-			this.currentMenu.pop();
-			this.currentMenu.push(selectedMenu);
-			this.$router.push(path);
-		},
-	}, mounted() {
-		this.changeMenuByRandom();
-	}, watch: {
-		"$route"() {
-			// 监听路由是否前进/后退，发生变化则触发导航栏切换高亮
-			if (this.$router.push) {
-				console.log(this.$route.name, this.$route.path);
-				let selectedMenu = this.$route.name;
-				let path = this.$route.path;
-				this.changeMenuByNavbar(selectedMenu, path);
-			}
-		}
-	}
-}
+const state = reactive({
+	menuList: [
+		{ key: "0", title: "home", path: "/home", header: "主页" },
+		{ key: "1", title: "function", path: "/function", header: "功能" },
+		// { key: "2", title: "feature", path: "/feature", header: "特色" },
+		// { key: "3", title: "realtime", path: "/realtime", header: "实时" },
+		{ key: "4", title: "about", path: "/about", header: "关于" }
+	],
+	currentMenu: ["home"], // 配合antd的:selectedKeys属性，定义currentMenu为字符串数组，home是默认值
+	navIndex: 0,
 
+});
+const route = useRoute();
+const router = useRouter();
+
+
+// 任意处路由跳转切换导航栏高亮
+function changeMenuByRandom() {
+	// bus.$on("currentMenu", (res) => { this.currentMenu.pop(); this.currentMenu.push(res) });//兄弟组件事件总线通信
+};
+// 导航栏切换高亮
+function changeMenuByNavbar(selectedMenu, path) {
+	// console.log(this.currentMenu);
+	// console.log(menu);
+	state.currentMenu.pop();
+	state.currentMenu.push(selectedMenu);
+	router.push(path);
+};
+onMounted(() => {
+	changeMenuByRandom();
+})
+watch((route), () => {
+	if (router.push) {
+		console.log(route.name, route.path);
+		let selectedMenu = route.name;
+		let path = route.path;
+		changeMenuByNavbar(selectedMenu, path);
+	}
+});
 
 </script>
