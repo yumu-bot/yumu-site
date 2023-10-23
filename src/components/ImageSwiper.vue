@@ -14,7 +14,7 @@
 	</div>
 </template>
 
-<script setup>
+<script setup name="ImageSwiper">
 import { Swiper, SwiperSlide } from 'swiper/vue'; // swiper所需组件
 // 这是分页器和对应方法，swiper好像在6的时候就已经分离了分页器和一些其他工具
 import { Autoplay, Navigation, Pagination, A11y } from 'swiper';

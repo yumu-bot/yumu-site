@@ -15,7 +15,7 @@
 	</div>
 </template>
 
-<script setup>
+<script setup name="User">
 import { message } from 'ant-design-vue';
 import SearchResultBanner from '../../components/SearchResult/SearchResultBanner.vue';
 import UserRequestBar from '../../components/SearchBar/UserRequestBar.vue'

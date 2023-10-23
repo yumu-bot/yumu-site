@@ -37,7 +37,7 @@
 	</div>
 </template>
 
-<script setup>
+<script setup name="Navigation">
 import { AntDesignOutlined } from '@ant-design/icons-vue';
 import { ref, provide, onMounted, onUnmounted, watch, watchEffect, reactive, inject } from "vue";
 import { useRoute, useRouter } from 'vue-router';

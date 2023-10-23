@@ -15,10 +15,10 @@
   </div>
 </template>
 
-<script setup>
+<script setup name="Match">
 import { message } from 'ant-design-vue';
 import SearchResultBanner from '../../components/SearchResult/SearchResultBanner.vue';
-import MatchRequestBar from '../../components/SearchBar/MatchRequestBar.vue'
+import MatchRequestBar from '../../components/SearchBar/MatchRequestBar.vue';
 import { onMounted, reactive } from 'vue';
 const state = reactive({
   baseUrl: "",

@@ -30,7 +30,7 @@
 		</div>
 	</div>
 </template>
-<script setup>
+<script setup name="SearchResultBanner">
 import { message } from 'ant-design-vue';
 import { ref } from 'vue';
 const loaded = ref(false);//图片是否加载成功

@@ -47,7 +47,7 @@
   </div>
 </template>
 
-<script setup>
+<script setup name="HomeContent">
 import ImageSwiper from '@/components/ImageSwiper.vue';
 import { useRouter } from 'vue-router';
 import { inject, onMounted, onUnmounted, ref, reactive } from 'vue';

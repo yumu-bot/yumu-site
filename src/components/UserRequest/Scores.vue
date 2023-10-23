@@ -33,7 +33,7 @@
 	<!-- 查询按钮 -->
 	<a-button style="width: 70px;" size="large" @click="emitParams()" :disabled="state.isInvalid">生成!</a-button>
 </template>
-<script setup>
+<script setup name="Scores">
 import { inject } from 'vue';
 const props = defineProps({
 	state: {

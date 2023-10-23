@@ -3,7 +3,7 @@
  * @fileName: UserRequestBar.vue 
  * @author: SIyuyuko 
  * @date: 2023-08-19 14:22:38
- * @others:
+ * @others:--
 !-->
 <template>
 	<div class="search-bar">
@@ -20,7 +20,7 @@
 		</MapScore>
 	</div>
 </template>
-<script setup>
+<script setup name="UserRequestBar">
 import { message } from 'ant-design-vue';
 import { reactive, onMounted, watch } from 'vue';
 import Infos from '../UserRequest/Infos.vue';
@@ -234,7 +234,7 @@ watch(() => state.mod, (val) => {
 watch(() => state.scoreType, (val) => {
 	state.maxRange = val === 'bp-days' ? 999 : 100;
 	if (state.isWideScreen) {
-		state.inputBarStyle.width = val === 'score' ? "200px" : "460px";
+		state.inputBarStyle.width = val === 'score' ? "200px" : "445px";
 	};
 });
 // 监听谱面id规范(表单验证)
@@ -250,7 +250,7 @@ watch(() => state.bid, (oldVal, newVal) => {
 });
 watch(() => state.type, (val) => {
 	if (state.isWideScreen) {
-		state.inputBarStyle.width = val === 1 ? "460px" : "570px";
+		state.inputBarStyle.width = val === 1 ? "445px" : "570px";
 	}
 	if (val === 2) {
 		state.inputBarStyle.width = "400px";
@@ -260,9 +260,9 @@ watch(() => state.isWideScreen, (val) => {
 	if (!val) {
 		state.inputBarStyle = {};
 	} else {
-		// state.inputBarStyle.width = state.type === 1 ? "460px" : "570px";
+		// state.inputBarStyle.width = state.type === 1 ? "445px" : "570px";
 		if (state.type === 1) {
-			state.inputBarStyle.width = state.scoreType === 'score' ? "200px" : "460px";
+			state.inputBarStyle.width = state.scoreType === 'score' ? "200px" : "445px";
 		};
 	}
 });

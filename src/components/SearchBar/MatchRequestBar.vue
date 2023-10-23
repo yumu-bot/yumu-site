@@ -53,7 +53,7 @@
 		<a-button style="width: 70px;" size="large" @click="emitParams()">生成!</a-button>
 	</div>
 </template>
-<script setup>
+<script setup name="MatchRequestBar">
 import { reactive } from 'vue';
 const state = reactive({
 	matchId: "",//比赛Id

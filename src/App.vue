@@ -3,7 +3,7 @@
   <Navigation></Navigation>
   <router-view></router-view>
 </template>
-<script setup>
+<script setup name="app">
 import Navigation from '@/components/Navigation.vue';
 import Theme from './components/Theme/Theme.vue';
 </script>
