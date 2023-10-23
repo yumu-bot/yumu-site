@@ -25,7 +25,7 @@
 	</div>
 </template>
 
-<script  name="About">
+<script setup name="About">
 import { onMounted, ref } from 'vue'
 const isDevelopment = ref(true);
 onMounted(() => {
