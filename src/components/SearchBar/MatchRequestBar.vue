@@ -22,13 +22,13 @@
 		</div>
 		<!-- 跳过开头对局 -->
 		<a-tooltip title="跳过开头对局" arrow-point-at-center>
-			<a-input-number v-model:value=state.skipBegin :min="0" style="width:80px;" size="large"
+			<a-input-number class="number-bar" v-model:value=state.skipBegin :min="0" size="large"
 				@keyup.enter="emitParams()" placeholder="0"></a-input-number>
 		</a-tooltip>
 		<!-- 跳过结尾对局 -->
 		<a-tooltip title="跳过结尾对局" arrow-point-at-center>
-			<a-input-number v-model:value=state.skipEnd :min="0" style="width:80px;" size="large"
-				@keyup.enter="emitParams()" placeholder="0"></a-input-number>
+			<a-input-number class="number-bar" v-model:value=state.skipEnd :min="0" size="large" @keyup.enter="emitParams()"
+				placeholder="0"></a-input-number>
 		</a-tooltip>
 		<div class="check-bar">
 			<!-- 是否包含失败对局 -->
@@ -36,21 +36,23 @@
 			<!-- 是否包含重赛对局 -->
 			<a-checkbox v-model:checked="state.includeRestart">重赛对局</a-checkbox>
 		</div>
-		<!-- 静态指令复制 -->
-		<div>
-			<a-tooltip :title=state.command arrow-point-at-center>
-				<a-button style="width: 130px;" size="large"
-					@mouseenter="getCommand(state.matchId, state.skipBegin, state.skipEnd, state.includeFail, state.includeRestart)">
-					<div class="copy-button">
-						<span>复制到剪贴板</span>
-						<a-typography-paragraph :copyable="{ tooltip: false, text: state.command }">
-						</a-typography-paragraph>
-					</div>
-				</a-button>
-			</a-tooltip>
+		<div class="query-bar">
+			<!-- 静态指令复制 -->
+			<div>
+				<a-tooltip :title=state.command arrow-point-at-center>
+					<a-button style="width: 130px;" size="large"
+						@mouseenter="getCommand(state.matchId, state.skipBegin, state.skipEnd, state.includeFail, state.includeRestart)">
+						<div class="copy-button">
+							<span>复制到剪贴板</span>
+							<a-typography-paragraph :copyable="{ tooltip: false, text: state.command }">
+							</a-typography-paragraph>
+						</div>
+					</a-button>
+				</a-tooltip>
+			</div>
+			<!-- 查询按钮 -->
+			<a-button style="width: 70px;" size="large" @click="emitParams()">生成!</a-button>
 		</div>
-		<!-- 查询按钮 -->
-		<a-button style="width: 70px;" size="large" @click="emitParams()">生成!</a-button>
 	</div>
 </template>
 <script setup name="MatchRequestBar">
@@ -128,6 +130,10 @@ function emitParams() {
 		flex-direction: column;
 		justify-content: center;
 	}
+
+	.number-bar {
+		width: 80px;
+	}
 }
 
 .copy-button {
@@ -151,47 +157,38 @@ function emitParams() {
 	}
 }
 
-// 媒体查询
-@media screen and (max-width:$xl) {
+// AutoResize for phone
+@media screen and (max-width:420px) {
 	.search-bar {
+		padding: 10px 10px;
+		justify-content: unset;
 		flex-wrap: wrap;
-		flex-direction: row;
-		justify-content: flex-start;
-		row-gap: 20px;
+		column-gap: 10px;
+		row-gap: 10px;
 
 		.input-bar {
-			width: 700px;
+			width: 200px;
+			display: flex;
+			margin-left: auto;
 		}
+
+		.number-bar {
+			width: 115px;
+		}
+
 
 		.check-bar {
-			width: 90px;
+			width: 100px;
+			margin-left: auto;
 		}
-	}
-}
 
-@media screen and (max-width:$lg) {}
-
-@media screen and (max-width:$md) {
-	.search-bar {
-		.input-bar {
-			width: 400px;
+		.query-bar {
+			display: flex;
+			margin-left: auto;
+			column-gap: 10px;
 		}
-	}
-}
 
-@media screen and (max-width:$sm) {
-	.search-bar {
-		.input-bar {
-			width: 370px;
-		}
 	}
-}
 
-@media screen and (max-width:$xs) {
-	.search-bar {
-		.input-bar {
-			width: 265px;
-		}
-	}
 }
 </style>

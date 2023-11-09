@@ -1,0 +1,12 @@
+.function-nav {
+	background-color: #54454C;
+	padding-bottom: 10px;
+}
+
+// AutoResize for phone
+@media screen and (max-width:420px) {
+
+	.function-item {
+		font-size:small;
+	}
+}

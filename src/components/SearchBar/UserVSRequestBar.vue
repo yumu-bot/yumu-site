@@ -13,20 +13,22 @@
 				@keyup.enter="emitParams()">
 			</a-input>
 		</div>
-		<FireFilled style="font-size: xx-large;" />
+		<FireFilled class="vs-icon" style="font-size: xx-large;" />
 		<!-- 玩家2输入框 -->
 		<div>
 			<a-input class="input-bar" placeholder="请输入要对比的玩家2" size="large" v-model:value=state.userB allow-clear
 				@keyup.enter="emitParams()">
 			</a-input>
 		</div>
-		<!-- 游戏模式切换 -->
-		<a-select style="width:110px;" :options="data.modes" size="large" v-model:value=state.mode>
-			<a-select-option v-for="(item, index) in data.modes" :key="index" :label="item.label"
-				:value="item.value"></a-select-option>
-		</a-select>
-		<!-- 查询按钮 -->
-		<a-button style="width: 70px;" size="large" @click="emitParams()">生成!</a-button>
+		<div class="query-bar">
+			<!-- 游戏模式切换 -->
+			<a-select style="width:110px;" :options="data.modes" size="large" v-model:value=state.mode>
+				<a-select-option v-for="(item, index) in data.modes" :key="index" :label="item.label"
+					:value="item.value"></a-select-option>
+			</a-select>
+			<!-- 查询按钮 -->
+			<a-button style="width: 70px;" size="large" @click="emitParams()">生成!</a-button>
+		</div>
 	</div>
 </template>
 <script setup name="UserVSRequestBar">
@@ -72,64 +74,35 @@ function emitParams() {
 	background-color: #54454C;
 	column-gap: 20px;
 
-	.switch-bar {
-		width: 140px;
-	}
-
 	.input-bar {
 		width: 413px;
 	}
-
-	.check-bar {
-		width: 130px;
-		display: flex;
-		flex-direction: column;
-		justify-content: center;
-	}
 }
 
-
-// 媒体查询
-@media screen and (max-width:$xl) {
+// AutoResize for phone
+@media screen and (max-width:420px) {
 	.search-bar {
+		padding: 10px 10px;
+		justify-content: unset;
 		flex-wrap: wrap;
-		flex-direction: row;
-		justify-content: flex-start;
-		row-gap: 20px;
+		column-gap: 10px;
+		row-gap: 10px;
 
 		.input-bar {
-			width: 700px;
+			width: 355px;
 		}
 
-		.check-bar {
-			width: 90px;
+		.vs-icon {
+			margin: auto;
 		}
-	}
-}
 
-@media screen and (max-width:$lg) {}
-
-@media screen and (max-width:$md) {
-	.search-bar {
-		.input-bar {
-			width: 400px;
+		.query-bar {
+			justify-content: flex-end;
+			display: flex;
+			margin-left: auto;
+			column-gap: 10px;
 		}
 	}
-}
 
-@media screen and (max-width:$sm) {
-	.search-bar {
-		.input-bar {
-			width: 370px;
-		}
-	}
-}
-
-@media screen and (max-width:$xs) {
-	.search-bar {
-		.input-bar {
-			width: 265px;
-		}
-	}
 }
 </style>

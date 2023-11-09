@@ -9,7 +9,7 @@
 	<!-- 功能导航栏 -->
 	<div class="function-nav">
 		<a-menu :selectedKeys="state.currentMenu" mode="horizontal" style="font-size: large;color: #ffffff;">
-			<a-menu-item v-for="(item) in state.menuList" :key="item.title"
+			<a-menu-item class="function-item" v-for="(item) in state.menuList" :key="item.title"
 				@click="changeMenuByNavbar(item.title, item.path)">{{
 					item.header }}
 			</a-menu-item>
@@ -67,8 +67,5 @@ onMounted(() => {
 </script>
 
 <style lang="scss" scoped>
-.function-nav {
-	background-color: #54454C;
-	padding-bottom: 10px;
-}
+
 </style>

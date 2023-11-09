@@ -95,4 +95,13 @@ function imgLoadError(event) {
 		flex-direction: column;
 	}
 }
+
+// AutoResize for phone
+@media screen and (max-width:420px) {
+	.progress-icon {
+		padding-top: 0;
+		margin-top: 200px;
+	}
+
+}
 </style>

@@ -27,6 +27,8 @@ body {
 // components
 @import "./components/homeContent.scss";
 @import "./components/navigation.scss";
+@import "./components/userRequestBar.scss";
 
 // views
-@import "./views/home.scss"
+@import "./views/home.scss";
+@import "./views/function.scss";

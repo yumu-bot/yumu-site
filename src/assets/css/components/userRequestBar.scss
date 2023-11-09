@@ -1,0 +1,30 @@
+.search-bar {
+	padding: 10px 20px;
+	display: flex;
+	flex-direction: row;
+	flex-wrap: nowrap;
+	justify-content: space-between;
+	width: -webkit-fill-available;
+	background-color: #54454C;
+	column-gap: 20px;
+
+	.function-bar {
+		width: 160px;
+	}
+}
+
+// AutoResize for phone
+@media screen and (max-width:420px) {
+	.search-bar {
+		padding: 10px 10px;
+		justify-content: unset;
+		flex-wrap: wrap;
+		column-gap: 10px;
+		row-gap: 10px;
+
+		.function-bar {
+			width: 140px;
+		}
+	}
+
+}

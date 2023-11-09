@@ -8,12 +8,12 @@
 <template>
 	<!-- 用户名输入框 -->
 	<div>
-		<a-input class="input-bar" :class="state.isWideScreen" :style="state.inputBarStyle" placeholder="请输入用户名"
-			size="large" v-model:value=state.username allow-clear @keyup.enter="emitParams()">
+		<a-input class="input-bar" :class="state.isWideScreen" placeholder="请输入用户名" size="large"
+			v-model:value=state.username allow-clear @keyup.enter="emitParams()">
 		</a-input>
 	</div>
 	<!-- 游戏模式切换 -->
-	<a-select style="width:110px;" :options="modes" size="large" v-model:value=state.mode>
+	<a-select class="mode-select" :options="modes" size="large" v-model:value=state.mode>
 		<a-select-option v-for="(item, index) in modes" :key="index" :label="item.label"
 			:value="item.value"></a-select-option>
 	</a-select>
@@ -71,13 +71,8 @@ const modes = inject("modes");
 	.input-bar {
 		width: 570px;
 	}
-
-	.plus-bar {
-		display: flex;
-		flex-direction: row;
-		flex-wrap: nowrap;
-		justify-content: space-between;
-		column-gap: 20px;
+	.mode-select {
+		width: 110px;
 	}
 }
 
@@ -102,55 +97,18 @@ const modes = inject("modes");
 	}
 }
 
-// 媒体查询
-@media screen and (max-width:$xl) {
-	.search-bar {
-		flex-wrap: wrap;
-		flex-direction: row;
-		justify-content: flex-start;
-		row-gap: 20px;
-
-		.function-bar {
-			width: 140px;
-		}
-
-		.input-bar {
-			width: 300px;
-		}
-	}
-}
-
-@media screen and (max-width:$lg) {}
-
-@media screen and (max-width:$md) {}
-
-@media screen and (max-width:$sm) {
+@media screen and (max-width:420px) {
 	.search-bar {
 		.function-bar {
 			width: 140px;
 		}
 
 		.input-bar {
-			width: 370px;
+			width: 204px;
 		}
 
-		.plus-bar {
-			flex-wrap: wrap;
-			justify-content: flex-start;
-			column-gap: 20px;
-			row-gap: 20px;
-		}
-	}
-}
-
-@media screen and (max-width:$xs) {
-	.search-bar {
-		.function-bar {
-			width: 140px;
-		}
-
-		.input-bar {
-			width: 265px;
+		.mode-select {
+			width: 134px
 		}
 	}
 }
