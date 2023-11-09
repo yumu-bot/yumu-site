@@ -17,6 +17,13 @@ body {
 	height: 100%;
 }
 
+// AutoResize for phone
+@media screen and (max-width:420px) {
+	body {
+		background-color: #2A2226;
+	}
+}
+
 // components
 @import "./components/homeContent.scss";
 @import "./components/navigation.scss";

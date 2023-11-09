@@ -13,6 +13,7 @@
 			// colorBgContainer: '#2A2226',
 			// colorText: '#ffffff',
 			// colorItemText:'#ffffff',
+			fontFamily:'torus,puhui',//全局UI字体
 		},
 		components: {
 			// 输入框
@@ -60,7 +61,6 @@
 </template>
 
 <script setup>
-import { Button, Menu, Select, theme } from 'ant-design-vue';
 </script>
 
 <style></style>

@@ -5,7 +5,7 @@
 	text-align: center;
 	width: 100%;
 	// left:395.04px;
-	height: auto;
+	height: 55px;
 	position: fixed;
 	display: inline;
 	z-index: 2;
@@ -14,6 +14,11 @@
 	color: #ffffff;
 }
 
+.nav-bar {
+	width: 1200px;
+	margin: auto;
+	display: flex;
+}
 
 .nav-menu {
 	background-color: #54454C;
@@ -34,95 +39,134 @@
 	// position: relative;
 	// background-color: #54454C;
 	// left: 395.04px;
+	width: 150px;
+	white-space: nowrap;
 }
 
-.user-avatar {
-	// padding-bottom: -2px;
-	margin-top: 6px;
-	margin-bottom: 6px;
-	// margin-right: 20px;
-	float: right;
-}
+.user-info {
 
-.user-name {
-	font-size: large;
-	// padding-right: 10px;
-	float: right;
-}
+	display: flex;
+	column-gap: 20px;
 
-// 媒体查询
-@media screen and (max-width:$xl) {
-	.nav-menu {
-		width: 690px;
+	.user-avatar {
+		margin-top: 6px;
+		margin-bottom: 6px;
+		float: right;
+	}
+
+	.user-name {
 		font-size: large;
-	}
-
-	.nav-title {
-		font-size: x-large;
-	}
-
-	.user-name {
-		font-size: larger;
+		margin: auto;
 	}
 }
 
-@media screen and (max-width:$lg) {
-	.nav-menu {
-		width: 465px;
-		font-size: larger;
-	}
-
-	.nav-title {
-		font-size: larger;
-	}
-
-	.user-name {
-		font-size: medium;
-	}
+.ant-space-item:has(.user-info) {
+	margin-left: auto;
 }
 
-@media screen and (max-width:$md) {
+
+// AutoResize for laptop/pad
+@media screen and (max-width:1200px) {
+
+	.nav-bar {
+		width: auto;
+
+		div {
+			font-size: medium;
+		}
+
+	}
+
+	:deep(.nav-bar .ant-space) {
+		gap: 10px;
+	}
+
+	.ant-space:has(.nav-bar) {
+		gap: 10px;
+	}
+
 	.nav-menu {
-		width: 390px;
-		font-size: medium;
-	}
-
-	.nav-title {
-		font-size: large;
-	}
-
-	.user-name {
-		font-size: small;
-	}
-}
-
-@media screen and (max-width:$sm) {
-	.nav-menu {
-		width: 220px;
-		font-size: small;
-	}
-
-	.nav-title {
+		width: auto;
 		font-size: medium;
 	}
 
-	.user-name {
-		font-size: smaller;
-	}
-
-}
-
-@media screen and (max-width:$xs) {
-	.nav-menu {
-		width: 175px;
-		font-size: smaller;
+	.user-info:has(div) {
+		margin-left: auto;
 	}
 
 	.nav-title {
-		font-size: small;
+		width: auto;
 	}
 
-	.user-name {
-		font-size: smaller;
+	.user-info {
+		column-gap: 10px;
+
+		.user-avatar span {
+			width: 36px;
+			height: 36px;
+		}
+
+		.user-name {
+			font-size: small;
+		}
 	}
 }
+
+// AutoResize for phone
+@media screen and (max-width:420px) {
+	.nav {
+		height: 45px;
+
+		.user-info {
+			.user-avatar {
+				display: none;
+			}
+		}
+	}
+}
+
+// @media screen and (max-width:$md) {
+// 	.nav-menu {
+// 		width: 390px;
+// 		font-size: medium;
+// 	}
+
+// 	.nav-title {
+// 		font-size: large;
+// 	}
+
+// 	.user-name {
+// 		font-size: small;
+// 	}
+// }
+
+// @media screen and (max-width:$sm) {
+// 	.nav-menu {
+// 		width: 220px;
+// 		font-size: small;
+// 	}
+
+// 	.nav-title {
+// 		font-size: medium;
+// 	}
+
+// 	.user-name {
+// 		font-size: smaller;
+// 	}
+
+// }
+
+// @media screen and (max-width:$xs) {
+// 	.nav-menu {
+// 		width: 175px;
+// 		font-size: smaller;
+// 	}
+
+// 	.nav-title {
+// 		font-size: small;
+// 	}
+
+// 	.user-name {
+// 		font-size: smaller;
+// 	}
+// }

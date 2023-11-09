@@ -33,14 +33,15 @@
             :src="item.src" @click="jumpSite(item)" style="object-fit: cover;">
         </div>
       </div>
+      <!-- 未完成面板 -->
       <!-- 活跃数据展示(静态) -->
-      <h3 class="content-header">活跃</h3>
+      <!-- <h3 class="content-header">活跃</h3>
       <div class="content-box">
         <div class="active-content">
           <div style="width: 520px;height: 100px;border-radius: 20px;background-color: #382E32;"></div>
           <div style="width: 520px;height: 100px;border-radius: 20px;background-color: #382E32;"></div>
         </div>
-      </div>
+      </div> -->
     </div>
     <!-- </a-space> -->
     <!-- <button>{{ current1 }}</button> -->

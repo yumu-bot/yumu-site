@@ -19,10 +19,10 @@ export default defineConfig({
   },
   // 代理配置
   server: {
-    // host: "0.0.0.0",
-    // cors: true,
-    // port: 5173,
-    // open: false,
+    host: "0.0.0.0",
+    cors: true,
+    port: 5173,
+    open: true,
     proxy: {
       "/pub": {
         target: "https://bot.365246692.xyz/pub",

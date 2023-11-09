@@ -38,6 +38,12 @@ const modules = [Autoplay, Pagination, Navigation, A11y];
 .mySwiper {
 	width: inherit;
 	height: 250px;
+
+	// AutoResize for phone
+	@media screen and (max-width:420px) {
+		height: 150px;
+	}
+
 }
 
 .swiper-slide {

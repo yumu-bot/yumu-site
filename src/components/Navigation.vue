@@ -2,8 +2,8 @@
 <template>
 	<div class="nav">
 		<div class="nav-bar">
-			<a-space size="large">
-				<span class="nav-title">Yumu Site</span>
+			<a-space size="large" style="flex: 1;">
+				<div class="nav-title">Yumu Site</div>
 				<a-menu class="nav-menu" :selectedKeys="state.currentMenu" mode="horizontal">
 					<a-menu-item v-for="(item, index) in state.menuList" :key="index"
 						@click="changeMenuByNavbar(item.title, item.path)">{{
@@ -28,10 +28,11 @@
 				</a-menu-item> -->
 				</a-menu>
 				<!-- 用户信息展示 -->
-				<span class="user-name">Muziyami</span>
-				<a-avatar class="user-avatar" :size="{ xs: 24, sm: 32, md: 40, lg: 48, xl: 48, xxl: 48 }"
-					src="/img/avatar/Head_yuyuko_Qiqi.png">
-				</a-avatar>
+				<div class="user-info">
+					<span class="user-name">Muziyami</span>
+					<a-avatar class="user-avatar" :size="48" src="/img/avatar/Head_yuyuko_Qiqi.png">
+					</a-avatar>
+				</div>
 			</a-space>
 		</div>
 	</div>
@@ -83,3 +84,4 @@ watch((route), () => {
 });
 
 </script>
+<style lang="scss" scoped></style>
