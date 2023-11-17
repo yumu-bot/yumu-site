@@ -39,7 +39,7 @@ const state = reactive({
 		{ label: "PP-", value: "ppm" },
 		{ label: "分析最好成绩", value: "bpa" },
 		{ label: "查询单个成绩", value: "score" },
-		// { label: "查询多个成绩", value: "scores" },
+		{ label: "查询多个成绩", value: "scores" },
 		{ label: "谱面成绩查询", value: "mapScore" },
 	],
 	nowfunction: "ppm",//指定查询功能,默认为ppm
@@ -134,7 +134,11 @@ function getScore() {
 		}
 	} else {
 		// 查询pr/re/bp/bp-days/bp-range
-		state.imgUrl = state.baseUrl + `/${state.nowfunction}/${paramsObj.scoreType}?u1=${paramsObj.u1}&mode=${paramsObj.mode}&n=${paramsObj.value}`;
+		if (state.nowfunction === 'score') {
+			state.imgUrl = state.baseUrl + `/${state.nowfunction}/${paramsObj.scoreType}?u1=${paramsObj.u1}&mode=${paramsObj.mode}&n=${paramsObj.value}`;
+		} else {
+			state.imgUrl = state.baseUrl + `/${state.nowfunction}/${paramsObj.scoreType}?u1=${paramsObj.u1}&mode=${paramsObj.mode}&m=${paramsObj.value}`;
+		}
 	}
 };
 onMounted(() => {
