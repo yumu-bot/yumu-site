@@ -27,7 +27,7 @@
 					:value="item.value"></a-select-option>
 			</a-select>
 			<!-- 查询按钮 -->
-			<a-button style="width: 70px;" size="large" @click="emitParams()">生成!</a-button>
+			<a-button style="width: 112px;" size="large" @click="emitParams()">生成!</a-button>
 		</div>
 	</div>
 </template>
@@ -76,6 +76,12 @@ function emitParams() {
 
 	.input-bar {
 		width: 413px;
+	}
+
+	.query-bar {
+		display: flex;
+		// margin-left: auto;
+		column-gap: 20px;
 	}
 }
 

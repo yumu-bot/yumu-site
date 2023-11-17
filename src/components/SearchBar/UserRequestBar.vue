@@ -26,6 +26,7 @@ import { reactive, onMounted, watch } from 'vue';
 import Infos from '../UserRequest/Infos.vue';
 import Scores from '../UserRequest/Scores.vue';
 import MapScore from '../UserRequest/MapScore.vue';
+import { findMod } from '@/utils/util.js'
 const state = reactive({
 	username: "",//用户名
 	nowfunction: "ppm",//指定查询功能,默认为ppm
@@ -58,7 +59,7 @@ const state = reactive({
 		{ label: "最好(天数范围)", value: "bp-days" },
 	],
 	scoreTypeList: [],
-	// 游玩模组列表
+	// 游玩模组列表 disabled默认为false,表示启用
 	mods: [
 		{ label: "NM", value: "NM", disabled: false },
 		{ label: "DT", value: "DT", disabled: false },
@@ -72,6 +73,8 @@ const state = reactive({
 		{ label: "HT", value: "HT", disabled: false },
 		{ label: "PF", value: "PF", disabled: false },
 		{ label: "FL", value: "FL", disabled: false },
+		{ label: "FI", value: "FI", disabled: true },//mania限定 Fade In
+		{ label: "MR", value: "MR", disabled: true },//mania限定 Mirror
 
 	],
 	maxRange: 100,//查询范围上限 bp-days时为999,其余情况为100
@@ -153,6 +156,15 @@ function getFunctionType() {
 // ht - dt / nc
 // fl - hd(骂娘特供)(暂不支持mania)
 function checkMods(val) {
+	let e;
+	if (state.mode === "mania") {
+		findMod(e, "FI", false, state);
+		findMod(e, "MR", false, state);
+	} else {
+		findMod(e, "FI", true, state);
+		findMod(e, "MR", true, state);
+	}
+	// i 为当前被选择的mod
 	for (let i = 0; i < state.mods.length; i++) {
 		// NM不能与其他mod组合
 		if (val.length >= 1 && val.includes("NM")) {
@@ -161,19 +173,24 @@ function checkMods(val) {
 				state.isInvalid = val.length > 1 ? true : false;//选择包含NM的其他mod组合禁止请求
 			}
 		} else if (val.includes("DT") || val.includes("NC")) {
-			let e;
-			state.mods.map((item) => {
-				if (item.value === "HT") {
-					e = state.mods.indexOf(item)
-				}
-			})
+			findMod(e, "HT", true, state);
 			//DT/NC不能共存，不能与HT组合
 			if (val.includes("DT")) {
 				state.mods[i].disabled = state.mods[i].value === "NC" ? true : false;
-				state.mods[e].disabled = true;
-			} else {
+				if (val.includes("HR")) {
+					findMod(e, "EZ", true, state);
+				};
+				if (val.includes("EZ")) {
+					findMod(e, "HR", true, state);
+				};
+			} else if (val.includes("NC")) {
 				state.mods[i].disabled = state.mods[i].value === "DT" ? true : false;
-				state.mods[e].disabled = true;
+				if (val.includes("HR")) {
+					findMod(e, "EZ", true, state);
+				};
+				if (val.includes("EZ")) {
+					findMod(e, "HR", true, state);
+				};
 			}
 		} else if (val.includes("HR") || val.includes("EZ")) {
 			//EZ/HR不能组合
@@ -184,22 +201,32 @@ function checkMods(val) {
 				state.mods[i].disabled = state.mods[i].value === "HR" ? true : false;
 			}
 		} else if (val.includes("SD") || val.includes("PF")) {
-			let e;
-			state.mods.map((item) => {
-				if (item.value === "NM") {
-					e = state.mods.indexOf(item)
-				}
-			})
+			findMod(e, "NM", true, state);
 			//SD/PF不能共存，不能与NM组合
 			if (val.includes("SD")) {
 				state.mods[i].disabled = state.mods[i].value === "PF" ? true : false;
-				state.mods[e].disabled = true;
 			} else {
 				state.mods[i].disabled = state.mods[i].value === "SD" ? true : false;
-				state.mods[e].disabled = true;
+			}
+		} else if (val.includes("FL") || val.includes("HD")) {
+			if (state.mode === "mania") {
+				// FL/HD不能共存(mania限定)
+				if (val.includes("FL")) {
+					state.mods[i].disabled = state.mods[i].value === "HD" ? true : false;
+
+				} else {
+					state.mods[i].disabled = state.mods[i].value === "FL" ? true : false;
+				}
 			}
 		}
 		else {
+			if (state.mode === "mania") {
+				findMod(e, "FI", false, state);
+				findMod(e, "MR", false, state);
+			} else {
+				findMod(e, "FI", true, state);
+				findMod(e, "MR", true, state);
+			}
 			state.mods[i].disabled = false;
 			state.isInvalid = false;
 		}
@@ -229,12 +256,22 @@ watch(() => state.nowfunction, (val) => {
 // 监听游玩mod选项进行mod组合校验
 watch(() => state.mod, (val) => {
 	checkMods(val);
-})
+});
+watch(() => state.mode, (val) => {
+	let e;
+	if (val === "mania") {
+		findMod(e, "FI", false, state);
+		findMod(e, "MR", false, state);
+	} else {
+		findMod(e, "FI", true, state);
+		findMod(e, "MR", true, state);
+	}
+});
 // 监听切换查询范围
 watch(() => state.scoreType, (val) => {
 	state.maxRange = val === 'bp-days' ? 999 : 100;
 	if (state.isWideScreen) {
-		state.inputBarStyle.width = val === 'score' ? "200px" : "445px";
+		// state.inputBarStyle.width = val === 'score' ? "200px" : "445px";
 	};
 });
 // 监听谱面id规范(表单验证)
@@ -250,10 +287,10 @@ watch(() => state.bid, (oldVal, newVal) => {
 });
 watch(() => state.type, (val) => {
 	if (state.isWideScreen) {
-		state.inputBarStyle.width = val === 1 ? "445px" : "570px";
+		// state.inputBarStyle.width = val === 1 ? "445px" : "570px";
 	}
 	if (val === 2) {
-		state.inputBarStyle.width = "400px";
+		// state.inputBarStyle.width = "400px";
 	}
 });
 watch(() => state.isWideScreen, (val) => {
@@ -262,113 +299,10 @@ watch(() => state.isWideScreen, (val) => {
 	} else {
 		// state.inputBarStyle.width = state.type === 1 ? "445px" : "570px";
 		if (state.type === 1) {
-			state.inputBarStyle.width = state.scoreType === 'score' ? "200px" : "445px";
+			// state.inputBarStyle.width = state.scoreType === 'score' ? "200px" : "445px";
 		};
 	}
 });
 
 </script>
-<style lang="scss" scoped>
-@import "src/assets/css/variables.scss";
-
-.search-bar {
-	padding: 10px 20px;
-	display: flex;
-	flex-direction: row;
-	flex-wrap: nowrap;
-	justify-content: space-between;
-	width: -webkit-fill-available;
-	background-color: #54454C;
-	column-gap: 20px;
-
-	.function-bar {
-		width: 160px;
-	}
-
-	// .input-bar {
-	// 	width: 570px;
-	// }
-
-	.plus-bar {
-		display: flex;
-		flex-direction: row;
-		flex-wrap: nowrap;
-		justify-content: space-between;
-		column-gap: 20px;
-	}
-}
-
-.copy-button {
-	display: flex;
-	justify-content: space-around;
-
-	:deep(.anticon) {
-		color: #ffffff;
-
-		:hover {
-			color: #ffffff79;
-		}
-
-		:active {
-			color: #ffffff28;
-		}
-
-		svg {
-			padding-top: 6px;
-		}
-	}
-}
-
-// 媒体查询
-@media screen and (max-width:$xl) {
-	.search-bar {
-		flex-wrap: wrap;
-		flex-direction: row;
-		justify-content: flex-start;
-		row-gap: 20px;
-
-		.function-bar {
-			width: 140px;
-		}
-
-		.input-bar {
-			width: 300px;
-		}
-	}
-}
-
-@media screen and (max-width:$lg) {}
-
-@media screen and (max-width:$md) {}
-
-@media screen and (max-width:$sm) {
-	.search-bar {
-		.function-bar {
-			width: 140px;
-		}
-
-		.input-bar {
-			width: 370px;
-		}
-
-		.plus-bar {
-			flex-wrap: wrap;
-			justify-content: flex-start;
-			column-gap: 20px;
-			row-gap: 20px;
-		}
-	}
-}
-
-@media screen and (max-width:$xs) {
-	.search-bar {
-		.function-bar {
-			width: 140px;
-		}
-
-		.input-bar {
-			width: 265px;
-		}
-	}
-}
-</style>
+<style lang="scss" scoped></style>

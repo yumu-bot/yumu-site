@@ -8,8 +8,8 @@
 <template>
 	<!-- 用户名输入框 -->
 	<div>
-		<a-input class="input-bar" :class="state.isWideScreen" :style="state.inputBarStyle" placeholder="请输入用户名"
-			size="large" v-model:value=state.username allow-clear @keyup.enter="emitParams()">
+		<a-input class="input-bar" :class="state.isWideScreen" placeholder="请输入用户名" size="large"
+			v-model:value=state.username allow-clear @keyup.enter="emitParams()">
 		</a-input>
 	</div>
 	<!-- score/scores功能附加项  -->
@@ -21,17 +21,20 @@
 		</a-select>
 		<!-- pr/bp范围查询 -->
 		<a-tooltip :title="'查询范围(1-' + state.maxRange + ')'" arrow-point-at-center>
-			<a-input-number v-model:value=state.key :min="1" :max="state.maxRange" v-show="state.scoreType !== 'score'"
-				style="width:80px;" size="large" @keyup.enter="emitParams()" placeholder="1"></a-input-number>
+			<a-input-number class="range-select" v-model:value=state.key :min="1" :max="state.maxRange"
+				v-show="state.scoreType !== 'score'" size="large" @keyup.enter="emitParams()"
+				placeholder="1"></a-input-number>
 		</a-tooltip>
 	</div>
 	<!-- 游戏模式切换 -->
-	<a-select style="width:110px;" :options="modes" size="large" v-model:value=state.mode>
+	<a-select class="mode-select" :options="modes" size="large" v-model:value=state.mode>
 		<a-select-option v-for="(item, index) in modes" :key="index" :label="item.label"
 			:value="item.value"></a-select-option>
 	</a-select>
 	<!-- 查询按钮 -->
-	<a-button style="width: 70px;" size="large" @click="emitParams()" :disabled="state.isInvalid">生成!</a-button>
+	<div class="query-bar">
+		<a-button class="query-button" size="large" @click="emitParams()" :disabled="state.isInvalid">生成!</a-button>
+	</div>
 </template>
 <script setup name="Scores">
 import { inject } from 'vue';
@@ -65,7 +68,7 @@ const modes = inject("modes")
 	}
 
 	.input-bar {
-		width: 570px;
+		width: 445px;
 	}
 
 	.plus-bar {
@@ -74,80 +77,48 @@ const modes = inject("modes")
 		flex-wrap: nowrap;
 		justify-content: space-between;
 		column-gap: 20px;
+
+		.range-select {
+			width: 80px
+		}
+	}
+
+	.mode-select {
+		width: 110px;
+	}
+
+	.query-button {
+		width: 110px;
 	}
 }
 
-.copy-button {
-	display: flex;
-	justify-content: space-around;
-
-	:deep(.anticon) {
-		color: #ffffff;
-
-		:hover {
-			color: #ffffff79;
-		}
-
-		:active {
-			color: #ffffff28;
-		}
-
-		svg {
-			padding-top: 6px;
-		}
-	}
-}
-
-// 媒体查询
-@media screen and (max-width:$xl) {
-	.search-bar {
-		flex-wrap: wrap;
-		flex-direction: row;
-		justify-content: flex-start;
-		row-gap: 20px;
-
-		.function-bar {
-			width: 140px;
-		}
-
-		.input-bar {
-			width: 300px;
-		}
-	}
-}
-
-@media screen and (max-width:$lg) {}
-
-@media screen and (max-width:$md) {}
-
-@media screen and (max-width:$sm) {
+@media screen and (max-width:420px) {
 	.search-bar {
 		.function-bar {
 			width: 140px;
 		}
 
 		.input-bar {
-			width: 370px;
+			width: 200px;
 		}
 
 		.plus-bar {
-			flex-wrap: wrap;
-			justify-content: flex-start;
-			column-gap: 20px;
-			row-gap: 20px;
-		}
-	}
-}
+			column-gap: 10px;
 
-@media screen and (max-width:$xs) {
-	.search-bar {
-		.function-bar {
-			width: 140px;
+			.range-select {
+				width: 65px;
+			}
 		}
 
-		.input-bar {
-			width: 265px;
+		.query-bar {
+			display: flex;
+			margin-left: auto;
+
+			.query-button {
+				width: 67px;
+			}
 		}
+
 	}
 }
 </style>

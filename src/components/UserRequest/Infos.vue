@@ -31,7 +31,7 @@
 		</a-tooltip>
 	</div>
 	<!-- 查询按钮 -->
-	<a-button style="width: 70px;" size="large" @click="emitParams()" :disabled="state.isInvalid">生成!</a-button>
+	<a-button class="query-button" size="large" @click="emitParams()" :disabled="state.isInvalid">生成!</a-button>
 </template>
 <script setup name="Infos">
 import { inject } from 'vue';
@@ -71,7 +71,12 @@ const modes = inject("modes");
 	.input-bar {
 		width: 570px;
 	}
+
 	.mode-select {
+		width: 110px;
+	}
+
+	.query-button {
 		width: 110px;
 	}
 }
@@ -104,11 +109,15 @@ const modes = inject("modes");
 		}
 
 		.input-bar {
-			width: 204px;
+			width: 200px;
 		}
 
 		.mode-select {
 			width: 134px
+		}
+
+		.query-button {
+			width: 67px;
 		}
 	}
 }

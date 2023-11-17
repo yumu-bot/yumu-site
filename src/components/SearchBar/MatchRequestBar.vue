@@ -51,7 +51,7 @@
 				</a-tooltip>
 			</div>
 			<!-- 查询按钮 -->
-			<a-button style="width: 70px;" size="large" @click="emitParams()">生成!</a-button>
+			<a-button style="width: 87px;" size="large" @click="emitParams()">生成!</a-button>
 		</div>
 	</div>
 </template>
@@ -110,7 +110,7 @@ function emitParams() {
 	display: flex;
 	flex-direction: row;
 	flex-wrap: nowrap;
-	justify-content: space-between;
+	// justify-content: space-between;
 	width: -webkit-fill-available;
 	height: 40px;
 	background-color: #54454C;
@@ -125,7 +125,7 @@ function emitParams() {
 	}
 
 	.check-bar {
-		width: 130px;
+		// width: 130px;
 		display: flex;
 		flex-direction: column;
 		justify-content: center;
@@ -133,6 +133,12 @@ function emitParams() {
 
 	.number-bar {
 		width: 80px;
+	}
+
+	.query-bar {
+		display: flex;
+		// margin-left: auto;
+		column-gap: 20px;
 	}
 }
 
