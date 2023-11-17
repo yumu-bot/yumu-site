@@ -84,8 +84,8 @@ const router = useRouter();
 function jumpPage(headMenu) {
   state.headMenu = headMenu;
   // router.push({ path: `/function/${headMenu}` });
-  router.push({ path: "/function" });
   bus.$emit("currentMenu", headMenu);
+  router.push({ path: "/function" });
   // console.log("ok", headMenu);
 }
 // 外部网站跳转
@@ -98,13 +98,13 @@ onMounted(() => {
 );
 onUnmounted(() => {
   let headMenu = state.headMenu;
-  // 功能页的默认组件显示逻辑交给触发方法，传递默认值以便在created()中一起渲染
+  // 功能页的默认组件显示逻辑交给触发方法，传递默认值以便在onBeforeMount()中一起渲染
   if (headMenu === "") {
     headMenu = "user";
   }
   // 只有不是导航栏之间跳转时才触发快捷入口跳转方法
   if (!router.push) {
-    state.jumpPage(headMenu);
+    jumpPage(state.headMenu);
   } else {
     state.headMenu = headMenu;
     bus.$emit("currentMenu", headMenu);

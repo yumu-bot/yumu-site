@@ -10,7 +10,7 @@
   "dependencies": {
     "@rollup/plugin-alias": "^5.0.0",
     "amfe-flexible": "^2.2.1",
-    "ant-design-vue": "^4.0.0",
+    "ant-design-vue": "^4.0.7",
     "axios": "^1.4.0",
     "mitt": "^3.0.1",
     "node-sass": "^9.0.0",

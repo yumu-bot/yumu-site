@@ -8,7 +8,7 @@
 <template>
 	<!-- 功能导航栏 -->
 	<div class="function-nav">
-		<a-menu :selectedKeys="state.currentMenu" mode="horizontal" style="font-size: large;color: #ffffff;">
+		<a-menu :selectedKeys="state.current" mode="horizontal" style="font-size: large;color: #ffffff;">
 			<a-menu-item class="function-item" v-for="(item) in state.menuList" :key="item.title"
 				@click="changeMenuByNavbar(item.title, item.path)">{{
 					item.header }}
@@ -32,7 +32,7 @@ import UserVS from './UserVS.vue';
 import Match from './Match.vue';
 import Beatmap from './Beatmap.vue';
 import Entertainment from './Entertainment.vue';
-import { onMounted, reactive } from 'vue';
+import { onMounted, reactive, onUnmounted, onBeforeMount } from 'vue';
 const state = reactive({
 	// 功能导航栏列表
 	menuList: [
@@ -53,6 +53,7 @@ function changeMenuByRandom() {
 			changeMenuByNavbar("user");
 		} else {
 			changeMenuByNavbar(res);
+			bus.$off("currentMenu");//通信结束后移除该事件
 		}
 	})
 };
@@ -61,11 +62,12 @@ function changeMenuByNavbar(selectedMenu) {
 	state.current.pop();
 	state.current.push(selectedMenu);
 };
-onMounted(() => {
+onBeforeMount(() => {
 	changeMenuByRandom();
-});
+})
+onUnmounted(() => {
+	state.current = []
+})
 </script>
 
-<style lang="scss" scoped>
-
-</style>
+<style lang="scss" scoped></style>
