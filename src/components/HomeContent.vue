@@ -18,19 +18,23 @@
       <h3 class="content-header" style="">功能</h3>
       <div class="content-box">
         <div class="function-content-left">
+          <a-tooltip title="玩家数据">
           <img class="large-item" title="玩家数据" src="/img/function/Function_Map.jpg" @click="jumpPage('user')">
+          </a-tooltip>
         </div>
         <div class="function-content-right">
-          <img class="small-item" v-for="(item, index) in state.functionItems" :key="index" :title=item.title
-            :src="item.src" @click="jumpPage(item.headMenu)" style="object-fit: cover;">
+          <a-tooltip v-for="(item, index) in state.functionItems" :key="index" :title=item.title>
+          <img class="small-item" :src="item.src" @click="jumpPage(item.headMenu)" style="object-fit: cover;">
+            </a-tooltip>
         </div>
       </div>
       <!-- 推荐快捷入口 -->
       <h3 class="content-header">推荐</h3>
       <div class="content-box">
         <div class="suggest-content">
-          <img class="small-item" v-for="(item, index) in state.suggestList" :key="index" :title=item.title
-            :src="item.src" @click="jumpSite(item)" style="object-fit: cover;">
+          <a-tooltip v-for="(item, index) in state.suggestList" :key="index" :title=item.title>
+          <img class="small-item" :src="item.src" @click="jumpSite(item)" style="object-fit: cover;">
+            </a-tooltip>
         </div>
       </div>
       <!-- 未完成面板 -->
