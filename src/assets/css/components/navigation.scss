@@ -5,7 +5,7 @@
 	text-align: center;
 	width: 100%;
 	// left:395.04px;
-	height: 55px;
+	height: 60px;
 	position: fixed;
 	display: inline;
 	z-index: 2;
@@ -117,56 +117,18 @@
 	.nav {
 		height: 45px;
 
+		.nav-title {
+			padding-left: 2px;
+		}
+
 		.user-info {
+			.user-name {
+				padding-right: 5px;
+			}
+
 			.user-avatar {
 				display: none;
 			}
 		}
 	}
 }
-
-// @media screen and (max-width:$md) {
-// 	.nav-menu {
-// 		width: 390px;
-// 		font-size: medium;
-// 	}
-
-// 	.nav-title {
-// 		font-size: large;
-// 	}
-
-// 	.user-name {
-// 		font-size: small;
-// 	}
-// }
-
-// @media screen and (max-width:$sm) {
-// 	.nav-menu {
-// 		width: 220px;
-// 		font-size: small;
-// 	}
-
-// 	.nav-title {
-// 		font-size: medium;
-// 	}
-
-// 	.user-name {
-// 		font-size: smaller;
-// 	}
-
-// }
-
-// @media screen and (max-width:$xs) {
-// 	.nav-menu {
-// 		width: 175px;
-// 		font-size: smaller;
-// 	}
-
-// 	.nav-title {
-// 		font-size: small;
-// 	}
-
-// 	.user-name {
-// 		font-size: smaller;
-// 	}
-// }

@@ -50,10 +50,12 @@
     <!-- </a-space> -->
     <!-- <button>{{ current1 }}</button> -->
   </div>
+  	<Footer></Footer>
 </template>
 
 <script setup name="HomeContent">
 import ImageSwiper from '@/components/ImageSwiper.vue';
+import Footer from "@/components/Footer.vue";
 import { useRouter } from 'vue-router';
 import { inject, onMounted, onUnmounted, ref, reactive } from 'vue';
 import bus from '../utils/bus';
