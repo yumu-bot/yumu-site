@@ -61,6 +61,7 @@ const modes = inject("modes");
 	flex-wrap: nowrap;
 	justify-content: space-between;
 	width: -webkit-fill-available;
+	height: auto;
 	background-color: #54454C;
 	column-gap: 20px;
 

@@ -70,7 +70,7 @@ function emitParams() {
 	flex-direction: row;
 	flex-wrap: nowrap;
 	width: -webkit-fill-available;
-	height: 40px;
+	height: auto;
 	background-color: #54454C;
 	column-gap: 20px;
 
