@@ -13,8 +13,8 @@
 				enter-button />
 		</div>
 		<vue-plyr ref="plyr">
-			<audio data-poster="./test.png" controls crossorigin playsinline autoplay>
-				<source :src=url type="audio/mp3" />
+			<audio controls crossorigin playsinline autoplay>
+				<source :src=url type="audio/mp3"/>
 			</audio>
 		</vue-plyr>
 	</div>
