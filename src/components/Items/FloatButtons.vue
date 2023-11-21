@@ -10,7 +10,7 @@
 	<div class="beatmap-player">
 		<div class="beatmap-query">
 			<a-input-search class="ant-input-search" v-model:value="bid" placeholder="请输入谱面ID" @search="onSearch"
-				:bordered="false" allow-clear enter-button />
+				:bordered="true" allow-clear enter-button />
 		</div>
 		<vue-plyr ref="plyr">
 			<audio controls crossorigin playsinline autoplay source=url>
