@@ -13,8 +13,9 @@
 				enter-button />
 		</div>
 		<vue-plyr ref="plyr">
-			<audio controls crossorigin playsinline autoplay>
-				<source :src=url type="audio/mp3"/>
+			<audio controls crossorigin playsinline autoplay source=url>
+				<source :src="url" type="audio/mp3" />
+				<!-- <source src="https://sp.365246692.xyz/api/file/map/song/4092433" type="audio/mp3" /> -->
 			</audio>
 		</vue-plyr>
 	</div>
@@ -31,23 +32,32 @@ let title = ref("");
 let bid = ref("");
 let url = ref("")
 const onSearch = ref(() => { })
-function initPlyr() {
-	plyr.value.title = "test"
-	title.value = plyr.value.title;
+function initPlyr(url) {
+	// 音频信息配置
+	plyr.value.player.source = {
+		type: 'audio',
+		title: 'Example title',
+		sources: [
+			{
+				src: url,
+				type: 'audio/mp3',
+			},
+		],
+	};
+	console.log(plyr.value);
 }
 onMounted(() => {
-	plyr.value = plyr.value.player;
-	initPlyr();
+	// initPlyr();
 	console.log(plyr.value);
-
 });
 watch(bid, (val) => {
 	if (!isNaN(val)) {
 		let param = "https://sp.365246692.xyz/api/file/map/song/" + val;
 		onSearch.value = (val) => {
-			if (val) {
+			if (val !== "" && !isNaN(val)) {
 				url.value = param;
-				console.log(url.value)
+				console.log(url.value);
+				initPlyr(url.value);
 			}
 		}
 	}
