@@ -171,7 +171,7 @@ function emitParams() {
 		flex-wrap: wrap;
 		column-gap: 10px;
 		row-gap: 10px;
-		height: auto;
+		height: auto;  
 
 		.input-bar {
 			width: 200px;

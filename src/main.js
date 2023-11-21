@@ -9,13 +9,17 @@ import '@/assets/css/index.scss' // 无需在此处引入全局样式，默认�
 // import '@/assets/iconfont/iconfont.css' // 引入矢量图标样式
 // import '@/assets/iconfont/iconfont.js'
 import 'swiper'
-
+import VuePlyr from 'vue-plyr'
 const app = createApp(App)
 // for (const [key, component] of Object.entries(ElementPlusIconsVue)) {
 // 	app.component(key, component)
 // }
 app.use(router)
 app.use(antd)
+app.use(VuePlyr, {
+	plyr: {
+	
+}})
 // app.config.globalProperties.$bus = bus;
 app.mount('#app')
 

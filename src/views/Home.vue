@@ -7,10 +7,10 @@
 		<div class="page-content">
 			<router-view></router-view>
 		</div>
-
+		<FloatButtons></FloatButtons>
 	</div>
 </template>
 
 <script setup name="Home">
-
+import FloatButtons from '../components/Items/FloatButtons.vue';
 </script>
