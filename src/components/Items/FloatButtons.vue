@@ -9,8 +9,8 @@
 	<!-- 谱面播放器 -->
 	<div class="beatmap-player">
 		<div class="beatmap-query">
-			<a-input-search v-model:value="bid" placeholder="请输入谱面ID" @search="onSearch" :bordered="true" allow-clear
-				enter-button />
+			<a-input-search class="ant-input-search" v-model:value="bid" placeholder="请输入谱面ID" @search="onSearch"
+				:bordered="false" allow-clear enter-button />
 		</div>
 		<vue-plyr ref="plyr">
 			<audio controls crossorigin playsinline autoplay source=url>
@@ -78,12 +78,12 @@ watch(bid, (val) => {
 		display: flex;
 		column-gap: 20px;
 
-		:deep(.ant-input-search :where(.css-dev-only-do-not-override-1fhdwiu).ant-input-group .ant-input-affix-wrapper:not(:last-child)) {
+		:deep(.ant-input-search .ant-input-group .ant-input-affix-wrapper:not(:last-child)) {
 			border-start-start-radius: 0px;
 			border-end-start-radius: 0px;
 		}
 
-		:deep(:where(.css-dev-only-do-not-override-1fhdwiu).ant-input-search >.ant-input-group >.ant-input-group-addon:last-child .ant-input-search-button) {
+		:deep(.ant-input-search >.ant-input-group >.ant-input-group-addon:last-child .ant-input-search-button) {
 			padding-top: 0;
 			padding-bottom: 0;
 			border-start-start-radius: 0;
@@ -93,7 +93,7 @@ watch(bid, (val) => {
 			border-color: rgb(255, 255, 255, .6);
 		}
 
-		:deep(.ant-input-search :where(.css-dev-only-do-not-override-1fhdwiu).ant-input-group .ant-input-affix-wrapper:not(:last-child)) {
+		:deep(.ant-input-search .ant-input-group .ant-input-affix-wrapper:not(:last-child)) {
 			background-color: #2A2226;
 			border-color: rgb(255, 255, 255, .6);
 		}
@@ -110,6 +110,7 @@ watch(bid, (val) => {
 		::placeholder {
 			color: rgb(255, 255, 255, .6);
 		}
+
 	}
 }
 
