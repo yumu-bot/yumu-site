@@ -8,13 +8,19 @@
 <template>
 	<!-- 谱面播放器 -->
 	<div class="beatmap-player" :style="playerStyle">
+		<div class="beatmap-info" :style="bgStyle">
+			<div v-if="info" class="beatmap-title">
+				<span class="title">{{ info.beatmapset?.title }}</span>
+				<span class="artist">{{ info.beatmapset?.artist }}</span>
+			</div>
+		</div>
 		<div class="beatmap-query">
 			<a-input-search class="ant-input-search" v-model:value="bid" placeholder="请输入谱面ID" @search="onSearch"
 				:bordered="true" allow-clear enter-button />
 		</div>
 		<vue-plyr ref="plyr">
-			<audio controls crossorigin playsinline autoplay source=url>
-				<source :src="url" type="audio/mp3" />
+			<audio controls crossorigin playsinline autoplay source=songUrl>
+				<source :src="songUrl" type="audio/mp3" />
 			</audio>
 		</vue-plyr>
 	</div>
@@ -31,11 +37,14 @@
 <script setup name="FloatButtons">
 import { CustomerServiceOutlined } from '@ant-design/icons-vue';
 import { onMounted, ref, watch } from 'vue';
-import { getBeatmapInfo } from '@/api/data_api.js'
+import { getBeatmapInfo, getBeatmapBg } from '@/api/data_api.js'
 let plyr = ref();// 播放器实例
 let bid = ref("");// 谱面ID
-let url = ref("");// 音乐url
+let songUrl = ref("");// 音乐url
+let bgUrl = ref("");// 谱面背景url
+let info = ref();// 谱面信息
 let playerStyle = ref({}); // 播放器样式
+let bgStyle = ref({});// 封面样式
 let isPlaying = ref(false);// 是否正在播放
 let isShow = ref(false);// 是否显示播放器
 const onSearch = ref(() => { });// 搜索事件钩子
@@ -53,14 +62,14 @@ function togglePlayer() {
 	isShow.value = !isShow.value;
 }
 // 播放器初始化
-function initPlyr(url) {
+function initPlyr(songUrl) {
 	// 音频信息配置
 	plyr.value.player.source = {
 		type: 'audio',
 		title: 'Example title',
 		sources: [
 			{
-				src: url,
+				src: songUrl,
 				type: 'audio/mp3',
 			},
 		],
@@ -75,20 +84,25 @@ function initPlyr(url) {
 	})
 	console.log(plyr.value);
 };
+// 获取谱面信息
 async function getBeatMap(bid) {
-	return await getBeatmapInfo(bid);
-	// return new Promise((resolve, reject) => {
-	// 	let promise = axios({
-	// 		url: `https://sp.365246692.xyz/api/map/getBeatMapInfo/${bid}`,
-	// 		method: "get",
-	// 	});
-	// 	promise.then(res => {
-	// 		resolve(res);
-	// 	}).catch(err => {
-	// 		reject(err);
-	// 	});
-	// })
+	await getBeatmapInfo(bid).then(res => {
+		if (res.status === 200 && res.data) {
+			info.value = res.data.data;
+		}
+	});
+	await getBeatmapBg(bid).then(res => {
+		bgUrl.value = res.request.responseURL;
+		bgStyle.value = {
+			"background-image": `url(${bgUrl.value})`,
+			"background-position": "center",
+			"background-size": "cover",
+			"margin-bottom": "0px",
+			"transition": "margin-bottom 0.5s ease"
+		}
+	})
 }
+
 onMounted(() => {
 	// initPlyr();
 	console.log(plyr.value);
@@ -99,8 +113,8 @@ watch(bid, (val) => {
 		onSearch.value = (val) => {
 			if (val !== "" && !isNaN(val)) {
 				getBeatMap(val);
-				url.value = param;
-				initPlyr(url.value);
+				songUrl.value = param;
+				initPlyr(songUrl.value);
 			}
 		}
 	}
@@ -113,9 +127,35 @@ watch(bid, (val) => {
 	position: fixed;
 	z-index: 3;
 	right: -400px;
-	top: 685px;
+	top: 625px;
 	color: #ffffff;
 	background-color: #2A2226;
+
+	.beatmap-info {
+		display: flex;
+		height: 60px;
+		z-index: -1;
+		margin-bottom: -60px;
+		position: relative;
+
+		.beatmap-title {
+			width: 100%;
+			height: 60px;
+			display: flex;
+			flex-direction: column;
+			text-align: center;
+			justify-content: center;
+			backdrop-filter: brightness(0.4) blur(0.4px);
+
+			.title {
+				font-size: 16px;
+			}
+
+			.artist {
+				font-size: 14px;
+			}
+		}
+	}
 
 	.beatmap-query {
 		display: flex;

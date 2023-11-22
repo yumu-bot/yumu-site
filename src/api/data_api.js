@@ -6,7 +6,17 @@ export const getPPM =params=>{
 	   params
 	})
 }
-
+// 获取谱面信息
 export const getBeatmapInfo = params => {
-	return axios.get(`https://sp.365246692.xyz/api/map/getBeatMapInfo/${params}`);
+	return axios({
+		method: "get",
+		url: `/api/info/${params}`,
+	})
+}
+// 获取谱面bg
+export const getBeatmapBg = params => {
+	return axios({
+		method: "get",
+		url: `/api/background/${params}`,
+	})
 }
