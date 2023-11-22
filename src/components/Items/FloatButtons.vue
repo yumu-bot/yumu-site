@@ -7,7 +7,7 @@
 !-->
 <template>
 	<!-- 谱面播放器 -->
-	<div class="beatmap-player">
+	<div class="beatmap-player" :style="playerStyle">
 		<div class="beatmap-query">
 			<a-input-search class="ant-input-search" v-model:value="bid" placeholder="请输入谱面ID" @search="onSearch"
 				:bordered="true" allow-clear enter-button />
@@ -15,23 +15,43 @@
 		<vue-plyr ref="plyr">
 			<audio controls crossorigin playsinline autoplay source=url>
 				<source :src="url" type="audio/mp3" />
-				<!-- <source src="https://sp.365246692.xyz/api/file/map/song/4092433" type="audio/mp3" /> -->
 			</audio>
 		</vue-plyr>
 	</div>
 	<!-- 浮动按钮组 -->
 	<a-float-button-group>
-		<a-float-button class="backtop-btn" />
-		<a-back-top class="backtop-btn" :visibilityHeight="30" />
+		<a-float-button class="backtop-btn" tooltip="听音乐" @click="togglePlayer()">
+			<template #icon>
+				<CustomerServiceOutlined :spin="isPlaying?true:false"/>
+			</template>
+		</a-float-button>
+		<a-back-top class="backtop-btn" tooltip="回到顶部" :visibilityHeight="30" />
 	</a-float-button-group>
 </template>
 <script setup name="FloatButtons">
+import { CustomerServiceOutlined } from '@ant-design/icons-vue';
 import { onMounted, ref, watch } from 'vue';
-let plyr = ref();
-let title = ref("");
-let bid = ref("");
-let url = ref("")
-const onSearch = ref(() => { })
+let plyr = ref();// 播放器实例
+let bid = ref("");// 谱面ID
+let url = ref("");// 音乐url
+let playerStyle = ref({}); // 播放器样式
+let isPlaying = ref(false);// 是否正在播放
+let isShow = ref(false);// 是否显示播放器
+const onSearch = ref(() => { });// 搜索事件钩子
+// 是否显示播放器
+function togglePlayer() {
+	playerStyle.value = isShow.value ? {
+		// 折叠播放器
+		right: "-400px",
+		transition: "right 0.5s ease"
+	} : {
+		// 展开播放器
+		right: "0px",
+		transition: "right 0.5s ease"
+	}
+	isShow.value = !isShow.value;
+}
+// 播放器初始化
 function initPlyr(url) {
 	// 音频信息配置
 	plyr.value.player.source = {
@@ -44,6 +64,7 @@ function initPlyr(url) {
 			},
 		],
 	};
+	isPlaying.value = plyr.value.player.playing;
 	console.log(plyr.value);
 }
 onMounted(() => {
@@ -69,7 +90,7 @@ watch(bid, (val) => {
 	width: 400px;
 	position: fixed;
 	z-index: 3;
-	right: 0;
+	right: -400px;
 	top: 685px;
 	color: #ffffff;
 	background-color: #2A2226;
