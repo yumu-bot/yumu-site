@@ -22,7 +22,7 @@
 	<a-float-button-group>
 		<a-float-button class="backtop-btn" tooltip="听音乐" @click="togglePlayer()">
 			<template #icon>
-				<CustomerServiceOutlined :spin="isPlaying?true:false"/>
+				<CustomerServiceOutlined :spin="isPlaying ? true : false" />
 			</template>
 		</a-float-button>
 		<a-back-top class="backtop-btn" tooltip="回到顶部" :visibilityHeight="30" />
@@ -31,6 +31,7 @@
 <script setup name="FloatButtons">
 import { CustomerServiceOutlined } from '@ant-design/icons-vue';
 import { onMounted, ref, watch } from 'vue';
+import axios from 'axios'
 let plyr = ref();// 播放器实例
 let bid = ref("");// 谱面ID
 let url = ref("");// 音乐url
@@ -64,8 +65,28 @@ function initPlyr(url) {
 			},
 		],
 	};
-	isPlaying.value = plyr.value.player.playing;
+	// 监听是否播放
+	plyr.value.player.on('play', (playing) => {
+		isPlaying.value = playing.detail.plyr.playing;
+	});
+	// 监听是否暂停
+	plyr.value.player.on('pause', (playing) => {
+		isPlaying.value = playing.detail.plyr.playing;
+	})
 	console.log(plyr.value);
+};
+async function getBeatMapInfo(bid) {
+	return await axios.get(`https://sp.365246692.xyz/api/map/getBeatMapInfo/${bid}`);
+	return new Promise((resolve, reject) => {
+		let promise = axios({
+			url: "https://sp.365246692.xyz/api/map/getBeatMapInfo/",
+			method: "get",
+			params
+		});
+		promise.then(res => {
+			resolve(res)
+		});
+	})
 }
 onMounted(() => {
 	// initPlyr();
@@ -76,13 +97,13 @@ watch(bid, (val) => {
 		let param = "https://sp.365246692.xyz/api/file/map/song/" + val;
 		onSearch.value = (val) => {
 			if (val !== "" && !isNaN(val)) {
+				getBeatMapInfo(val);
 				url.value = param;
-				console.log(url.value);
 				initPlyr(url.value);
 			}
 		}
 	}
-})
+});
 </script>
 <style lang="scss" scoped>
 .beatmap-player {
