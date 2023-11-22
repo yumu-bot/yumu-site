@@ -6,3 +6,7 @@ export const getPPM =params=>{
 	   params
 	})
 }
+
+export const getBeatmapInfo = params => {
+	return axios.get(`https://sp.365246692.xyz/api/map/getBeatMapInfo/${params}`);
+}

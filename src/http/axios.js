@@ -16,7 +16,7 @@ axios.interceptors.request.use(
   // 配置请求头
     config.headers = {
       //'Content-Type':'application/x-www-form-urlencoded',   // 传参方式表单
-    //   'Content-Type':'application/json;charset=UTF-8',        // 传参方式json
+      'Content-Type':'application/json;charset=UTF-8',        // 传参方式json
     //   'token':'80c483d59ca86ad0393cf8a98416e2a1'              // 这里自定义配置，这里传的是token
     };
     return config;

@@ -31,7 +31,7 @@
 <script setup name="FloatButtons">
 import { CustomerServiceOutlined } from '@ant-design/icons-vue';
 import { onMounted, ref, watch } from 'vue';
-import axios from 'axios'
+import { getBeatmapInfo } from '@/api/data_api.js'
 let plyr = ref();// 播放器实例
 let bid = ref("");// 谱面ID
 let url = ref("");// 音乐url
@@ -75,18 +75,19 @@ function initPlyr(url) {
 	})
 	console.log(plyr.value);
 };
-async function getBeatMapInfo(bid) {
-	return await axios.get(`https://sp.365246692.xyz/api/map/getBeatMapInfo/${bid}`);
-	return new Promise((resolve, reject) => {
-		let promise = axios({
-			url: "https://sp.365246692.xyz/api/map/getBeatMapInfo/",
-			method: "get",
-			params
-		});
-		promise.then(res => {
-			resolve(res)
-		});
-	})
+async function getBeatMap(bid) {
+	return await getBeatmapInfo(bid);
+	// return new Promise((resolve, reject) => {
+	// 	let promise = axios({
+	// 		url: `https://sp.365246692.xyz/api/map/getBeatMapInfo/${bid}`,
+	// 		method: "get",
+	// 	});
+	// 	promise.then(res => {
+	// 		resolve(res);
+	// 	}).catch(err => {
+	// 		reject(err);
+	// 	});
+	// })
 }
 onMounted(() => {
 	// initPlyr();
@@ -97,7 +98,7 @@ watch(bid, (val) => {
 		let param = "https://sp.365246692.xyz/api/file/map/song/" + val;
 		onSearch.value = (val) => {
 			if (val !== "" && !isNaN(val)) {
-				getBeatMapInfo(val);
+				getBeatMap(val);
 				url.value = param;
 				initPlyr(url.value);
 			}
