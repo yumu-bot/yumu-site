@@ -8,10 +8,13 @@
 <template>
 	<!-- 谱面播放器 -->
 	<div class="beatmap-player" :style="playerStyle">
-		<div class="beatmap-info" :style="bgStyle">
-			<div v-if="info" class="beatmap-title">
+		<div class="beatmap-info" :style="bgStyle" @click="jumpBeatmap(bid)" title="点击查看谱面信息">
+			<div v-if="info && !spinning" class="beatmap-title">
 				<span class="title">{{ info.beatmapset?.title }}</span>
 				<span class="artist">{{ info.beatmapset?.artist }}</span>
+			</div>
+			<div v-else="spinning" class="beatmap-title">
+				<a-spin :spinning="spinning" tip="Loading..." size="small" style="color: inherit;"></a-spin>
 			</div>
 		</div>
 		<div class="beatmap-query">
@@ -47,6 +50,7 @@ let playerStyle = ref({}); // 播放器样式
 let bgStyle = ref({});// 封面样式
 let isPlaying = ref(false);// 是否正在播放
 let isShow = ref(false);// 是否显示播放器
+let spinning = ref(false);// 是否正在加载
 const onSearch = ref(() => { });// 搜索事件钩子
 // 是否显示播放器
 function togglePlayer() {
@@ -86,6 +90,7 @@ function initPlyr(songUrl) {
 };
 // 获取谱面信息
 async function getBeatMap(bid) {
+	spinning.value = true;
 	await getBeatmapInfo(bid).then(res => {
 		if (res.status === 200 && res.data) {
 			info.value = res.data.data;
@@ -100,7 +105,13 @@ async function getBeatMap(bid) {
 			"margin-bottom": "0px",
 			"transition": "margin-bottom 0.5s ease"
 		}
-	})
+	});
+	spinning.value = false;
+};
+// 谱面信息官网跳转
+function jumpBeatmap(bid) {
+	let url = "http://osu.ppy.sh/b/" + bid;
+	window.open(url, "_blank");
 }
 
 onMounted(() => {
@@ -138,9 +149,23 @@ watch(bid, (val) => {
 		margin-bottom: -60px;
 		position: relative;
 
+		:hover {
+			border-width: 1px;
+			border-style: solid;
+			border-color: rgb(255, 255, 255, .6);
+
+			:not(div) {
+				border: none;
+			}
+
+		}
+
+		:active {
+			border-color: rgb(255, 255, 255);
+		}
+
 		.beatmap-title {
 			width: 100%;
-			height: 60px;
 			display: flex;
 			flex-direction: column;
 			text-align: center;
@@ -154,6 +179,22 @@ watch(bid, (val) => {
 			.artist {
 				font-size: 14px;
 			}
+
+			:deep(.ant-spin) {
+				position: unset;
+				color: inherit;
+
+				.ant-spin-dot-item {
+					background-color: #ffffff;
+				}
+
+			}
+
+
+			:hover {
+				border: none;
+			}
+
 		}
 	}
 
