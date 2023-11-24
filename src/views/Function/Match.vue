@@ -19,7 +19,9 @@
 import { message } from 'ant-design-vue';
 import SearchResultBanner from '../../components/SearchResult/SearchResultBanner.vue';
 import MatchRequestBar from '../../components/SearchBar/MatchRequestBar.vue';
-import { onMounted, reactive } from 'vue';
+import { onMounted, reactive, watch } from 'vue';
+import { useI18n } from 'vue-i18n'
+const { locale, t } = useI18n()
 const state = reactive({
   baseUrl: "",
   matchId: "",//比赛id
@@ -42,7 +44,7 @@ const state = reactive({
 async function sendRequest() {
   // 表单验证
   if (state.matchId === "") {
-    message.warning("比赛id不能为空")
+    message.warning(t('notification.blankMatchid'));
   } else {
     state.spinning = true;//图片正在加载
     state.status = "loading";
@@ -51,7 +53,7 @@ async function sendRequest() {
     let timer = setTimeout(() => {
       if (state.status !== "") {
         state.status = "error";
-        message.warning("图片加载超时,请稍后再试(可尝试连接vpn改善网络状况)");
+        message.warning(t('notification.timeout'));
         clearTimeout(timer);
       } else {
         // 若加载成功,清除定时器
@@ -93,6 +95,12 @@ onMounted(() => {
   state.imgUrl = "";
   state.baseUrl = import.meta.env.VITE_BASEURL;
 }); 
+// 国际化
+watch(locale, (val) => {
+	for (let item of state.functions) {
+		item.label = t(`matchRequestOptions.${item.value}`);
+	};
+}, { immediate:true,deep: true })
 </script>
 
 <style></style>

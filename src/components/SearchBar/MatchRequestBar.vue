@@ -16,25 +16,25 @@
 		</div>
 		<!-- 比赛id输入框 -->
 		<div>
-			<a-input class="input-bar" placeholder="请输入比赛id" size="large" v-model:value=state.matchId allow-clear
-				@keyup.enter="emitParams()">
+			<a-input class="input-bar" :placeholder="$t('placeholder.matchid')" size="large" v-model:value=state.matchId
+				allow-clear @keyup.enter="emitParams()">
 			</a-input>
 		</div>
 		<!-- 跳过开头对局 -->
-		<a-tooltip title="跳过开头对局" arrow-point-at-center>
+		<a-tooltip :title="$t('placeholder.skipBegin')" arrow-point-at-center>
 			<a-input-number class="number-bar" v-model:value=state.skipBegin :min="0" size="large"
 				@keyup.enter="emitParams()" placeholder="0"></a-input-number>
 		</a-tooltip>
 		<!-- 跳过结尾对局 -->
-		<a-tooltip title="跳过结尾对局" arrow-point-at-center>
+		<a-tooltip :title="$t('placeholder.skipEnd')" arrow-point-at-center>
 			<a-input-number class="number-bar" v-model:value=state.skipEnd :min="0" size="large" @keyup.enter="emitParams()"
 				placeholder="0"></a-input-number>
 		</a-tooltip>
 		<div class="check-bar">
 			<!-- 是否包含失败对局 -->
-			<a-checkbox v-model:checked="state.includeFail">失败对局</a-checkbox>
+			<a-checkbox v-model:checked="state.includeFail">{{ $t('tool.fail') }}</a-checkbox>
 			<!-- 是否包含重赛对局 -->
-			<a-checkbox v-model:checked="state.includeRestart">重赛对局</a-checkbox>
+			<a-checkbox v-model:checked="state.includeRestart">{{ $t('tool.restart') }}</a-checkbox>
 		</div>
 		<div class="query-bar">
 			<!-- 静态指令复制 -->
@@ -43,7 +43,7 @@
 					<a-button style="width: 130px;" size="large"
 						@mouseenter="getCommand(state.matchId, state.skipBegin, state.skipEnd, state.includeFail, state.includeRestart)">
 						<div class="copy-button">
-							<span>复制到剪贴板</span>
+							<span>{{ $t('tool.clipboard') }}</span>
 							<a-typography-paragraph :copyable="{ tooltip: false, text: state.command }">
 							</a-typography-paragraph>
 						</div>
@@ -51,12 +51,14 @@
 				</a-tooltip>
 			</div>
 			<!-- 查询按钮 -->
-			<a-button style="width: 87px;" size="large" @click="emitParams()">生成!</a-button>
+			<a-button style="width: 87px;" size="large" @click="emitParams()">{{ $t('tool.search') }}</a-button>
 		</div>
 	</div>
 </template>
 <script setup name="MatchRequestBar">
 import { reactive } from 'vue';
+import { useI18n } from 'vue-i18n'
+const { locale, t } = useI18n()
 const state = reactive({
 	matchId: "",//比赛Id
 	nowfunction: "match",//指定查询功能,默认为match
@@ -101,6 +103,7 @@ function emitParams() {
 	}
 	props.init(data);
 };
+
 </script>
 <style lang="scss" scoped>
 @import "src/assets/css/variables.scss";
@@ -171,7 +174,7 @@ function emitParams() {
 		flex-wrap: wrap;
 		column-gap: 10px;
 		row-gap: 10px;
-		height: auto;  
+		height: auto;
 
 		.input-bar {
 			width: 200px;

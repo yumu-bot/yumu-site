@@ -8,7 +8,7 @@
 <template>
 	<!-- 用户名输入框 -->
 	<div>
-		<a-input class="input-bar" :class="state.isWideScreen" placeholder="请输入用户名" size="large"
+		<a-input class="input-bar" :class="state.isWideScreen" :placeholder="$t('placeholder.username')" size="large"
 			v-model:value=state.username allow-clear @keyup.enter="emitParams()">
 		</a-input>
 	</div>
@@ -20,7 +20,7 @@
 				:value="item.value"></a-select-option>
 		</a-select>
 		<!-- pr/bp范围查询 -->
-		<a-tooltip :title="'查询范围(1-' + state.maxRange + ')'" arrow-point-at-center>
+		<a-tooltip :title="$t('placeholder.range')+'(1-' + state.maxRange + ')'" arrow-point-at-center>
 			<a-input-number class="range-select" v-model:value=state.key :min="1" :max="state.maxRange"
 				v-show="state.scoreType !== 'score'" size="large" @keyup.enter="emitParams()"
 				placeholder="1"></a-input-number>
@@ -33,7 +33,8 @@
 	</a-select>
 	<!-- 查询按钮 -->
 	<div class="query-bar">
-		<a-button class="query-button" size="large" @click="emitParams()" :disabled="state.isInvalid">生成!</a-button>
+		<a-button class="query-button" size="large" @click="emitParams()" :disabled="state.isInvalid">{{ $t('tool.search')
+		}}</a-button>
 	</div>
 </template>
 <script setup name="Scores">

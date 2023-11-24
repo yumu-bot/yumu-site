@@ -6,8 +6,7 @@
 				<div class="nav-title">Yumu Site</div>
 				<a-menu class="nav-menu" :selectedKeys="state.currentMenu" mode="horizontal">
 					<a-menu-item v-for="(item, index) in state.menuList" :key="index"
-						@click="changeMenuByNavbar(item.title, item.path)">{{
-							item.header }}
+						@click="changeMenuByNavbar(item.title, item.path)">{{ $t(`menuList.${item.title}`) }}
 					</a-menu-item>
 					<!-- 暂未实现的页面 -->
 					<!-- <a-menu-item key="function">
@@ -27,6 +26,16 @@
 					</a>
 				</a-menu-item> -->
 				</a-menu>
+				<!-- 切换语言 -->
+				<div class="locale-changer">
+					<!-- <select v-model="$i18n.locale">
+						<option v-for="(lang, i) in langs" :key="`Lang${i}`" :value="lang">
+							{{ lang }}
+						</option>
+					</select> -->
+					<a-button type="text" v-model="$i18n.locale" @click="toggleLang($i18n.locale)">{{ locale
+					}}</a-button>
+				</div>
 				<!-- 用户信息展示 -->
 				<div class="user-info">
 					<span class="user-name">Muziyami</span>
@@ -43,6 +52,11 @@ import { AntDesignOutlined } from '@ant-design/icons-vue';
 import { ref, provide, onMounted, onUnmounted, watch, watchEffect, reactive, inject } from "vue";
 import { useRoute, useRouter } from 'vue-router';
 import bus from '../utils/bus';
+import { useI18n } from 'vue-i18n'
+const I18n = useI18n()
+const { locale } = useI18n()
+console.warn('locale', locale.value);
+const langs = ref(['简体中文', 'English']);
 const state = reactive({
 	menuList: [
 		{ key: "0", title: "home", path: "/home", header: "主页" },
@@ -58,6 +72,10 @@ const state = reactive({
 const route = useRoute();
 const router = useRouter();
 
+//切换网页语言
+function toggleLang(currentLang) {
+	locale.value = currentLang === "简体中文" ? "English" : "简体中文";
+}
 
 // 任意处路由跳转切换导航栏高亮
 function changeMenuByRandom() {

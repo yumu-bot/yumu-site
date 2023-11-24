@@ -40,7 +40,7 @@ axios.interceptors.response.use(
 		return Promise.reject(response.data);
 		// if(response.message.in)
     } else {
-      message.error('网络连接异常,请稍后再试!');
+      message.error(`$t('notification.badNetwork')`);
     }
   }
 );

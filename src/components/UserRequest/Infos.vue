@@ -8,7 +8,7 @@
 <template>
 	<!-- 用户名输入框 -->
 	<div>
-		<a-input class="input-bar" :class="state.isWideScreen" placeholder="请输入用户名" size="large"
+		<a-input class="input-bar" :class="state.isWideScreen" :placeholder="$t('placeholder.username')" size="large"
 			v-model:value=state.username allow-clear @keyup.enter="emitParams()">
 		</a-input>
 	</div>
@@ -23,7 +23,7 @@
 			<a-button style="width: 130px;" size="large"
 				@mouseenter="getCommand(state.nowfunction, state.mode, state.username)">
 				<div class="copy-button">
-					<span>复制到剪贴板</span>
+					<span>{{ $t('tool.clipboard') }}</span>
 					<a-typography-paragraph :copyable="{ tooltip: false, text: state.command }">
 					</a-typography-paragraph>
 				</div>
@@ -31,7 +31,8 @@
 		</a-tooltip>
 	</div>
 	<!-- 查询按钮 -->
-	<a-button class="query-button" size="large" @click="emitParams()" :disabled="state.isInvalid">生成!</a-button>
+	<a-button class="query-button" size="large" @click="emitParams()" :disabled="state.isInvalid">{{ $t('tool.search')
+	}}</a-button>
 </template>
 <script setup name="Infos">
 import { inject } from 'vue';

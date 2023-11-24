@@ -2,7 +2,7 @@
 	<div class="about-page">
 		<!-- 关于内容展示 -->
 		<a-image src="/img/avatar/Head_yuyuko_Qiqi.png" alt="关于页图片说明" :width="300" :preview="false"></a-image>
-		<h1>关于Yumu Site</h1>
+		<h1>Yumu Site</h1>
 		<h2>Main Designer: Muziyami</h2>
 		<h2>Developer: -Spring Night- Truncle SIyuyuko</h2>
 		<div class="website-list">

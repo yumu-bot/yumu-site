@@ -10,8 +10,8 @@
 		<!-- 查询功能切换 -->
 		<div>
 			<a-select class="function-bar" :options="functions" size="large" v-model:value=state.nowfunction>
-				<a-select-option v-for="(item, index) in functions" :key="index" :label="item.label"
-					:value="item.value"></a-select-option>
+				<a-select-option v-for="(item, index) in functions" :key="index"
+					:label="$t(`userRequestOptions.${item.value}`)" :value="item.value"></a-select-option>
 			</a-select>
 		</div>
 		<Infos v-if="state.type === 0" :state="state" :emitParams="emitParams" :getCommand="getCommand"></Infos>
@@ -26,7 +26,9 @@ import { reactive, onMounted, watch } from 'vue';
 import Infos from '../UserRequest/Infos.vue';
 import Scores from '../UserRequest/Scores.vue';
 import MapScore from '../UserRequest/MapScore.vue';
-import { findMod } from '@/utils/util.js'
+import { useI18n } from 'vue-i18n'
+const { locale, t } = useI18n()
+import { findMod } from '@/utils/util.js';
 const state = reactive({
 	username: "",//用户名
 	nowfunction: "ppm",//指定查询功能,默认为ppm
@@ -277,7 +279,7 @@ watch(() => state.scoreType, (val) => {
 // 监听谱面id规范(表单验证)
 watch(() => state.bid, (oldVal, newVal) => {
 	if (isNaN(newVal)) {
-		message.warning("谱面id应该为纯数字");
+		message.warning(t('notification.badBeatmapid'));
 		state.isInvalid = true;
 	} else if (oldVal == "" || newVal === "") {
 		state.isInvalid = true;
@@ -303,6 +305,14 @@ watch(() => state.isWideScreen, (val) => {
 		};
 	}
 });
-
+// 国际化
+watch(locale, (val) => {
+	for (let item of state.scoreTypes) {
+		item.label = t(`scoreTypeOptions.${item.value}`);
+	};
+	for (let item of state.scoresTypes) {
+		item.label = t(`scoreTypeOptions.${item.value}`);
+	}
+}, { immediate:true,deep: true })
 </script>
 <style lang="scss" scoped></style>

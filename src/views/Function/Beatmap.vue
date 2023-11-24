@@ -1,5 +1,5 @@
 <template>
-	施工中。。。
+	{{ $t('tool.wip') }}
 </template>
 
 <script>

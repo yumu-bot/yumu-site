@@ -8,7 +8,8 @@
 <template>
 	<div class="user-page">
 		<!-- 玩家查询搜索框(支持用户名+mode查询) -->
-		<UserRequestBar :modes="state.modes" :functions="state.functions" :init="init"></UserRequestBar>
+		<UserRequestBar :modes="state.modes" :functions="state.functions" :init="init">
+		</UserRequestBar>
 		<!-- 搜索结果banner -->
 		<SearchResultBanner :status="state.status" :imgUrl="state.imgUrl" :spinning="state.spinning"
 			@changeStatus="changeStatus" @isSpinning="isSpinning"></SearchResultBanner>
@@ -19,7 +20,9 @@
 import { message } from 'ant-design-vue';
 import SearchResultBanner from '../../components/SearchResult/SearchResultBanner.vue';
 import UserRequestBar from '../../components/SearchBar/UserRequestBar.vue'
-import { provide, reactive, onMounted } from 'vue';
+import { watch, provide, reactive, onMounted } from 'vue';
+import { useI18n } from 'vue-i18n'
+const { locale, t } = useI18n()
 const state = reactive({
 	baseUrl: "",
 	username: "",//用户名
@@ -36,11 +39,11 @@ const state = reactive({
 	],
 	// 功能列表
 	functions: [
-		{ label: "PP-", value: "ppm" },
-		{ label: "分析最好成绩", value: "bpa" },
-		{ label: "查询单个成绩", value: "score" },
-		{ label: "查询多个成绩", value: "scores" },
-		{ label: "谱面成绩查询", value: "mapScore" },
+		{ label: t('userRequestOptions.ppm'), value: "ppm" },
+		{ label: t('userRequestOptions.bpa'), value: "bpa" },
+		{ label: t('userRequestOptions.score'), value: "score" },
+		{ label: t('userRequestOptions.scores'), value: "scores" },
+		{ label: t('userRequestOptions.mapScore'), value: "mapScore" },
 	],
 	nowfunction: "ppm",//指定查询功能,默认为ppm
 	type: 0,//功能类型
@@ -53,7 +56,7 @@ const state = reactive({
 async function sendRequest() {
 	// 表单验证
 	if (state.username === "") {
-		message.warning("用户名不能为空")
+		message.warning(t('notification.blankUsername'))
 	} else {
 		state.spinning = true;//图片正在加载
 		state.status = "loading";
@@ -69,7 +72,7 @@ async function sendRequest() {
 		let timer = setTimeout(() => {
 			if (state.status !== "") {
 				state.status = "error";
-				message.warning("图片加载超时,请稍后再试(可尝试连接vpn改善网络状况)");
+				message.warning(t('notification.timeout'));
 				clearTimeout(timer);
 			} else {
 				// 若加载成功,清除定时器
@@ -144,7 +147,13 @@ function getScore() {
 onMounted(() => {
 	state.imgUrl = "";
 	state.baseUrl = import.meta.env.VITE_BASEURL;
-})
+});
+// 国际化
+watch(locale, (val) => {
+	for (let item of state.functions) {
+		item.label = t(`userRequestOptions.${item.value}`);
+	}
+}, { immediate: true, deep: true })
 
 </script>
 

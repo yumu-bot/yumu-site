@@ -8,18 +8,18 @@
 <template>
 	<!-- 用户名输入框 -->
 	<div>
-		<a-input class="input-bar" :class="state.isWideScreen" placeholder="请输入用户名" size="large"
+		<a-input class="input-bar" :class="state.isWideScreen" :placeholder="$t('placeholder.username')" size="large"
 			v-model:value=state.username allow-clear @keyup.enter="emitParams()">
 		</a-input>
 	</div>
 	<!-- score/scores功能附加项  -->
 	<div class="plus-bar">
 		<!-- 谱面成绩查询 -->
-		<a-input placeholder="谱面id" v-model:value=state.bid size="large" style="width:130px;" allow-clear
+		<a-input :placeholder="$t('placeholder.bid')" v-model:value=state.bid size="large" style="width:130px;" allow-clear
 			@keyup.enter="emitParams()"></a-input>
 		<!-- 附加参数:游玩mods(仅支持谱面成绩查询) -->
 		<a-select class="mod-select" mode="multiple" :options="state.mods" size="large" v-model:value=state.mod
-			:max-tag-count="4" :max-tag-text-length="2" allow-clear placeholder="游玩mod">
+			:max-tag-count="4" :max-tag-text-length="2" allow-clear :placeholder="$t('placeholder.mod')">
 			<a-select-option v-for="(item, index) in state.mods" :key="index" :label="item.label"
 				:value="item.value"></a-select-option>
 		</a-select>
@@ -30,7 +30,8 @@
 			:value="item.value"></a-select-option>
 	</a-select>
 	<!-- 查询按钮 -->
-	<a-button class="query-button" size="large" @click="emitParams()" :disabled="state.isInvalid">生成!</a-button>
+	<a-button class="query-button" size="large" @click="emitParams()" :disabled="state.isInvalid">{{ $t('tool.search')
+	}}</a-button>
 </template>
 <script setup name="MapScore">
 import { inject } from 'vue';

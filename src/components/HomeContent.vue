@@ -15,21 +15,21 @@
     <div class="main-content">
       <!-- <a-space direction="vertical"> -->
       <!-- 功能快捷入口 -->
-      <h3 class="content-header" style="">功能</h3>
+      <h3 class="content-header" style="">{{ $t('homeTitle.function') }}</h3>
       <div class="content-box">
         <div class="function-content-left">
-          <a-tooltip title="玩家数据">
-          <img class="large-item" title="玩家数据" src="/img/function/Function_Map.jpg" @click="jumpPage('user')">
+          <a-tooltip :title="$t('functionTooltip.userInfo')">
+          <img class="large-item" src="/img/function/Function_Map.jpg" @click="jumpPage('user')">
           </a-tooltip>
         </div>
         <div class="function-content-right">
-          <a-tooltip v-for="(item, index) in state.functionItems" :key="index" :title=item.title>
+          <a-tooltip v-for="(item, index) in state.functionItems" :key="index" :title="$t(`functionTooltip.${item.headMenu}`)">
           <img class="small-item" :src="item.src" @click="jumpPage(item.headMenu)" style="object-fit: cover;">
             </a-tooltip>
         </div>
       </div>
       <!-- 推荐快捷入口 -->
-      <h3 class="content-header">推荐</h3>
+      <h3 class="content-header">{{ $t('homeTitle.suggest') }}</h3>
       <div class="content-box">
         <div class="suggest-content">
           <a-tooltip v-for="(item, index) in state.suggestList" :key="index" :title=item.title>

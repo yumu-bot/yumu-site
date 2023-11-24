@@ -10,16 +10,17 @@ import '@/assets/css/index.scss' // 无需在此处引入全局样式，默认�
 // import '@/assets/iconfont/iconfont.js'
 import 'swiper'
 import VuePlyr from 'vue-plyr'
+import i18n from './language'
 const app = createApp(App)
-// for (const [key, component] of Object.entries(ElementPlusIconsVue)) {
-// 	app.component(key, component)
-// }
 app.use(router)
 app.use(antd)
 app.use(VuePlyr, {
 	plyr: {
 	
-}})
+	}
+})
+app.use(i18n)
+i18n.global.locale.value = '简体中文'
 // app.config.globalProperties.$bus = bus;
 app.mount('#app')
 

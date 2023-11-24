@@ -12,8 +12,8 @@
 	<footer class="footer-body">
 		<p>
 			<a-space>
-				<a href="https://docs.365246692.xyz/" target="_blank">帮助文档</a>
-				<a href="https://panel.365246692.xyz/status/public" target="_blank">服务器状态</a>
+				<a href="https://docs.365246692.xyz/" target="_blank">{{ $t('footer.helpDocs') }}</a>
+				<a href="https://panel.365246692.xyz/status/public" target="_blank">{{ $t('footer.serverStatus') }}</a>
 			</a-space>
 		</p>
 		<p>Copyright © 2021-2023 Yumubot, All Rights Reserved.</p>

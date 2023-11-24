@@ -33,6 +33,8 @@
 <script setup name="SearchResultBanner">
 import { message } from 'ant-design-vue';
 import { ref } from 'vue';
+import { useI18n } from 'vue-i18n'
+const {  t } = useI18n()
 const loaded = ref(false);//图片是否加载成功
 const props = defineProps({
 	// 查询状态
@@ -61,7 +63,7 @@ function imgLoaded() {
 };
 //图片加载失败时
 function imgLoadError(event) {
-	message.error("用户不存在或查询失败");
+	message.error(t('notification.fail'));
 	loaded.value = false;
 	let status = "error";//改变status状态,显示error
 	emit("changeStatus", status);

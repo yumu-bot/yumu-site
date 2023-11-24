@@ -9,14 +9,14 @@
 	<div class="search-bar">
 		<!-- 玩家1输入框 -->
 		<div>
-			<a-input class="input-bar" placeholder="请输入要对比的玩家1" size="large" v-model:value=state.userA allow-clear
+			<a-input class="input-bar" :placeholder="$t('placeholder.uservs1')" size="large" v-model:value=state.userA allow-clear
 				@keyup.enter="emitParams()">
 			</a-input>
 		</div>
 		<FireFilled class="vs-icon" style="font-size: xx-large;" />
 		<!-- 玩家2输入框 -->
 		<div>
-			<a-input class="input-bar" placeholder="请输入要对比的玩家2" size="large" v-model:value=state.userB allow-clear
+			<a-input class="input-bar" :placeholder="$t('placeholder.uservs2')" size="large" v-model:value=state.userB allow-clear
 				@keyup.enter="emitParams()">
 			</a-input>
 		</div>
@@ -27,7 +27,7 @@
 					:value="item.value"></a-select-option>
 			</a-select>
 			<!-- 查询按钮 -->
-			<a-button style="width: 112px;" size="large" @click="emitParams()">生成!</a-button>
+			<a-button style="width: 112px;" size="large" @click="emitParams()">{{ $t('tool.search') }}</a-button>
 		</div>
 	</div>
 </template>

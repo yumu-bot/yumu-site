@@ -8,7 +8,7 @@
 <template>
 	<!-- 谱面播放器 -->
 	<div class="beatmap-player" :style="playerStyle">
-		<div class="beatmap-info" :style="bgStyle" @click="jumpBeatmap(bid)" title="点击查看谱面信息">
+		<div class="beatmap-info" :style="bgStyle" @click="jumpBeatmap(bid)" :title="$t('placeholder.beatmapInfo')">
 			<div v-if="info && !spinning" class="beatmap-title">
 				<span class="title">{{ info.beatmapset?.title }}</span>
 				<span class="artist">{{ info.beatmapset?.artist }}</span>
@@ -18,7 +18,7 @@
 			</div>
 		</div>
 		<div class="beatmap-query">
-			<a-input-search class="ant-input-search" v-model:value="bid" placeholder="请输入谱面ID" @search="onSearch"
+			<a-input-search class="ant-input-search" v-model:value="bid" :placeholder="$t('placeholder.beatmapid')" @search="onSearch"
 				:bordered="true" allow-clear enter-button />
 		</div>
 		<vue-plyr ref="plyr">
@@ -29,12 +29,12 @@
 	</div>
 	<!-- 浮动按钮组 -->
 	<a-float-button-group>
-		<a-float-button class="backtop-btn" tooltip="听音乐" @click="togglePlayer()">
+		<a-float-button class="backtop-btn" :tooltip="$t('tool.musics')" @click="togglePlayer()">
 			<template #icon>
 				<CustomerServiceOutlined :spin="isPlaying ? true : false" />
 			</template>
 		</a-float-button>
-		<a-back-top class="backtop-btn" tooltip="回到顶部" :visibilityHeight="30" />
+		<a-back-top class="backtop-btn" :tooltip="$t('tool.backTop')" :visibilityHeight="30" />
 	</a-float-button-group>
 </template>
 <script setup name="FloatButtons">

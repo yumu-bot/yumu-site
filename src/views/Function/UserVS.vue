@@ -20,6 +20,8 @@ import { message } from 'ant-design-vue';
 import SearchResultBanner from '../../components/SearchResult/SearchResultBanner.vue';
 import UserVSRequestBar from '../../components/SearchBar/UserVSRequestBar.vue';
 import { onMounted, reactive } from 'vue';
+import { useI18n } from 'vue-i18n'
+const { t } = useI18n()
 const state = reactive({
 	baseUrl: "",
 	imgUrl: "",//图片地址
@@ -41,7 +43,7 @@ const state = reactive({
 async function sendRequest() {
 	// 表单验证
 	if (state.userA === "" || state.userB === "") {
-		message.warning("对比玩家不能为空")
+		message.warning(t('notification.blankUservs'));
 	} else {
 		state.spinning = true;//图片正在加载
 		state.status = "loading";
@@ -50,7 +52,7 @@ async function sendRequest() {
 		let timer = setTimeout(() => {
 			if (state.status !== "") {
 				state.status = "error";
-				message.warning("图片加载超时,请稍后再试(可尝试连接vpn改善网络状况)");
+				message.warning(t('notification.timeout'));
 				clearTimeout(timer);
 			} else {
 				// 若加载成功,清除定时器

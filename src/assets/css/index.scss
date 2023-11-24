@@ -17,6 +17,10 @@ body {
 	height: 100%;
 }
 
+:deep(.ant-input-number-handler) {
+	background-color: #54454C;
+}
+
 // AutoResize for phone
 @media screen and (max-width:420px) {
 	body {

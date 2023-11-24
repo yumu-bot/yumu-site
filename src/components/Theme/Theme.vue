@@ -18,8 +18,15 @@
 		components: {
 			// 输入框
 			Input: {
-				// colorBgContainer: '#2A2226',
-				// colorTextPlaceholder: 'rgba(255,255,255,0.45)'
+				colorBgContainer: '#2A2226',
+				colorTextPlaceholder: 'rgba(255,255,255,0.45)',
+				colorText:'#fff'
+			},
+			// 数字输入框
+			InputNumber: {
+				colorBgContainer: '#2A2226',
+				colorTextPlaceholder: 'rgba(255,255,255,0.45)',
+				colorText: '#fff'
 			},
 			// 选择框
 			Select: {
