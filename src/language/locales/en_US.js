@@ -1,28 +1,28 @@
 export default {
   menuList: {
 		"home": "Home",
-		"function": "Funciton",
-		"about":"About",
+		"function": "Function",
+		"about": "About",
 	},
 	homeTitle: {
-	  "function": "Funciton",
-	  "suggest":"Suggest",
+	  "function": "Function",
+	  "suggest": "Suggest",
 	},
 	footer: {
-		"helpDocs":"Help Docs",
-		"serverStatus":"Server Status"
+		"helpDocs": "Help Docs",
+		"serverStatus": "Server Status"
 	},
 	functionTooltip: {
-		"userInfo": "user info",
-		"user": "user info",
-		"uservs": "user VS",
-		"match": "tournament query",
-		"beatmap": "beatmap query",
-		"entertainment":"entertainment"
+		"userInfo": "player info",
+		"user": "player info",
+		"uservs": "ppm vs",
+		"match": "tournament",
+		"beatmap": "beatmap",
+		"entertainment": "entertainment"
 	},
 	placeholder: {
 		"username": "enter username here",
-		"bid":"beatmap id",
+		"bid": "beatmap id",
 		"mod": "play mod",
 		"range": "query range",
 		"uservs1": "enter player 1 here",
@@ -40,14 +40,14 @@ export default {
 		"blankMatchid": "Match id can not be null",
 		"badBeatmapid": "Beatmap id should be Numbers",
 		"fail": "Unknown users or error",
-		"badNetwork":"Network doesn't works, try again later"
+		"badNetwork":"Network error, try again later"
 	},
 	tool: {
 		"clipboard": "Copy it",
 		"search": "Search!",
 		"fail": "failround",
 		"restart": "restartround",
-		"wip": "work in progress ...",
+		"wip": "work in progress...",
 		"musics": "beatmap music player",
 		"backTop":"back to top",
 	},
