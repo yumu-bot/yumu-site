@@ -26,18 +26,18 @@
 					</a>
 				</a-menu-item> -->
 				</a-menu>
-				<!-- 切换语言 -->
-				<div class="locale-changer">
-					<!-- <select v-model="$i18n.locale">
+				<!-- 用户信息展示 -->
+				<div class="user-info">
+					<!-- 切换语言 -->
+					<div class="locale-changer">
+						<!-- <select v-model="$i18n.locale">
 						<option v-for="(lang, i) in langs" :key="`Lang${i}`" :value="lang">
 							{{ lang }}
 						</option>
 					</select> -->
-					<a-button type="text" v-model="$i18n.locale" @click="toggleLang($i18n.locale)">{{ locale
-					}}</a-button>
-				</div>
-				<!-- 用户信息展示 -->
-				<div class="user-info">
+						<a-button type="text" v-model="$i18n.locale" @click="toggleLang($i18n.locale)">{{ locale
+						}}</a-button>
+					</div>
 					<span class="user-name">Muziyami</span>
 					<a-avatar class="user-avatar" :size="48" src="/img/avatar/Head_yuyuko_Qiqi.png">
 					</a-avatar>
