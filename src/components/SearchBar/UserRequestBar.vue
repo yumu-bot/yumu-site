@@ -28,7 +28,7 @@ import Scores from '../UserRequest/Scores.vue';
 import MapScore from '../UserRequest/MapScore.vue';
 import { useI18n } from 'vue-i18n'
 const { locale, t } = useI18n()
-import { findMod } from '@/utils/util.js';
+import { findMod, check } from '@/utils/util.js';
 const state = reactive({
 	username: "",//用户名
 	nowfunction: "ppm",//指定查询功能,默认为ppm
@@ -63,20 +63,20 @@ const state = reactive({
 	scoreTypeList: [],
 	// 游玩模组列表 disabled默认为false,表示启用
 	mods: [
-		{ label: "NM", value: "NM", disabled: false },
-		{ label: "DT", value: "DT", disabled: false },
-		{ label: "HD", value: "HD", disabled: false },
-		{ label: "HR", value: "HR", disabled: false },
-		{ label: "NC", value: "NC", disabled: false },
-		{ label: "EZ", value: "EZ", disabled: false },
-		{ label: "SO", value: "SO", disabled: false },
-		{ label: "NF", value: "NF", disabled: false },
-		{ label: "SD", value: "SD", disabled: false },
-		{ label: "HT", value: "HT", disabled: false },
-		{ label: "PF", value: "PF", disabled: false },
-		{ label: "FL", value: "FL", disabled: false },
-		{ label: "FI", value: "FI", disabled: true },//mania限定 Fade In
-		{ label: "MR", value: "MR", disabled: true },//mania限定 Mirror
+		{ label: "NM", value: "NM", disabled: false, bit: 0 },
+		{ label: "DT", value: "DT", disabled: false, bit: 1 << 6 },
+		{ label: "HD", value: "HD", disabled: false, bit: 1 << 3 },
+		{ label: "HR", value: "HR", disabled: false, bit: 1 << 4 },
+		{ label: "NC", value: "NC", disabled: false, bit: 1 << 9 },
+		{ label: "SO", value: "SO", disabled: false, bit: 1 << 12 },
+		{ label: "NF", value: "NF", disabled: false, bit: 1 },
+		{ label: "EZ", value: "EZ", disabled: false, bit: 1 << 1 },
+		{ label: "SD", value: "SD", disabled: false, bit: 1 << 5 },
+		{ label: "HT", value: "HT", disabled: false, bit: 1 << 8 },
+		{ label: "PF", value: "PF", disabled: false, bit: 1 << 14 },
+		{ label: "FL", value: "FL", disabled: false, bit: 1 << 18 },
+		{ label: "FI", value: "FI", disabled: true, bit: 1 << 20 },//mania限定 Fade In
+		{ label: "MR", value: "MR", disabled: true, bit: 1 << 30 },//mania限定 Mirror
 
 	],
 	maxRange: 100,//查询范围上限 bp-days时为999,其余情况为100
@@ -158,82 +158,38 @@ function getFunctionType() {
 // ht - dt / nc
 // fl - hd(骂娘特供)(暂不支持mania)
 function checkMods(val) {
+	// mode为mania时的额外判断
+	let isMania = state.mode === "mania"?false:true;
 	let e;
-	if (state.mode === "mania") {
-		findMod(e, "FI", false, state);
-		findMod(e, "MR", false, state);
-	} else {
-		findMod(e, "FI", true, state);
-		findMod(e, "MR", true, state);
-	}
-	// i 为当前被选择的mod
-	for (let i = 0; i < state.mods.length; i++) {
-		// NM不能与其他mod组合
-		if (val.length >= 1 && val.includes("NM")) {
-			if (state.mods[i].value !== "NM") {
-				state.mods[i].disabled = true;
-				state.isInvalid = val.length > 1 ? true : false;//选择包含NM的其他mod组合禁止请求
-			}
-		} else if (val.includes("DT") || val.includes("NC")) {
-			findMod(e, "HT", true, state);
-			//DT/NC不能共存，不能与HT组合
-			if (val.includes("DT")) {
-				state.mods[i].disabled = state.mods[i].value === "NC" ? true : false;
-				if (val.includes("HR")) {
-					findMod(e, "EZ", true, state);
-				};
-				if (val.includes("EZ")) {
-					findMod(e, "HR", true, state);
-				};
-			} else if (val.includes("NC")) {
-				state.mods[i].disabled = state.mods[i].value === "DT" ? true : false;
-				if (val.includes("HR")) {
-					findMod(e, "EZ", true, state);
-				};
-				if (val.includes("EZ")) {
-					findMod(e, "HR", true, state);
-				};
-			}
-		} else if (val.includes("HR") || val.includes("EZ")) {
-			//EZ/HR不能组合
-			if (val.includes("HR")) {
-				state.mods[i].disabled = state.mods[i].value === "EZ" ? true : false;
-
-			} else {
-				state.mods[i].disabled = state.mods[i].value === "HR" ? true : false;
-			}
-		} else if (val.includes("SD") || val.includes("PF")) {
+	findMod(e, "FI", isMania, state);
+	findMod(e, "MR", isMania, state);
+	// 位运算判断
+	if (val.length > 0) {
+		let arr = Object.keys(val);
+		let selectModName = val[arr[arr.length - 1]];
+		let e;
+		state.mods?.map((item) => {
+			if (item.value === selectModName) {
+				e = state.mods.indexOf(item);//找到指定modName对象
+			};
+		});
+		let selectMod = state.mods[e];
+		for (let i of state.mods) {
+			check(i, selectMod);
+		};
+		// 选择mod为SD/PF的额外判断
+		// SD/PF不能共存，不能与NM组合
+		if (selectModName === "SD" || "PF") {
 			findMod(e, "NM", true, state);
-			//SD/PF不能共存，不能与NM组合
-			if (val.includes("SD")) {
-				state.mods[i].disabled = state.mods[i].value === "PF" ? true : false;
-			} else {
-				state.mods[i].disabled = state.mods[i].value === "SD" ? true : false;
-			}
-		} else if (val.includes("FL") || val.includes("HD")) {
-			if (state.mode === "mania") {
-				// FL/HD不能共存(mania限定)
-				if (val.includes("FL")) {
-					state.mods[i].disabled = state.mods[i].value === "HD" ? true : false;
-
-				} else {
-					state.mods[i].disabled = state.mods[i].value === "FL" ? true : false;
-				}
-			}
-		}
-		else {
-			if (state.mode === "mania") {
-				findMod(e, "FI", false, state);
-				findMod(e, "MR", false, state);
-			} else {
-				findMod(e, "FI", true, state);
-				findMod(e, "MR", true, state);
-			}
-			state.mods[i].disabled = false;
-			state.isInvalid = false;
-		}
+		};
+	} else {
+		// 清空选择时重置禁用状态
+		state.mods?.map((item) => {
+			item.disabled = false;
+		});
 	}
 };
+
 function getScreenWidth() {
 	state.screenWidth = window.screen.width;
 	state.isWideScreen = state.screenWidth === 1920 || state.screenWidth > 1920 ? true : false;
@@ -313,6 +269,6 @@ watch(locale, (val) => {
 	for (let item of state.scoresTypes) {
 		item.label = t(`scoreTypeOptions.${item.value}`);
 	}
-}, { immediate:true,deep: true })
+}, { immediate: true, deep: true })
 </script>
 <style lang="scss" scoped></style>

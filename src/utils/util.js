@@ -14,3 +14,79 @@ export const findMod = (e, modName, status,state) => {
 			};
 		});
 }
+
+/**
+ * 游玩模组位运算组合验证
+ * @param mod mod列表中的mod
+ * @param selectMod 当前选择的mod
+ */
+export const check=(mod, selectMod)=> {
+	let checkBits = [];// 位运算符数组
+	switch (selectMod.value) {
+		case "HR":
+			checkBits = [
+				1 << 1,// EZ
+			];
+			break;
+		case "EZ":
+			checkBits = [
+				1 << 4,// HR
+			];
+			break;
+		case "NC":
+			checkBits = [
+				1 << 6,// DT
+				1 << 8,// HT
+			];
+			break;
+		case "HT":
+			checkBits = [
+				1 << 9,// NC
+				1 << 6,// DT
+			];
+			break;
+		case "DT":
+			checkBits = [
+				1 << 9,// NC
+				1 << 8,// HT
+			];
+			break;
+		case "SD":
+			checkBits = [
+				1 << 14,// PF
+				// 0,// NM
+			];
+			break;
+		case "PF":
+			checkBits = [
+				1 << 5,// SD
+				// 0,// NM
+			];
+			break;
+		case "FL":
+			checkBits = [
+				1 << 3,// HD
+			];
+			break;
+		case "HD":
+			checkBits = [
+				1 << 18,// FL
+			];
+			break;
+		case "NM":
+			break;
+    };
+    // 选择NM以外的mod时
+	if (selectMod.value !== "NM") {
+        for (let i of checkBits) {
+            // 位运算逻辑
+			if (((selectMod.bit | mod.bit) & i) === i) {
+                mod.disabled = true; // 匹配时禁用checkBits中值对应的mod
+			}
+        }
+	} else {
+		if (mod.value !== "NM") {
+			mod.disabled = true; // 禁用NM以外的其他mod
+		}
+	}
+}
