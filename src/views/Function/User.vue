@@ -51,16 +51,27 @@ const state = reactive({
 	bid: "",//
 	scoreType: "",//成绩功能类型
 	mod: "",
+	isInvalid: false,
 });
 //发送查询请求
 async function sendRequest() {
+	debugger
 	// 表单验证
-	if (state.username === "") {
-		message.warning(t('notification.blankUsername'));
-	} else if (state?.bid && state?.bid === "") {
-		message.warning(t('notification.blankBeatmapid'));
+	if (state.nowfunction === "mapScore") {
+		state.isInvalid = state.bid === "" || state.username === "" ? true : false;// 谱面查询双重验证
+		if (state.username === "") {
+			message.warning(t('notification.blankUsername'));
+		}
+		if (state.bid === "") {
+			message.warning(t('notification.blankBeatmapid'));
+		}
+	} else {
+		state.isInvalid = state.username === "" ? true : false;
+		if (state.username === "") {
+			message.warning(t('notification.blankUsername'));
+		}
 	}
-	else {
+	if (state.isInvalid === false) {
 		state.spinning = true;//图片正在加载
 		state.status = "loading";
 		// 支持用户名+mode查询传参
