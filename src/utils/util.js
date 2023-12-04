@@ -19,8 +19,9 @@ export const findMod = (e, modName, status,state) => {
  * 游玩模组位运算组合验证
  * @param mod mod列表中的mod
  * @param selectMod 当前选择的mod
+ * @param state 数据流
  */
-export const check=(mod, selectMod)=> {
+export const check=(mod, selectMod,state)=> {
 	let checkBits = [];// 位运算符数组
 	switch (selectMod.value) {
 		case "HR":
@@ -64,15 +65,21 @@ export const check=(mod, selectMod)=> {
 			];
 			break;
 		case "FL":
-			checkBits = [
-				1 << 3,// HD
-			];
+			// 仅限mania
+			if (state.mode === "mania") {
+				checkBits = [
+					1 << 3,// HD
+				];
+			};
 			break;
 		case "HD":
-			checkBits = [
+			// 仅限mania
+			if (state.mode === "mania") {
+				checkBits = [
 				1 << 18,// FL
-			];
-			break;
+				];
+			};
+			break;	
 		case "NM":
 			break;
     };

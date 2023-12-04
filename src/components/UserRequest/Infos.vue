@@ -31,7 +31,7 @@
 		</a-tooltip>
 	</div>
 	<!-- 查询按钮 -->
-	<a-button class="query-button" size="large" @click="emitParams()" :disabled="state.isInvalid">{{ $t('tool.search')
+	<a-button class="query-button" size="large" @click="emitParams()" >{{ $t('tool.search')
 	}}</a-button>
 </template>
 <script setup name="Infos">

@@ -40,7 +40,8 @@ export default {
 		"blankMatchid": "比赛 ID 不能为空",
 		"badBeatmapid": "谱面 ID 应为纯数字",
 		"fail": "不存在玩家或查询失败",
-		"badNetwork":"网络连接异常,请稍后再试!",
+		"badNetwork": "网络连接异常,请稍后再试!",
+		"blankBeatmapid":"谱面 ID 不能为空",
 	},
 	tool: {
 		"clipboard": "复制到剪贴板",

@@ -40,7 +40,8 @@ export default {
 		"blankMatchid": "Match id can not be null",
 		"badBeatmapid": "Beatmap id should be Numbers",
 		"fail": "Unknown users or error",
-		"badNetwork":"Network error, try again later"
+		"badNetwork": "Network error, try again later",
+		"blankBeatmapid":"Beatmap id can not be null",
 	},
 	tool: {
 		"clipboard": "Copy it",

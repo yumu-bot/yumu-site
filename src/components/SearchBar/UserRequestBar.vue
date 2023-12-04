@@ -156,10 +156,10 @@ function getFunctionType() {
 // nm- sd / pf
 // ez- hr
 // ht - dt / nc
-// fl - hd(骂娘特供)(暂不支持mania)
+// fl - hd(骂娘特供)
 function checkMods(val) {
 	// mode为mania时的额外判断
-	let isMania = state.mode === "mania"?false:true;
+	let isMania = state.mode === "mania" ? false : true;
 	let e;
 	findMod(e, "FI", isMania, state);
 	findMod(e, "MR", isMania, state);
@@ -175,7 +175,7 @@ function checkMods(val) {
 		});
 		let selectMod = state.mods[e];
 		for (let i of state.mods) {
-			check(i, selectMod);
+			check(i, selectMod, state);
 		};
 		// 选择mod为SD/PF的额外判断
 		// SD/PF不能共存，不能与NM组合
@@ -187,6 +187,8 @@ function checkMods(val) {
 		state.mods?.map((item) => {
 			item.disabled = false;
 		});
+		findMod(e, "FI", isMania, state);
+		findMod(e, "MR", isMania, state);
 	}
 };
 
@@ -224,6 +226,7 @@ watch(() => state.mode, (val) => {
 		findMod(e, "FI", true, state);
 		findMod(e, "MR", true, state);
 	}
+	state.mod = [];// 重置以初始化游玩模组列表
 });
 // 监听切换查询范围
 watch(() => state.scoreType, (val) => {

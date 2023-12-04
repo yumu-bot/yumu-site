@@ -56,8 +56,11 @@ const state = reactive({
 async function sendRequest() {
 	// 表单验证
 	if (state.username === "") {
-		message.warning(t('notification.blankUsername'))
-	} else {
+		message.warning(t('notification.blankUsername'));
+	} else if (state?.bid === "") {
+		message.warning(t('notification.blankBeatmapid'));
+	}
+	else {
 		state.spinning = true;//图片正在加载
 		state.status = "loading";
 		// 支持用户名+mode查询传参
