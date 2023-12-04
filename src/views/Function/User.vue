@@ -57,7 +57,7 @@ async function sendRequest() {
 	// 表单验证
 	if (state.username === "") {
 		message.warning(t('notification.blankUsername'));
-	} else if (state?.bid === "") {
+	} else if (state?.bid && state?.bid === "") {
 		message.warning(t('notification.blankBeatmapid'));
 	}
 	else {
