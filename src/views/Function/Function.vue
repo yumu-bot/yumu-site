@@ -20,6 +20,7 @@
 		<UserVS v-if="state.current[0] === 'uservs'"></UserVS>
 		<Match v-if="state.current[0] === 'match'"></Match>
 		<Beatmap v-if="state.current[0] === 'beatmap'"></Beatmap>
+		<Mappool v-if="state.current[0] === 'mappool'"></Mappool>
 		<Entertainment v-if="state.current[0] === 'entertainment'"></Entertainment>
 	</div>
 </template>
@@ -30,6 +31,7 @@ import User from './User.vue';
 import UserVS from './UserVS.vue';
 import Match from './Match.vue';
 import Beatmap from './Beatmap.vue';
+import Mappool from './Mappool.vue';
 import Entertainment from './Entertainment.vue';
 import { watch, reactive, onUnmounted, onBeforeMount } from 'vue';
 const state = reactive({
@@ -39,7 +41,8 @@ const state = reactive({
 		{ key: "1", title: "uservs", path: "/function/uservs", header: "玩家对比" },
 		{ key: "2", title: "match", path: "/function/match", header: "比赛查询" },
 		{ key: "3", title: "beatmap", path: "/function/beatmap", header: "谱面查询" },
-		{ key: "4", title: "entertainment", path: "/function/entertainment", header: "娱乐功能" },
+		{ key: "4", title: "mappool", path: "/function/mappool", header: "图池制作" },
+		{ key: "5", title: "entertainment", path: "/function/entertainment", header: "娱乐功能" },
 	],
 	currentMenu: [], // 配合antd的:selectedKeys属性，定义currentMenu为字符串数组，home是默认值
 	current: ["user"],

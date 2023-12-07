@@ -21,6 +21,10 @@ body {
 	background-color: #54454C;
 }
 
+:deep(.ant-input-clear-icon) {
+	color: rgb(255, 255, 255, .6);
+}
+
 // AutoResize for phone
 @media screen and (max-width:420px) {
 	body {

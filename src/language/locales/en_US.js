@@ -18,6 +18,7 @@ export default {
 		"uservs": "ppm vs",
 		"match": "tournament",
 		"beatmap": "beatmap",
+		"mappool":"mappool make",
 		"entertainment": "entertainment"
 	},
 	placeholder: {
@@ -31,7 +32,8 @@ export default {
 		"skipBegin": "skip begin round",
 		"skipEnd": "skip end round",
 		"beatmapid": "enter beatmap id here",
-		"beatmapInfo":"click to see beatmap info"
+		"beatmapInfo": "click to see beatmap info",
+		"mappool":"enter mappool name here"
 	},
 	notification: {
 		"blankUsername": "Username can not be null",
@@ -41,7 +43,10 @@ export default {
 		"badBeatmapid": "Beatmap id should be Numbers",
 		"fail": "Unknown users or error",
 		"badNetwork": "Network error, try again later",
-		"blankBeatmapid":"Beatmap id can not be null",
+		"blankBeatmapid": "Beatmap id can not be null",
+		"blankPoolModList":"At least add one play mod",
+		"blankPoolBeatmap": "At least add one beatmap",
+		"blankPoolMod":"Play mod can not be null",
 	},
 	tool: {
 		"clipboard": "Copy it",
@@ -50,7 +55,10 @@ export default {
 		"restart": "restartround",
 		"wip": "work in progress...",
 		"musics": "beatmap music player",
-		"backTop":"back to top",
+		"backTop": "back to top",
+		"addMod": "add play mod",
+		"addBeatmap": "add beatmap",
+		"addCustomMod":"DIY Mod"
 	},
 	userRequestOptions: {
 		"ppm": "PP-", 

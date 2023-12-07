@@ -18,6 +18,7 @@ export default {
 		"uservs": "玩家对比",
 		"match": "比赛查询",
 		"beatmap": "谱面查询",
+		"mappool":"图池制作",
 		"entertainment": "娱乐"
 	},
 	placeholder: {
@@ -31,7 +32,8 @@ export default {
 		"skipBegin": "跳过开头对局",
 		"skipEnd": "跳过结尾对局",
 		"beatmapid": "请输入谱面 ID",
-		"beatmapInfo":"点击查看谱面信息"
+		"beatmapInfo": "点击查看谱面信息",
+		"mappool":"请输入图池名称（默认为MapPool）"
 	},
 	notification: {
 		"blankUsername": "玩家名不能为空",
@@ -41,7 +43,10 @@ export default {
 		"badBeatmapid": "谱面 ID 应为纯数字",
 		"fail": "不存在玩家或查询失败",
 		"badNetwork": "网络连接异常,请稍后再试!",
-		"blankBeatmapid":"谱面 ID 不能为空",
+		"blankBeatmapid": "谱面 ID 不能为空",
+		"blankPoolModList":"至少添加一种游玩模组",
+		"blankPoolBeatmap": "模组内至少添加一张谱面",
+		"blankPoolMod":"请选择游玩模组",
 	},
 	tool: {
 		"clipboard": "复制到剪贴板",
@@ -50,7 +55,10 @@ export default {
 		"restart": "重赛对局",
 		"wip": "施工中...",
 		"musics": "听音乐",
-		"backTop":"回到顶部",
+		"backTop": "回到顶部",
+		"addMod": "添加游玩模组",
+		"addBeatmap": "添加谱面",
+		"addCustomMod":"自定义模组",
 	},
 	userRequestOptions: {
 		"ppm": "PP-", 
