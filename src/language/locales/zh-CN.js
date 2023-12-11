@@ -46,7 +46,8 @@ export default {
 		"blankBeatmapid": "谱面 ID 不能为空",
 		"blankPoolModList":"至少添加一种游玩模组",
 		"blankPoolBeatmap": "模组内至少添加一张谱面",
-		"blankPoolMod":"请选择游玩模组",
+		"blankPoolMod": "请选择游玩模组",
+		"blankCustomMod":"自定义模组名称不能为空",
 	},
 	tool: {
 		"clipboard": "复制到剪贴板",
@@ -58,7 +59,8 @@ export default {
 		"backTop": "回到顶部",
 		"addMod": "添加游玩模组",
 		"addBeatmap": "添加谱面",
-		"addCustomMod":"自定义模组",
+		"addCustomMod": "自定义模组",
+		"removeMod":"删除游玩模组",
 	},
 	userRequestOptions: {
 		"ppm": "PP-", 

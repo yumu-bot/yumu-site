@@ -33,7 +33,7 @@ export default {
 		"skipEnd": "skip end round",
 		"beatmapid": "enter beatmap id here",
 		"beatmapInfo": "click to see beatmap info",
-		"mappool":"enter mappool name here"
+		"mappool":"enter mappool name here",
 	},
 	notification: {
 		"blankUsername": "Username can not be null",
@@ -46,7 +46,9 @@ export default {
 		"blankBeatmapid": "Beatmap id can not be null",
 		"blankPoolModList":"At least add one play mod",
 		"blankPoolBeatmap": "At least add one beatmap",
-		"blankPoolMod":"Play mod can not be null",
+		"blankPoolMod": "Play mod can not be null",
+		"blankCustomMod":"DIY mod can not be null",
+		
 	},
 	tool: {
 		"clipboard": "Copy it",
@@ -58,7 +60,8 @@ export default {
 		"backTop": "back to top",
 		"addMod": "add play mod",
 		"addBeatmap": "add beatmap",
-		"addCustomMod":"DIY Mod"
+		"addCustomMod": "DIY Mod",
+		"removeMod":"delete play mod",
 	},
 	userRequestOptions: {
 		"ppm": "PP-", 

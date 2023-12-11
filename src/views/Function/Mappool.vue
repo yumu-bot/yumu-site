@@ -28,7 +28,7 @@
 							<a-divider style="margin: 4px 0" />
 							<a-space style="padding: 4px 8px">
 								<a-input ref="inputRef" v-model:value="customMod" :placeholder="$t('tool.addCustomMod')"
-									@keydown.enter="addCustomMod" @change="mod.mod = customMod" />
+									@keydown.enter="addCustomMod" @change="mod.mod = customMod.toUpperCase()" :maxlength="4"/>
 								<a-button type="text" @click="addCustomMod">
 									<template #icon>
 										<plus-outlined />
@@ -39,7 +39,9 @@
 						<!-- #endregion -->
 					</a-select>
 				</a-form-item>
+				<a-tooltip :title="t('tool.removeMod')">
 				<MinusCircleOutlined class="mod-bar" @click="removeMods(mod)" />
+				</a-tooltip>
 				<!-- 谱面列表(嵌套) -->
 				<div class="beatmap-list">
 					<a-form ref="mapFormRef" :model="mod" layout="inline">
@@ -52,7 +54,7 @@
 						<a-space v-for="(map, index) in mod.beatmaps" :key="map.id"
 							style="display: flex; margin-bottom: 8px" align="baseline">
 							<a-form-item :name="['beatmaps', index, 'bid']"
-								:rules="{ required: true, pattern: /\d/, message: '' }" hasFeedback>
+								:rules="{ required: true, pattern: /^[0-9]*$/, message: '' }" hasFeedback>
 								<a-input v-model:value="map.bid" :placeholder="$t('placeholder.bid')" allow-clear
 									style="width: 178px;">
 									<template #addonAfter class="remove-btn">
@@ -109,7 +111,7 @@ const poolForm = reactive({
 		{ label: "FreeMod(FM)", value: "FM", disabled: false },
 		{ label: "Easy(EZ)", value: "EZ", disabled: false },
 		{ label: "LongNote(LN)", value: "LN", disabled: false },
-		{ label: "Rice(DT)", value: "RC", disabled: false },
+		{ label: "Rice(RC)", value: "RC", disabled: false },
 		{ label: "Hybrid(HB)", value: "HB", disabled: false },
 		{ label: "Extra(EX)", value: "EX", disabled: false },
 		{ label: "SpeedVariation(SV)", value: "SV", disabled: false },
@@ -286,14 +288,19 @@ const VNodes = defineComponent({
 });
 // 自定义模组名称
 const inputRef = ref({});
-const customMod = ref();
+const customMod = ref("");
 const addCustomMod = e => {
-	e.preventDefault();
-	poolForm.mods.push({ label: customMod.value, value: customMod.value, disabled: false });
-	customMod.value = '';
-	setTimeout(() => {
-		inputRef.value[0].focus();
-	}, 0);
+	if (customMod.value !== "") {
+		e.preventDefault();
+		let customModName = customMod.value.toUpperCase();
+		poolForm.mods.push({ label: customModName, value: customModName, disabled: false });
+		customMod.value = '';
+		setTimeout(() => {
+			inputRef.value[0].focus();
+		}, 0);
+	} else {
+		message.warning(t('notification.blankCustomMod'));
+	};
 };
 //#endregion
 </script>
@@ -304,7 +311,7 @@ const addCustomMod = e => {
 	flex-direction: row;
 	flex-wrap: nowrap;
 	width: -webkit-fill-available;
-	height: 100%;
+	height: calc(100% + 500px);
 	background-color: #54454C;
 	column-gap: 20px;
 
