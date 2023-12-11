@@ -15,7 +15,7 @@
 		</a-menu>
 	</div>
 	<!-- 功能组件展示 -->
-	<div>
+	<div style="height:auto;">
 		<User v-show="state.current[0] === 'user'"></User>
 		<UserVS v-if="state.current[0] === 'uservs'"></UserVS>
 		<Match v-if="state.current[0] === 'match'"></Match>

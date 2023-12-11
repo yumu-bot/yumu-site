@@ -7,6 +7,7 @@
 	// overflow: hidden;
 	// z-index: auto;
 	color: #ffffff;
+	height: 100%;
 
 	@media screen and (min-width: 1921px) {
 		width: 100%;
@@ -18,7 +19,7 @@
 .page-content {
 	background-color: #2A2226;
 	// width:50%;
-	height: auto; //未完成面板时暂定高度900px
+	height: 100%; //铺满全屏定为850px
 	// position:fixed;
 	// background-size:50% 100%;
 	// flex-grow: 1;

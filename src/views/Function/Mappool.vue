@@ -51,7 +51,8 @@
 						</a-form-item>
 						<a-space v-for="(map, index) in mod.beatmaps" :key="map.id"
 							style="display: flex; margin-bottom: 8px" align="baseline">
-							<a-form-item :name="['beatmaps', index, 'bid']" :rules="{ required: true }" hasFeedback>
+							<a-form-item :name="['beatmaps', index, 'bid']"
+								:rules="{ required: true, pattern: /\d/, message: '' }" hasFeedback>
 								<a-input v-model:value="map.bid" :placeholder="$t('placeholder.bid')" allow-clear
 									style="width: 178px;">
 									<template #addonAfter class="remove-btn">
@@ -73,9 +74,9 @@
 				</a-button>
 			</a-form-item>
 		</a-form>
+		<SearchResultBanner :status="state.status" :imgUrl="state.imgUrl" :spinning="state.spinning"
+			@changeStatus="changeStatus" @isSpinning="isSpinning" ></SearchResultBanner>
 	</div>
-	<SearchResultBanner :status="state.status" :imgUrl="state.imgUrl" :spinning="state.spinning"
-		@changeStatus="changeStatus" @isSpinning="isSpinning"></SearchResultBanner>
 </template>
 <script setup name="Mappool">
 import { reactive, ref, onMounted, defineComponent } from 'vue';
@@ -109,7 +110,7 @@ const poolForm = reactive({
 		{ label: "Easy(EZ)", value: "EZ", disabled: false },
 		{ label: "LongNote(LN)", value: "LN", disabled: false },
 		{ label: "Rice(DT)", value: "RC", disabled: false },
-		{ label: "Hybrid(DT)", value: "HB", disabled: false },
+		{ label: "Hybrid(HB)", value: "HB", disabled: false },
 		{ label: "Extra(EX)", value: "EX", disabled: false },
 		{ label: "SpeedVariation(SV)", value: "SV", disabled: false },
 		{ label: "TieBreaker(TB)", value: "TB", disabled: false },
@@ -177,9 +178,16 @@ async function submit(poolForm) {
 					valid = false;
 					message.warning(t('notification.blankPoolBeatmap'));
 				}
-			}).catch(() => {
+			}).catch((e) => {
 				valid = false;
-				message.warning(t('notification.blankBeatmapid'));
+				let arr = e.values?.beatmaps;
+				arr.map((i) => {
+					if (i.bid === '') {
+						message.warning(t('notification.blankBeatmapid'));
+					} else {
+						message.warning(t('notification.badBeatmapid'));
+					}
+				});
 			});
 		};
 		setTimeout(() => {
@@ -296,7 +304,7 @@ const addCustomMod = e => {
 	flex-direction: row;
 	flex-wrap: nowrap;
 	width: -webkit-fill-available;
-	height: auto;
+	height: 100%;
 	background-color: #54454C;
 	column-gap: 20px;
 

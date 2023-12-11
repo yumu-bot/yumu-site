@@ -55,7 +55,6 @@ const state = reactive({
 });
 //发送查询请求
 async function sendRequest() {
-	debugger
 	// 表单验证
 	if (state.nowfunction === "mapScore") {
 		state.isInvalid = state.bid === "" || state.username === "" ? true : false;// 谱面查询双重验证
@@ -174,5 +173,6 @@ watch(locale, (val) => {
 <style lang="scss" scoped>
 .user-page {
 	width: 100%;
+	height: 100%;
 }
 </style>

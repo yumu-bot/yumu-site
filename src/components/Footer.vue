@@ -16,7 +16,7 @@
 				<a href="https://panel.365246692.xyz/status/public" target="_blank">{{ $t('footer.serverStatus') }}</a>
 			</a-space>
 		</p>
-		<p>Copyright © 2021-2023 Yumubot, All Rights Reserved.</p>
+		<p style="margin-top:10px ;">Copyright © 2021-2023 Yumubot, All Rights Reserved.</p>
 	</footer>
 </template>
 <script setup name="Footer">

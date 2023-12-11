@@ -74,7 +74,7 @@ function imgLoadError(event) {
 	text-align: center;
 	background-color: #54454C;
 	padding: 10px 0px;
-	height: 712px;
+	height: 750px;
 	// overflow: hidden;
 
 	.result :deep(.ant-spin) {

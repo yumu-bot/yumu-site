@@ -5,11 +5,17 @@
 	// background-color: #1c1719;
 	// color: #ffffff;
 	font-family: "puhui", "torus";
+	margin: 0;
+	padding: 0;
 }
 
 body {
 	background-color: #1c1719;
 	//color: #ffffff;
+}
+html,body{
+	height: 100%;
+	width:100%;
 }
 
 #app {
