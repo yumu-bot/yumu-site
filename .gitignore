@@ -28,5 +28,5 @@ coverage
 *.sw?
 /img/*
 /src/assets/img/*
-/public/*
+# /public/*
 .VSCodeCounter/*
