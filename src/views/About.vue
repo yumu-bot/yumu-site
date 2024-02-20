@@ -10,7 +10,7 @@
 				<a href="http://git.365246692.xyz/bot/yumu-site" target="_blank">Git</a>
 			</h3>
 			<h3 v-if="isDevelopment">
-				<a href="https://bot.365246692.xyz/" target="_blank">yumu site(online)</a>
+				<a href="https://bot.365246692.xyz/" target="_blank">Yumu Site(online)</a>
 			</h3>
 			<h3 v-if="isDevelopment">
 				<a href="http://disk.365246692.xyz/" target="_blank">Web Disk</a>
