@@ -3,6 +3,9 @@ export default {
 		"home": "Home",
 		"function": "Function",
 		"about": "About",
+		"login":"Log In",
+		"logout":"Log Out",
+		"settings":"Settings",
 	},
 	homeTitle: {
 	  "function": "Function",
@@ -48,6 +51,10 @@ export default {
 		"blankPoolBeatmap": "At least add one beatmap",
 		"blankPoolMod": "Play mod can not be null",
 		"blankCustomMod":"DIY mod can not be null",
+		"quit":"Quit",
+		"quitText":"Are you sure you want to log out? ;w;",
+		"quitButton":"Yes",
+		"backButton":"Back",
 		
 	},
 	tool: {

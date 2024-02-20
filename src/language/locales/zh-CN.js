@@ -3,6 +3,9 @@ export default {
 		"home": "主页",
 		"function": "功能",
 		"about": "关于",
+		"login":"登入",
+		"logout":"登出",
+		"settings":"设置",
 	},
 	homeTitle: {
 		"function": "功能",
@@ -48,6 +51,10 @@ export default {
 		"blankPoolBeatmap": "模组内至少添加一张谱面",
 		"blankPoolMod": "请选择游玩模组",
 		"blankCustomMod":"自定义模组名称不能为空",
+		"quit":"退出",
+		"quitText":"确定要退出登录吗？ ;w;",
+		"quitButton":"是的",
+		"backButton":"返回",
 	},
 	tool: {
 		"clipboard": "复制到剪贴板",
