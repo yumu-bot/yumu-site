@@ -29,3 +29,11 @@ export const getMappool = params => {
 		responseType:'blob',
 	});
 };
+// 投骰子
+export const getDice = params => {
+	return axios({
+		method: "get",
+		url: `/dice`,
+		params
+	});
+};

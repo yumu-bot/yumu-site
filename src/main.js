@@ -12,6 +12,7 @@ import 'swiper'
 import VuePlyr from 'vue-plyr'
 import i18n from './language'
 import { createPinia } from 'pinia'
+import dayjs from 'dayjs'
 const app = createApp(App)
 const pinia=createPinia()
 app.use(router)
@@ -24,6 +25,6 @@ app.use(VuePlyr, {
 app.use(i18n)
 app.use(pinia)
 i18n.global.locale.value = '简体中文'
-// app.config.globalProperties.$bus = bus;
+app.config.globalProperties.$dayjs = dayjs;
 app.mount('#app')
 
