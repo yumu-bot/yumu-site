@@ -141,7 +141,6 @@ onMounted(() => {
 	}
 	if (userInfo) {
 		locale.value = userInfo.lang;
-		console.log(locale.value)
 	}
 })
 watch((route), () => {
@@ -156,6 +155,7 @@ watch(
 	userInfoStore.$state,
 	(state) => {
 		// 每当它发生变化时，将整个状态持久化到本地存储
+		state.lang=locale.value;// 刷新页面多语言不变
 		localStorage.setItem('userInfoState', JSON.stringify(state))
 	},
 	{ deep: true }
