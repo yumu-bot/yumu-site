@@ -2,6 +2,7 @@
 import axios from 'axios';
 import { showMessage } from "./status";   // 引入状态码文件
 import { message } from 'ant-design-vue'  // 引入el 提示框，这个项目里用什么组件库这里引什么
+import i18n from "../language"
 
 // 设置接口超时时间
 axios.defaults.timeout = 60000;
@@ -40,7 +41,7 @@ axios.interceptors.response.use(
 		return Promise.reject(response.data);
 		// if(response.message.in)
     } else {
-      message.error(`$t('notification.badNetwork')`);
+      message.error(i18n.global.t('notification.badNetwork'));
     }
   }
 );
