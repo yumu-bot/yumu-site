@@ -19,7 +19,7 @@
 				</div>
 				<p class="botchat" v-if="i.output">
 					<a-space class="botchat" :size="16">
-						<a-avatar :size="64" src="/img/avatar/avatar-guest@2x.png"></a-avatar>
+						<a-avatar :size="64" src="/img/avatar/YumuBot.jpg"></a-avatar>
 						<div class="border">
 							<span>YumuBot</span>
 							<span class="chatline">{{ i.output }}</span>
@@ -30,9 +30,9 @@
 		</div>
 		<div class="chat-bar">
 			<a-input v-model:value="input" @keydown.enter="sendChat()" allowClear size="large"
-				placeholder="请输入你想说的话"></a-input>
-			<a-button type="primary" @click="sendChat()" size="large">发送</a-button>
-			<a-button @click="clearChat()" size="large">清屏</a-button>
+				:placeholder="$t('placeholder.chatInput')"></a-input>
+			<a-button type="primary" @click="sendChat()" size="large">{{$t('tool.send')}}</a-button>
+			<a-button @click="clearChat()" size="large">{{ $t('tool.clear') }}</a-button>
 		</div>
 
 	</div>
@@ -145,6 +145,7 @@ function clearChat() {
 
 .spinbar {
 	text-align: center;
+	padding:10px 0
 }
 
 .chatline {
