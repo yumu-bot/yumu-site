@@ -5,14 +5,25 @@
 				<p class="userchat" v-if="i.input">
 					<span class="timeline" v-if="i.isShow">{{ i.time }}</span>
 					<a-space style="margin-left: auto;" :size="16">
-						<span class="chatline">{{ i.input }}</span>
-						<a-avatar :size="64" src="/img/avatar/Head_yuyuko_Qiqi.png"></a-avatar>
+						<div class="border">
+							<span style="margin-left: auto;">Muziyami</span>
+							<span class="chatline">{{ i.input }}</span>
+						</div>
+						<div style="margin-bottom: auto;">
+							<a-avatar :size="64" src="/img/avatar/Head_yuyuko_Qiqi.png"></a-avatar>
+						</div>
 					</a-space>
 				</p>
+				<div class="spinbar" v-if="i.isSpinning">
+					<a-spin></a-spin>
+				</div>
 				<p class="botchat" v-if="i.output">
 					<a-space class="botchat" :size="16">
 						<a-avatar :size="64" src="/img/avatar/avatar-guest@2x.png"></a-avatar>
-						<span class="chatline">{{ i.output }}</span>
+						<div class="border">
+							<span>YumuBot</span>
+							<span class="chatline">{{ i.output }}</span>
+						</div>
 					</a-space>
 				</p>
 			</div>
@@ -30,9 +41,13 @@
 <script setup name="Entertainment">
 import dayjs from "dayjs";
 import { nextTick, ref, watch } from "vue";
-import {getDice} from "../../api/data_api"
+import { getDice } from "../../api/data_api"
+import { useI18n } from 'vue-i18n'
+const I18n = useI18n()
+const { locale, t } = useI18n()
 let chatList = ref([]);// 聊天列表
 let isShow = ref(true);
+let isSpinning = ref(true);
 
 const chat = ref();
 const now = ref(dayjs().format("YYYY-MM-DD HH:mm:ss"));
@@ -40,20 +55,20 @@ const now = ref(dayjs().format("YYYY-MM-DD HH:mm:ss"));
 let input = ref("");
 // 发送消息
 function sendChat() {
+	isSpinning.value = true;
 	if (input.value) {
-		chatList.value.push({ input: input.value, time: now.value, isShow: isShow.value });
+		chatList.value.push({ input: input.value, time: now.value, isShow: isShow.value, isSpinning: isSpinning.value });
 		//消息处理逻辑
-		// setTimeout(() => {
-		// 	let output = Math.floor(Math.random() * 100);// 模拟roll点，获取100以内的随机数
-		// 	scrollToBottom();
-		// }, 1000);
-		getDice({compare:input.value}).then((res)=>{
-			console.log(res)
-			if(res.data){
-			let output=res.data;
-			chatList.value.push({ output: output });
-			scrollToBottom();
+		getDice({ compare: input.value }).then((res) => {
+			if (res.data) {
+				let output = res.data;
+				isSpinning.value = false;
+				chatList.value[chatList.value.length - 1].isSpinning = false;//接收消息后停止加载
+				chatList.value.push({ output: output });
+				scrollToBottom();
 			}
+		}).catch((e) => {
+			chatList.value[chatList.value.length - 1].isSpinning = false;//接收消息后停止加载
 		});
 		input.value = "";// 清空输入框
 		scrollToBottom();
@@ -105,6 +120,10 @@ function clearChat() {
 		display: flex;
 		padding: 0 10px;
 		flex-direction: column;
+
+		:deep(.ant-space .ant-space-item):last-child {
+			margin-bottom: auto;
+		}
 	}
 
 	.botchat {
@@ -116,6 +135,16 @@ function clearChat() {
 	display: flex;
 	margin-top: 20px;
 	column-gap: 10px;
+}
+
+.border {
+	display: flex;
+	flex-direction: column;
+	row-gap: 5px;
+}
+
+.spinbar {
+	text-align: center;
 }
 
 .chatline {
@@ -131,5 +160,9 @@ function clearChat() {
 .timeline {
 	text-align: center;
 	font-size: medium;
+}
+
+:deep(.ant-spin .ant-spin-dot-item) {
+	background-color: #fff;
 }
 </style>
