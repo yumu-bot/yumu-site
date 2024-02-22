@@ -37,6 +37,7 @@ export default {
 		"beatmapid": "enter beatmap id here",
 		"beatmapInfo": "click to see beatmap info",
 		"mappool":"enter mappool name here",
+		"chatInput":"enter your words here",
 	},
 	notification: {
 		"blankUsername": "Username can not be null",
@@ -69,6 +70,8 @@ export default {
 		"addBeatmap": "add beatmap",
 		"addCustomMod": "DIY Mod",
 		"removeMod":"delete play mod",
+		"send":"Send",
+		"clear":"Clear",
 	},
 	userRequestOptions: {
 		"ppm": "PP-", 

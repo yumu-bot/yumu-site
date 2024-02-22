@@ -36,7 +36,8 @@ export default {
 		"skipEnd": "跳过结尾对局",
 		"beatmapid": "请输入谱面 ID",
 		"beatmapInfo": "点击查看谱面信息",
-		"mappool":"请输入图池名称（默认为MapPool）"
+		"mappool":"请输入图池名称（默认为MapPool）",
+		"chatInput":"请输入你想说的话",
 	},
 	notification: {
 		"blankUsername": "玩家名不能为空",
@@ -68,6 +69,8 @@ export default {
 		"addBeatmap": "添加谱面",
 		"addCustomMod": "自定义模组",
 		"removeMod":"删除游玩模组",
+		"send":"发送",
+		"clear":"清屏",
 	},
 	userRequestOptions: {
 		"ppm": "PP-", 
