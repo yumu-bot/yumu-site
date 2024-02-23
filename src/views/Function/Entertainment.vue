@@ -1,6 +1,6 @@
 <template>
-	<div class="chat-window">
-		<div ref="chat" class="chat-area">
+	<div class="chat-window" >
+		<div ref="chat" class="chat-area" :style="toggleSidebar" @mouseenter="toggleSidebar='overflow-y:auto'" @mouseleave="toggleSidebar='overflow-y:hidden'">
 			<div v-for=" i in chatList" :key="i">
 				<p class="userchat" v-if="i.input">
 					<span class="timeline" v-if="i.isShow">{{ i.time }}</span>
@@ -48,6 +48,7 @@ const { locale, t } = useI18n()
 let chatList = ref([]);// 聊天列表
 let isShow = ref(true);
 let isSpinning = ref(true);
+let toggleSidebar=ref("overflow-y:hidden")
 
 const chat = ref();
 const now = ref(dayjs().format("YYYY-MM-DD HH:mm:ss"));
@@ -115,6 +116,8 @@ function clearChat() {
 	display: flex;
 	flex-direction: column;
 	row-gap: 20px;
+	scrollbar-gutter: stable;
+	scrollbar-color: #54454c #2a2226;
 
 	.userchat {
 		display: flex;
