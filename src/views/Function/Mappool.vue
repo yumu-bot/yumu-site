@@ -203,6 +203,8 @@ async function submit(poolForm) {
 				getMappool({ data, name }).then(res => {
 					if (res.status === 200 && res.data) {
 						state.imgUrl = URL.createObjectURL(res.data);
+					}else{
+						console.log(res)
 					}
 				});
 				// 图片加载超时切换状态为error,超时限制为1分钟
