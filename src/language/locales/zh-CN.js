@@ -6,6 +6,7 @@ export default {
 		"login":"登入",
 		"logout":"登出",
 		"settings":"设置",
+		"userInfo":"个人信息"
 	},
 	homeTitle: {
 		"function": "功能",
@@ -38,6 +39,7 @@ export default {
 		"beatmapInfo": "点击查看谱面信息",
 		"mappool":"请输入图池名称（默认为MapPool）",
 		"chatInput":"请输入你想说的话",
+		"logCode":"请输入6位验证码",
 	},
 	notification: {
 		"blankUsername": "玩家名不能为空",
@@ -52,10 +54,10 @@ export default {
 		"blankPoolBeatmap": "模组内至少添加一张谱面",
 		"blankPoolMod": "请选择游玩模组",
 		"blankCustomMod":"自定义模组名称不能为空",
-		"quit":"退出",
 		"quitText":"确定要退出登录吗？ ;w;",
-		"quitButton":"是的",
-		"backButton":"返回",
+		"logText":"在有 YumuBot 的 QQ 群里发送指令 !login 来获取登录验证码",
+		"wrongLogCode":"验证码错误或过期",
+		"blankLogCode":"验证码不能为空",
 	},
 	tool: {
 		"clipboard": "复制到剪贴板",
@@ -71,6 +73,11 @@ export default {
 		"removeMod":"删除游玩模组",
 		"send":"发送",
 		"clear":"清屏",
+		"quit":"退出",
+		"quitButton":"退出",
+		"backButton":"返回",
+		"confirmButton":"确认",
+		"firstLog":"首次登录"
 	},
 	userRequestOptions: {
 		"ppm": "PP-", 

@@ -1,21 +1,25 @@
-import { defineStore } from "pinia";
+import { defineStore, storeToRefs } from "pinia";
 
-export const useUserInfoStore=defineStore('userInfo',{
-    state:()=>({
-        username:"Muziyami",
-        avatar:"/img/avatar/Head_yuyuko_Qiqi.png",
-        isLogin:true,
-        lang:"简体中文"
-    }),
-    actions:{
-        changeLogState(){
-            this.isLogin=!this.isLogin;
-        },
-        changeLanguage(lang){
-            this.lang=lang;
-        }
-    }
-    
+export const useUserInfoStore = defineStore("userInfo", {
+  state: () => {
+    return {
+      isLogin: false,
+      lang: "简体中文",
+      data: null,
+    };
+  },
+  persist:true,
+  actions: {
+    changeLogState() {
+      this.isLogin = !this.isLogin;
+    },
+    changeLanguage(lang) {
+      this.lang = lang;
+    },
+    getUserData(data) {
+      this.data = data;
+    },
+  },
 });
 
 export default useUserInfoStore;

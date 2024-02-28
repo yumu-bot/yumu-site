@@ -63,10 +63,31 @@
 	.locale-changer {
 		margin: auto;
 	}
+
 }
 
 .ant-space-item:has(.user-info) {
 	margin-left: auto;
+}
+
+.ant-dropdown{
+	text-align: end;
+
+}
+
+.login-modal{
+	.ant-input,.ant-input-affix-wrapper{
+		background-color: #ffffff;
+		color: #000000;
+	}
+	::placeholder{
+		color: #000000;
+	}
+}
+.login-modal,.logout-modal{
+	p{
+		font-size: 16px;
+	}
 }
 
 

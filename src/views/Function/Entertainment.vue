@@ -1,16 +1,17 @@
 <template>
-	<div class="chat-window" >
-		<div ref="chat" class="chat-area" :style="toggleSidebar" @mouseenter="toggleSidebar='overflow-y:auto'" @mouseleave="toggleSidebar='overflow-y:hidden'">
+	<div class="chat-window">
+		<div ref="chat" class="chat-area" :style="toggleSidebar" @mouseenter="toggleSidebar = 'overflow-y:auto'"
+			@mouseleave="toggleSidebar = 'overflow-y:hidden'">
 			<div v-for=" i in chatList" :key="i">
 				<p class="userchat" v-if="i.input">
 					<span class="timeline" v-if="i.isShow">{{ i.time }}</span>
 					<a-space style="margin-left: auto;" :size="16">
 						<div class="border">
-							<span style="margin-left: auto;">Muziyami</span>
+							<span style="margin-left: auto;">{{ user.data.username }}</span>
 							<span class="chatline">{{ i.input }}</span>
 						</div>
 						<div style="margin-bottom: auto;">
-							<a-avatar :size="64" src="/img/avatar/Head_yuyuko_Qiqi.png"></a-avatar>
+							<a-avatar :size="64" :src=user.data.avatar_url></a-avatar>
 						</div>
 					</a-space>
 				</p>
@@ -31,7 +32,7 @@
 		<div class="chat-bar">
 			<a-input v-model:value="input" @keydown.enter="sendChat()" allowClear size="large"
 				:placeholder="$t('placeholder.chatInput')"></a-input>
-			<a-button type="primary" @click="sendChat()" size="large">{{$t('tool.send')}}</a-button>
+			<a-button type="primary" @click="sendChat()" size="large">{{ $t('tool.send') }}</a-button>
 			<a-button @click="clearChat()" size="large">{{ $t('tool.clear') }}</a-button>
 		</div>
 
@@ -40,18 +41,21 @@
 
 <script setup name="Entertainment">
 import dayjs from "dayjs";
-import { nextTick, ref, watch } from "vue";
-import { getDice } from "../../api/data_api"
-import { useI18n } from 'vue-i18n'
+import { nextTick, ref, onMounted, watch } from "vue";
+import { getDice } from "../../api/data_api";
+import { useUserInfoStore } from '../../stores/userInfo';
+import { useI18n } from 'vue-i18n';
 const I18n = useI18n()
 const { locale, t } = useI18n()
 let chatList = ref([]);// 聊天列表
 let isShow = ref(true);
 let isSpinning = ref(true);
-let toggleSidebar=ref("overflow-y:hidden")
+let toggleSidebar = ref("overflow-y:hidden");
+let user = ref();
 
 const chat = ref();
 const now = ref(dayjs().format("YYYY-MM-DD HH:mm:ss"));
+const userInfoStore = useUserInfoStore();
 
 let input = ref("");
 // 发送消息
@@ -92,7 +96,7 @@ function updateTimeline() {
 		setTimeout(() => {
 			isShow.value = true;
 			now.value = dayjs().format("YYYY-MM-DD HH:mm:ss");
-		}, 120000);
+		}, 120000);// 更新时间间隔为2分钟
 	}
 };
 // 清空聊天记录
@@ -100,7 +104,28 @@ function clearChat() {
 	chatList.value.length = 0
 	isShow.value = true;
 	now.value = dayjs().format("YYYY-MM-DD HH:mm:ss");
+};
+// 更新用户信息
+function updateUserInfo(){
+	if (!user.value.data||!user.value.isLogin) {
+		user.value = {
+			data: { username: "Guest", avatar_url: "/img/avatar/avatar-guest@2x.png" }
+		}
+	};
 }
+
+onMounted(() => {
+	user.value = JSON.parse(localStorage.getItem("userInfo"));
+	updateUserInfo();
+});
+// 监听pinia
+watch(
+	userInfoStore.$state,
+	(state) => {
+		user.value = state;// 更新用户状态数据
+		updateUserInfo();
+	},
+	{ deep: true })
 </script>
 
 <style lang="scss" scoped>
@@ -148,7 +173,7 @@ function clearChat() {
 
 .spinbar {
 	text-align: center;
-	padding:10px 0
+	padding: 10px 0
 }
 
 .chatline {

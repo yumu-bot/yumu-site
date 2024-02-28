@@ -12,9 +12,11 @@ import 'swiper'
 import VuePlyr from 'vue-plyr'
 import i18n from './language'
 import { createPinia } from 'pinia'
+import piniaPluginPersistedstate from 'pinia-plugin-persistedstate'
 import dayjs from 'dayjs'
 const app = createApp(App)
 const pinia=createPinia()
+pinia.use(piniaPluginPersistedstate)
 app.use(router)
 app.use(antd)
 app.use(VuePlyr, {

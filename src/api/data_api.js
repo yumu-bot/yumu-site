@@ -37,3 +37,11 @@ export const getDice = params => {
 		params
 	});
 };
+// 玩家登录
+export const getLogin = params => {
+	return axios({
+		method: "get",
+		url: `/login`,
+		params
+	});
+};

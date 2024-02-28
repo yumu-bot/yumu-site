@@ -6,6 +6,7 @@ export default {
 		"login":"Log In",
 		"logout":"Log Out",
 		"settings":"Settings",
+		"userInfo":"User Info"
 	},
 	homeTitle: {
 	  "function": "Function",
@@ -38,6 +39,7 @@ export default {
 		"beatmapInfo": "click to see beatmap info",
 		"mappool":"enter mappool name here",
 		"chatInput":"enter your words here",
+		"logCode":"enter 6 digit verification code here",
 	},
 	notification: {
 		"blankUsername": "Username can not be null",
@@ -52,11 +54,10 @@ export default {
 		"blankPoolBeatmap": "At least add one beatmap",
 		"blankPoolMod": "Play mod can not be null",
 		"blankCustomMod":"DIY mod can not be null",
-		"quit":"Quit",
 		"quitText":"Are you sure you want to log out? ;w;",
-		"quitButton":"Yes",
-		"backButton":"Back",
-		
+		"logText":"Send the command '!login' in the QQ group with YumuBot to get the verification code",
+		"wrongLogCode":"Code is wrong or out of date",
+		"blankLogCode":"Code can not be null",
 	},
 	tool: {
 		"clipboard": "Copy it",
@@ -72,6 +73,12 @@ export default {
 		"removeMod":"delete play mod",
 		"send":"Send",
 		"clear":"Clear",
+		"quit":"Exit",
+		"quitButton":"Exit",
+		"backButton":"Back",
+		"confirmButton":"Confirm",
+		"firstLog":"New to log in"
+
 	},
 	userRequestOptions: {
 		"ppm": "PP-", 
