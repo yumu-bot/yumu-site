@@ -123,6 +123,7 @@ function getPerformancePoint() {
 		mode: state.mode,
 	}
 	state.imgUrl = state.baseUrl + `/${state.nowfunction}?u1=${paramsObj.u1}&mode=${paramsObj.mode}`;
+	state.imgUrl = encodeURI(state.imgUrl);
 };
 // 查询score/scores
 function getScore() {
@@ -156,6 +157,7 @@ function getScore() {
 			state.imgUrl = state.baseUrl + `/${state.nowfunction}/${paramsObj.scoreType}?u1=${paramsObj.u1}&mode=${paramsObj.mode}&m=${paramsObj.value}`;
 		}
 	}
+	state.imgUrl = encodeURI(state.imgUrl);
 };
 onMounted(() => {
 	state.imgUrl = "";
@@ -166,7 +168,7 @@ watch(locale, (val) => {
 	for (let item of state.functions) {
 		item.label = t(`userRequestOptions.${item.value}`);
 	}
-}, { immediate: true, deep: true })
+}, { immediate: true, deep: true });
 
 </script>
 
