@@ -104,18 +104,18 @@ const poolForm = reactive({
 	poolMods: [],// 图池模组
 	// 模组列表（比赛图池用）
 	mods: [
-		{ label: "NoMod(NM)", value: "NM", disabled: false },
-		{ label: "Hidden(HD)", value: "HD", disabled: false },
-		{ label: "HardRock(HR)", value: "HR", disabled: false },
-		{ label: "DoubleTime(DT)", value: "DT", disabled: false },
-		{ label: "FreeMod(FM)", value: "FM", disabled: false },
-		{ label: "Easy(EZ)", value: "EZ", disabled: false },
-		{ label: "LongNote(LN)", value: "LN", disabled: false },
-		{ label: "Rice(RC)", value: "RC", disabled: false },
-		{ label: "Hybrid(HB)", value: "HB", disabled: false },
-		{ label: "Extra(EX)", value: "EX", disabled: false },
-		{ label: "SpeedVariation(SV)", value: "SV", disabled: false },
-		{ label: "TieBreaker(TB)", value: "TB", disabled: false },
+		{ label: "NM (NoMod)", value: "NM", disabled: false },
+		{ label: "HD (Hidden)", value: "HD", disabled: false },
+		{ label: "HR (HardRock)", value: "HR", disabled: false },
+		{ label: "DT (DoubleTime)", value: "DT", disabled: false },
+		{ label: "FM (FreeMod)", value: "FM", disabled: false },
+		{ label: "EZ (Easy)", value: "EZ", disabled: false },
+		{ label: "LN (LongNote)", value: "LN", disabled: false },
+		{ label: "RC (Rice)", value: "RC", disabled: false },
+		{ label: "HB (Hybrid)", value: "HB", disabled: false },
+		{ label: "EX (Extra)", value: "EX", disabled: false },
+		{ label: "SV (SpeedVariation)", value: "SV", disabled: false },
+		{ label: "TB (TieBreaker)", value: "TB", disabled: false },
 	]
 });
 // 增加模组
