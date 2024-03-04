@@ -97,5 +97,20 @@ export default {
 	matchRequestOptions: {
 		"match": "浏览比赛结果",
 		"rating":"计算斗力"
+	},
+	userInfo:{
+		"previousUsernames":"曾用名",
+		"globalRank":"全球排名",
+		"countryRank":"地区排名",
+		"medals":"奖牌",
+		"playerInfo":"玩家信息",
+		"rankedScore":"进榜总分",
+		"totalScore":"总分",
+		"playCount":"游戏次数",
+		"playTime":"游玩时间",
+		"accuracy":"准确率",
+		"replaysBeingWatched":"回放被观看次数",
+		"followers":"粉丝",
+		"totalHits":"总命中次数"
 	}
 };

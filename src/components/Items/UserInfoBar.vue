@@ -199,10 +199,10 @@ watch(
     userInfoStore.$state,
     (state) => {
         // 每当它发生变化时，将整个状态持久化到本地存储
-        console.log(state)
+        // console.log(state)
         // state.lang = locale.value;// 刷新页面多语言不变
         userInfo.value = state;// 更新用户状态数据
-        console.log(userInfo.value.data)
+        // console.log(userInfo.value.data)
     },
     { deep: true }
 )

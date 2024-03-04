@@ -98,5 +98,20 @@ export default {
 	matchRequestOptions: {
 		"match": "results",
 		"rating":"rating",
+	},
+	userInfo:{
+		"previousUsernames":"formerly known as",
+		"globalRank":"Global Ranking",
+		"countryRank":"Country Ranking",
+		"medals":"Medals",
+		"playerInfo":"player info",
+		"rankedScore":"Ranked Score",
+		"totalScore":"Total Score",
+		"playCount":"Play Count",
+		"playTime":"Total Play Time",
+		"accuracy":"Accuracy",
+		"replaysBeingWatched":"Replays Being Watched",
+		"followers":"Followers",
+		"totalHits":"Total Hits"	
 	}
 };
