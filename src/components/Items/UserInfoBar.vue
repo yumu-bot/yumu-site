@@ -32,7 +32,7 @@
                         </template>
                         <template #actions>
                             <setting-outlined :title="$t('menuList.settings')" />
-                            <UserOutlined :title="$t('menuList.userInfo')" />
+                            <UserOutlined :title="$t('menuList.userInfo')" @click="router.push('info')" />
                             <LogoutOutlined @click="toggleShow()" :title="$t('menuList.logout')" />
                         </template>
                         <a-card-meta :title=user.name :description=user.description>
@@ -60,31 +60,34 @@
     <!-- 首次登入 -->
     <a-modal class="login-modal" v-else v-model:open="isVisible" :title=noteTitle destroyOnClose>
         <p>{{ $t('notification.logText') }}</p><br>
-        <a-input v-model:value="logCode" size="large" @keyup.enter="getLogCode()" :placeholder="$t('placeholder.logCode')" allow-clear :maxlength="6">
+        <a-input v-model:value="logCode" size="large" @keyup.enter="getLogCode()" :placeholder="$t('placeholder.logCode')"
+            allow-clear :maxlength="6">
             <template #suffix>
                 <LoadingOutlined v-show="isLoading" style="color: rgba(0, 0, 0, 0.45)" />
             </template>
         </a-input>
         <template #footer>
-            <a-button @click="isVisible = false;logCode=''">{{ $t('tool.backButton') }}</a-button>
+            <a-button @click="isVisible = false; logCode = ''">{{ $t('tool.backButton') }}</a-button>
             <a-button @click="getLogCode()">{{ $t('tool.confirmButton') }}</a-button>
         </template>
     </a-modal>
 </template>
 
-<script setup>
+<script setup name="UserInfoBar">
 import { SettingOutlined, UserOutlined, LogoutOutlined, LoadingOutlined } from '@ant-design/icons-vue';
 import { message } from 'ant-design-vue';
 import { ref, watch, onMounted, onBeforeMount } from 'vue';
+import { useRouter } from 'vue-router';
 import { useUserInfoStore } from '../../stores/userInfo';
-import { getLogin } from '../../api/data_api';
-import { useI18n } from 'vue-i18n'
-const I18n = useI18n()
-const { locale, t } = useI18n()
+import { getLogin, getUui } from '../../api/data_api';
+import { useI18n } from 'vue-i18n';
+const I18n = useI18n();
+const { locale, t } = useI18n();
 const langs = ref(['简体中文', 'English']);// 多语言
 
 const userInfoStore = useUserInfoStore();// 用户状态(pinia)
 const guestAvatar = "/img/avatar/avatar-guest@2x.png";// 游客头像
+const router = useRouter();
 
 let userInfo = ref();//用户状态数据(ref)
 // 用户信息
@@ -132,23 +135,28 @@ function getLogCode() {
         }).catch((e) => {
             message.error(t('notification.wrongLogCode'));
             isLoading.value = false;
-            logCode.value="";
+            logCode.value = "";
         });
-    }else{
+    } else {
         message.warning(t('notification.blankLogCode'));
     }
 };
 // 用户数据展示
 function showUserData() {
-    let data = JSON.parse(localStorage.getItem('userData'));
-    userInfoStore.getUserData(data);
-    user.value = {
-        name: data.username,
-        avatar: data.avatar_url,
-        cover: data.cover_url,
-        description: data.pp + " pp "
-    }
-    userInfoStore.$state = { isLogin: true };
+    let data = JSON.parse(localStorage.getItem('userData'));// 获取本地玩家数据
+    // 通过uid更新玩家数据
+    getUui({ uid: data.uid }).then((res) => {
+        if (res.status && res.data) {
+            userInfoStore.getUserData(res.data);
+            user.value = {
+                name: res.data.username,
+                avatar: res.data.avatar_url,
+                cover: res.data.cover_url,
+                description: res.data.pp + " pp "
+            };
+            userInfoStore.$state = { isLogin: true };
+        };
+    });
 };
 // 用户登出
 function logout() {
@@ -160,6 +168,7 @@ function logout() {
     }
     userInfoStore.$state = { isLogin: false };
     isVisible.value = false;
+    router.push("home");
 };
 // 触发下拉菜单时切换通知窗口显示
 function toggleShow() {

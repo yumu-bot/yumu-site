@@ -58,6 +58,7 @@ export default {
 		"logText":"Send the command '!login' in the QQ group with YumuBot to get the verification code",
 		"wrongLogCode":"Code is wrong or out of date",
 		"blankLogCode":"Code can not be null",
+		"notLogin":"Please Log in",
 	},
 	tool: {
 		"clipboard": "Copy it",

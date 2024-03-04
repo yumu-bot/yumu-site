@@ -58,6 +58,7 @@ export default {
 		"logText":"在有 YumuBot 的 QQ 群里发送指令 !login 来获取登录验证码",
 		"wrongLogCode":"验证码错误或过期",
 		"blankLogCode":"验证码不能为空",
+		"notLogin":"请先登录",
 	},
 	tool: {
 		"clipboard": "复制到剪贴板",

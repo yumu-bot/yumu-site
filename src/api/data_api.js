@@ -45,3 +45,11 @@ export const getLogin = params => {
 		params
 	});
 };
+// 获取玩家信息
+export const getUui = params => {
+	return axios({
+		method: "get",
+		url: `/uui`,
+		params
+	});
+};
