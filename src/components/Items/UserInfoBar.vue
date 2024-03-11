@@ -5,18 +5,22 @@
 * @date: 2024-02_27
 * @others: 嵌套在导航栏右侧
 !-->
+
 <template>
     <!-- 用户信息展示 -->
     <div class="user-info">
         <!-- 切换语言 -->
         <div class="locale-changer">
+            <a-button v-show="userInfo.isLogin" type="plain" shape="circle" @click="showDrawer()">
+                <SearchOutlined />
+            </a-button>
             <!-- <select v-model="$i18n.locale">
 						<option v-for="(lang, i) in langs" :key="`Lang${i}`" :value="lang">
 							{{ lang }}
 						</option>
 					</select> -->
             <a-button type="text" v-model="$i18n.locale" @click="toggleLang($i18n.locale)">{{ locale
-            }}</a-button>
+                }}</a-button>
         </div>
         <span class="user-name">{{ user.name }}</span>
         <!-- 用户菜单 -->
@@ -30,12 +34,14 @@
                         <template #cover>
                             <img :src=user.cover />
                         </template>
+
                         <template #actions>
                             <setting-outlined :title="$t('menuList.settings')" />
-                            <UserOutlined :title="$t('menuList.userInfo')" @click="router.push('info')" />
+                            <UserOutlined :title="$t('menuList.userInfo')" @click="router.push(`/info/${user.uid}`)" />
                             <LogoutOutlined @click="toggleShow()" :title="$t('menuList.logout')" />
                         </template>
                         <a-card-meta :title=user.name :description=user.description>
+
                             <template #avatar>
                                 <a-avatar :size="48" :src=user.avatar />
                             </template>
@@ -52,6 +58,7 @@
     <!-- 登出 -->
     <a-modal class="logout-modal" v-if="userInfo.data" v-model:open="isVisible" :title=noteTitle>
         <p>{{ $t('notification.quitText') }}</p>
+
         <template #footer>
             <a-button @click="isVisible = false">{{ $t('tool.backButton') }}</a-button>
             <a-button @click="logout()">{{ $t('tool.quitButton') }}</a-button>
@@ -60,26 +67,43 @@
     <!-- 首次登入 -->
     <a-modal class="login-modal" v-else v-model:open="isVisible" :title=noteTitle destroyOnClose>
         <p>{{ $t('notification.logText') }}</p><br>
-        <a-input v-model:value="logCode" size="large" @keyup.enter="getLogCode()" :placeholder="$t('placeholder.logCode')"
-            allow-clear :maxlength="6">
+        <a-input v-model:value="logCode" size="large" @keyup.enter="getLogCode()"
+            :placeholder="$t('placeholder.logCode')" allow-clear :maxlength="6">
+
             <template #suffix>
                 <LoadingOutlined v-show="isLoading" style="color: rgba(0, 0, 0, 0.45)" />
             </template>
         </a-input>
+
         <template #footer>
             <a-button @click="isVisible = false; logCode = ''">{{ $t('tool.backButton') }}</a-button>
             <a-button @click="getLogCode()">{{ $t('tool.confirmButton') }}</a-button>
         </template>
     </a-modal>
+    <!-- 搜索抽屉 -->
+    <a-drawer title="搜索玩家" placement="top" :closable="false" :open="drawerVisible" :keyboard="false" height="225px"
+        @close="drawerVisible = false">
+        <a-input v-model:value="searchText" size="large" placeholder="键入以搜索" allow-clear
+            @keyup.enter="searchUser()"></a-input>
+        <a-spin v-show="isLoading" style="margin-top: 20px;" />
+        <div class="user-result" v-if="aimUser && !isLoading" @click="jumpUserInfo()">
+            <a-avatar :size="48" :src="aimUser.avatar_url"></a-avatar>
+            <span style="margin-left: 20px;">{{ aimUser.username }}</span>
+        </div>
+        <div class="user-result-error" v-show="aimUser===null&&!isLoading">
+            <a-empty image="/img/component/Index_Error.svg" description="玩家不存在"/>
+        </div>
+    </a-drawer>
 </template>
 
 <script setup name="UserInfoBar">
-import { SettingOutlined, UserOutlined, LogoutOutlined, LoadingOutlined } from '@ant-design/icons-vue';
+import { SettingOutlined, UserOutlined, LogoutOutlined, LoadingOutlined, SearchOutlined } from '@ant-design/icons-vue';
 import { message } from 'ant-design-vue';
 import { ref, watch, onMounted, onBeforeMount } from 'vue';
 import { useRouter } from 'vue-router';
 import { useUserInfoStore } from '../../stores/userInfo';
-import { getLogin, getUui } from '../../api/data_api';
+import { getLogin, getUserInfo } from '../../api/data_api';
+import { resolveString } from '../../utils/util';
 import { useI18n } from 'vue-i18n';
 const I18n = useI18n();
 const { locale, t } = useI18n();
@@ -96,12 +120,16 @@ let user = ref({
     avatar: "",// 头像
     cover: "",// 主页封面
     description: "",// 简介，展示pp
+    uid:"",// id
 });
 let isVisible = ref(false);// 全局通知窗口是否显示
 let isOpen = ref();// 下拉菜单是否弹出
 let noteTitle = ref();// 全局通知窗口标题
 let logCode = ref("");// 登录验证码
 let isLoading = ref(false);// 登录验证loading
+let drawerVisible = ref(false);// 抽屉是否显示
+let searchText = ref("");// 搜索文字
+let aimUser = ref();// 指定搜索用户
 
 //切换网页语言
 function toggleLang(currentLang) {
@@ -145,14 +173,15 @@ function getLogCode() {
 function showUserData() {
     let data = JSON.parse(localStorage.getItem('userData'));// 获取本地玩家数据
     // 通过uid更新玩家数据
-    getUui({ uid: data.uid }).then((res) => {
+    getUserInfo({ uid: data.uid }).then((res) => {
         if (res.status && res.data) {
             userInfoStore.getUserData(res.data);
             user.value = {
                 name: res.data.username,
                 avatar: res.data.avatar_url,
                 cover: res.data.cover_url,
-                description: res.data.pp + " pp "
+                description: res.data.pp + " pp ",
+                uid:res.data.uid,
             };
             userInfoStore.$state = { isLogin: true };
         };
@@ -164,7 +193,8 @@ function logout() {
         name: null,
         avatar: guestAvatar,
         cover: null,
-        description: null
+        description: null,
+        uid:null
     }
     userInfoStore.$state = { isLogin: false };
     isVisible.value = false;
@@ -176,6 +206,34 @@ function toggleShow() {
     isVisible.value = true;
     isOpen.value = false;
 };
+// 显示搜索抽屉
+function showDrawer() {
+    drawerVisible.value = true;
+};
+// 根据用户名查询指定用户 
+function searchUser() {
+    if (searchText.value !== "") {
+        isLoading.value = true;
+        let name = resolveString(searchText.value);
+        getUserInfo({ name: name }).then((res) => {
+            if (res.status && res.data) {
+                isLoading.value = false;
+                aimUser.value = res.data;
+            }
+        }).catch((e) => {
+            isLoading.value = false;
+            aimUser.value = null;
+        });
+    };
+};
+// 
+function jumpUserInfo(){
+    const uid=aimUser.value.uid;
+    router.push({name:"info",params:{uid}});
+    drawerVisible.value=false;
+    // window.history.go(0);
+    // location.reload();
+}
 
 onBeforeMount(() => {
     // 校验用户状态

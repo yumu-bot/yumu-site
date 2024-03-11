@@ -11,7 +11,7 @@
 		<div>
 			<a-select class="function-bar" :options="functions" size="large" v-model:value=state.nowfunction>
 				<a-select-option v-for="(item, index) in functions" :key="index"
-					:label="$t(`userRequestOptions.${item.value}`)" :value="item.value"></a-select-option>
+					:label="item.label" :value="item.value"></a-select-option>
 			</a-select>
 		</div>
 		<Infos v-if="state.type === 0" :state="state" :emitParams="emitParams" :getCommand="getCommand"></Infos>
@@ -42,23 +42,23 @@ const state = reactive({
 	type: 0,//功能类型
 	//功能列表
 	functionList: [
-		["ppm", "bpa"],//支持用户名+mode查询 type:0
+		["ppm", "bp/analysis"],//支持用户名+mode查询 type:0
 		["score", "scores"],//支持用户名+mode+可选附加参数查询 type:1
 		["mapScore"],
 	],
 	//单个成绩查询类型
 	scoreTypes: [
-		{ label: "最近", value: "re" },
-		{ label: "最近通过", value: "pr" },
+		{ label: "最近", value: "score/recent" },
+		{ label: "最近通过", value: "score/pass" },
 		{ label: "最好成绩", value: "bp" },
 		// { label: "谱面成绩", value: "score" },
 	],
 	//多个成绩查询类型
 	scoresTypes: [
-		{ label: "最近", value: "re" },
-		{ label: "最近通过", value: "pr" },
-		{ label: "最好(bp范围)", value: "bp-range" },
-		{ label: "最好(天数范围)", value: "bp-days" },
+		{ label: "最近", value: "score/recents" },
+		{ label: "最近通过", value: "score/passes" },
+		{ label: "最好(bp范围)", value: "bp/scores" },
+		{ label: "最好(天数范围)", value: "bp/today" },
 	],
 	scoreTypeList: [],
 	// 游玩模组列表 disabled默认为false,表示启用
@@ -206,11 +206,11 @@ watch(() => state.nowfunction, (val) => {
 	getFunctionType();
 	if (val === "score") {
 		state.scoreTypeList = state.scoreTypes;
-		state.scoreType = "pr";//默认选择最近通过项
+		state.scoreType = "score/pass";//默认选择最近通过项
 	};
 	if (val === "scores") {
 		state.scoreTypeList = state.scoresTypes;
-		state.scoreType = "bp-range";//默认选择最好成绩(bp范围)项
+		state.scoreType = "bp/scores";//默认选择最好成绩(bp范围)项
 	};
 });
 // 监听游玩mod选项进行mod组合校验
@@ -270,7 +270,7 @@ watch(locale, (val) => {
 		item.label = t(`scoreTypeOptions.${item.value}`);
 	};
 	for (let item of state.scoresTypes) {
-		item.label = t(`scoreTypeOptions.${item.value}`);
+		item.label = t(`scoresTypeOptions.${item.value}`);
 	}
 }, { immediate: true, deep: true })
 </script>

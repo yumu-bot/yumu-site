@@ -82,20 +82,24 @@ export default {
 	},
 	userRequestOptions: {
 		"ppm": "PP-", 
-		"bpa": "分析最好成绩", 
+		"bp/analysis": "分析最好成绩", 
 		"score": "查询单个成绩", 
 		"scores": "查询多个成绩", 
 		"mapScore": "谱面成绩查询",
 	},
 	scoreTypeOptions: {
-		"re": "最近",
-		"pr": "最近通过",
+		"score/recent": "最近",
+		"score/pass": "最近通过",
 		"bp":"最好成绩",
-		"bp-range":"最好(bp范围)",
-		"bp-days":"最好(天数范围)",	
+	},
+	scoresTypeOptions: {
+		"score/recents": "最近",
+		"score/passes": "最近通过",
+		"bp/scores":"最好(bp范围)",
+		"bp/today":"最好(天数范围)",	
 	},
 	matchRequestOptions: {
-		"match": "浏览比赛结果",
+		"now": "浏览比赛结果",
 		"rating":"计算斗力"
 	},
 	userInfo:{

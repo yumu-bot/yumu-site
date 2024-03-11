@@ -107,9 +107,9 @@ export const resolveTime = (time) => {
   let day;
   let hour;
   let minute;
-  let rateDay = 60 * 60 * 24;//天 - 秒之间倍率
-  let rateHour = 60 * 60;// 时 - 秒之间倍率
-  let rateMinute = 60;// 秒
+  let rateDay = 60 * 60 * 24; //天 - 秒之间倍率
+  let rateHour = 60 * 60; // 时 - 秒之间倍率
+  let rateMinute = 60; // 秒
   day = Number.parseInt(time / rateDay);
   hour = Number.parseInt((time - day * rateDay) / rateHour);
   minute = Number.parseInt(
@@ -122,3 +122,62 @@ export const resolveTime = (time) => {
   };
   return timeObj;
 };
+
+/**
+ * @description 字符串 - 百分比编码格式化
+ * @param {String} val 格式化前的字符串
+ * @return {String} val 格式化后的字符串
+ */
+export const resolveString = (val) => {
+  // 百分比编码列表
+  let encodeList = [
+    ":",
+    "/",
+    "?",
+    "#",
+    "[",
+    "]",
+    "@",
+    "!",
+    "$",
+    "&",
+    "'",
+    "(",
+    ")",
+    "*",
+    "+",
+    ",",
+    ";",
+    "=",
+    "%",
+    // " ",//空格已有预处理
+  ];
+  let res = "";
+  let char = "";
+  for (let i in val) {
+    if (encodeList.includes(val[i])) {
+      char = "%" + val.charCodeAt(i).toString(16);
+      console.log(val[i]);
+    } else {
+      char = val[i];
+    }
+    res += char;
+  }
+  return res;
+};
+
+/**
+* @description 游戏模式高光显示
+* @param {String} mode
+* @param {Array} modeList
+* @param {Boolean} isActive
+* @return 
+*/
+export const modeHighlight=(mode,modeList,isActive)=>{
+  for (let i of modeList) {
+    if (i.name !== mode) {
+        i.isActive = isActive;
+    };
+};
+
+}

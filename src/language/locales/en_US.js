@@ -83,20 +83,24 @@ export default {
 	},
 	userRequestOptions: {
 		"ppm": "PP-", 
-		"bpa": "performance", 
+		"bp/analysis": "performance", 
 		"score": "single score", 
 		"scores": "multiple scores", 
 		"mapScore": "beatmap score",
 	},
 	scoreTypeOptions: {
-		"re": "recent",
-		"pr": "recent pass",
+		"score/recent": "recent",
+		"score/pass": "recent pass",
 		"bp":"best",
-		"bp-range":"best(in bps)",
-		"bp-days":"best(in days)",	
+	},
+	scoresTypeOptions: {
+		"score/recents": "recents",
+		"score/passes": "recent passes",
+		"bp/scores":"best(in bps)",
+		"bp/today":"best(in days)",	
 	},
 	matchRequestOptions: {
-		"match": "results",
+		"now": "results",
 		"rating":"rating",
 	},
 	userInfo:{

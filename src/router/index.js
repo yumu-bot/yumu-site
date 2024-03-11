@@ -41,7 +41,7 @@ const routes = [
         },
       },
       {
-        path: "/info",
+        path: "/info/:uid?",
         name: "info",
         component: () => import("../views/Info.vue"),
         meta: {

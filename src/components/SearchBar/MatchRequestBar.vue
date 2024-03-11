@@ -61,7 +61,7 @@ import { useI18n } from 'vue-i18n'
 const { locale, t } = useI18n()
 const state = reactive({
 	matchId: "",//比赛Id
-	nowfunction: "match",//指定查询功能,默认为match
+	nowfunction: "now",//指定查询功能,默认为now
 	skipBegin: 0,//跳过开头对局
 	skipEnd: 0,//跳过结尾对局
 	includeFail: false,//是否包含失败对局
@@ -84,7 +84,7 @@ const props = defineProps({
 // match -> !ymmn 123456 0 0 r f
 // rating -> !ymra 123456 0 0 r f
 function getCommand(matchId, k, d, r, f) {
-	let functionName = state.nowfunction === "match" ? "ymmn" : "ymra";
+	let functionName = state.nowfunction === "now" ? "ymmn" : "ymra";
 	let isRestart = r ? " r" : "";
 	let isFail = f ? " f" : "";
 	if (matchId !== "") {

@@ -46,10 +46,10 @@ export const getLogin = params => {
 	});
 };
 // 获取玩家信息
-export const getUui = params => {
+export const getUserInfo = params => {
 	return axios({
 		method: "get",
-		url: `/uui`,
+		url: `/info/json`,
 		params
 	});
 };

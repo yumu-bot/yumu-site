@@ -1,4 +1,5 @@
 <!-- eslint-disable vue/multi-word-component-names -->
+
 <template>
 	<div class="nav">
 		<div class="nav-bar">
@@ -66,15 +67,18 @@ function changeMenuByNavbar(selectedMenu, path) {
 };
 onMounted(() => {
 	changeMenuByRandom();
-})
+});
+// 监听路由
 watch((route), () => {
 	if (router.push) {
 		console.log(route.name, route.path);
+		// 导航栏路由跳转逻辑
 		let selectedMenu = route.name;
 		let path = route.path;
 		changeMenuByNavbar(selectedMenu, path);
-	}
+	};
 });
 
 </script>
+
 <style lang="scss" scoped></style>

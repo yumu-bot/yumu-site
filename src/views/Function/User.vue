@@ -40,7 +40,7 @@ const state = reactive({
 	// 功能列表
 	functions: [
 		{ label: t('userRequestOptions.ppm'), value: "ppm" },
-		{ label: t('userRequestOptions.bpa'), value: "bpa" },
+		{ label: t(`userRequestOptions.bp/analysis`), value: "bp/analysis" },
 		{ label: t('userRequestOptions.score'), value: "score" },
 		{ label: t('userRequestOptions.scores'), value: "scores" },
 		{ label: t('userRequestOptions.mapScore'), value: "mapScore" },
@@ -122,7 +122,7 @@ function getPerformancePoint() {
 		u1: state.username,
 		mode: state.mode,
 	}
-	state.imgUrl = state.baseUrl + `/${state.nowfunction}?u1=${paramsObj.u1}&mode=${paramsObj.mode}`;
+	state.imgUrl = state.baseUrl + `/${state.nowfunction}?name=${paramsObj.u1}&mode=${paramsObj.mode}`;
 	state.imgUrl = encodeURI(state.imgUrl);
 };
 // 查询score/scores
@@ -143,18 +143,18 @@ function getScore() {
 		if (mod === "") {
 			// 不查询指定mod(默认查询分数最高成绩)
 			// state.imgUrl = state.baseUrl + `/${state.nowfunction}?u1=${paramsObj.u1}&mode=${paramsObj.mode}&bid=${paramsObj.bid}`;
-			state.imgUrl = state.baseUrl + `/score?u1=${paramsObj.u1}&mode=${paramsObj.mode}&bid=${paramsObj.bid}`;
+			state.imgUrl = state.baseUrl + `/score?name=${paramsObj.u1}&mode=${paramsObj.mode}&bid=${paramsObj.bid}`;
 		} else {
 			// 查询指定mod
 			// state.imgUrl = state.baseUrl + `/${state.nowfunction}?u1=${paramsObj.u1}&mode=${paramsObj.mode}&bid=${paramsObj.bid}&mods=${mod}`;
-			state.imgUrl = state.baseUrl + `/score?u1=${paramsObj.u1}&mode=${paramsObj.mode}&bid=${paramsObj.bid}&mods=${mod}`;
+			state.imgUrl = state.baseUrl + `/score?name=${paramsObj.u1}&mode=${paramsObj.mode}&bid=${paramsObj.bid}&mods=${mod}`;
 		}
 	} else {
 		// 查询pr/re/bp/bp-days/bp-range
 		if (state.nowfunction === 'score') {
-			state.imgUrl = state.baseUrl + `/${state.nowfunction}/${paramsObj.scoreType}?u1=${paramsObj.u1}&mode=${paramsObj.mode}&n=${paramsObj.value}`;
+			state.imgUrl = state.baseUrl + `/${paramsObj.scoreType}?name=${paramsObj.u1}&mode=${paramsObj.mode}&start=${paramsObj.value}`;
 		} else {
-			state.imgUrl = state.baseUrl + `/${state.nowfunction}/${paramsObj.scoreType}?u1=${paramsObj.u1}&mode=${paramsObj.mode}&m=${paramsObj.value}`;
+			state.imgUrl = state.baseUrl + `/${paramsObj.scoreType}?name=${paramsObj.u1}&mode=${paramsObj.mode}&start=${paramsObj.value}&end=10`;
 		}
 	}
 	state.imgUrl = encodeURI(state.imgUrl);

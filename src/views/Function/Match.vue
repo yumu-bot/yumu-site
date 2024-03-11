@@ -21,7 +21,7 @@ import SearchResultBanner from '../../components/SearchResult/SearchResultBanner
 import MatchRequestBar from '../../components/SearchBar/MatchRequestBar.vue';
 import { onMounted, reactive, watch } from 'vue';
 import { useI18n } from 'vue-i18n'
-const { locale, t } = useI18n()
+const { locale, t } = useI18n();
 const state = reactive({
   baseUrl: "",
   matchId: "",//比赛id
@@ -30,10 +30,10 @@ const state = reactive({
   status: "waiting",//查询状态
   // 功能列表
   functions: [
-    { label: "浏览比赛结果", value: "match" },
+    { label: "浏览比赛结果", value: "now" },
     { label: "计算斗力", value: "rating" },
   ],
-  nowfunction: "match",//指定查询功能,默认为match
+  nowfunction: "now",//指定查询功能,默认为now
   skipBegin: 0,//跳过开头对局
   skipEnd: 0,//跳过结尾对局
   includeFail: false,//是否包含失败对局
@@ -89,7 +89,7 @@ function getMatchInfo() {
     f: state.includeFail,
     r: state.includeRestart
   }
-  state.imgUrl = state.baseUrl + `/${state.nowfunction}?id=${paramsObj.id}&k=${paramsObj.k}&d=${paramsObj.d}&f=${paramsObj.f}&r=${paramsObj.r}`
+    state.imgUrl = state.baseUrl + `/match/${state.nowfunction}?id=${paramsObj.id}&k=${paramsObj.k}&d=${paramsObj.d}&f=${paramsObj.f}&r=${paramsObj.r}`
 };
 onMounted(() => {
   state.imgUrl = "";

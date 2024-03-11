@@ -83,7 +83,7 @@ function getUserVS() {
 		u2: state.userB,
 		mode: state.mode
 	}
-	state.imgUrl = state.baseUrl + `/ppmvs?u1=${paramsObj.u1}&u2=${paramsObj.u2}&mode=${paramsObj.mode}`;
+	state.imgUrl = state.baseUrl + `/ppm/vs?name=${paramsObj.u1}&name2=${paramsObj.u2}&mode=${paramsObj.mode}`;
 	state.imgUrl = encodeURI(state.imgUrl);
 };
 onMounted(() => {
