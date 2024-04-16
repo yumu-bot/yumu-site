@@ -1,10 +1,11 @@
 // global
 @import "./variables.scss";
+@import "./font.scss";
 
 * {
 	// background-color: #1c1719;
 	// color: #ffffff;
-	font-family: "puhui", "torus";
+	font-family: torus,puhui,-apple-system;
 	margin: 0;
 	padding: 0;
 }
