@@ -124,8 +124,8 @@ function init() {
     // 游玩时间格式化
     playTime.value = resolveTime(user.value.play_time);
     // 曾用名字符串处理
+    previousUsernames.value = "";// 初始化清空
     for (let i of user.value.previous_usernames) {
-        previousUsernames.value = "";// 初始化清空
         if (i !== user.value.previous_usernames[user.value.previous_usernames.length - 1]) {
             previousUsernames.value += i + ", ";
         } else {
