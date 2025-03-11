@@ -102,6 +102,7 @@ export default {
 	matchRequestOptions: {
 		"now": "results",
 		"rating":"rating",
+		"exportCsv":"export results",
 	},
 	userInfo:{
 		"previousUsernames":"formerly known as",

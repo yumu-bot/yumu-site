@@ -19,6 +19,7 @@
 import { message } from 'ant-design-vue';
 import SearchResultBanner from '../../components/SearchResult/SearchResultBanner.vue';
 import MatchRequestBar from '../../components/SearchBar/MatchRequestBar.vue';
+import { getMatchCsv } from '../../api/data_api';
 import { onMounted, reactive, watch } from 'vue';
 import { useI18n } from 'vue-i18n'
 const { locale, t } = useI18n();
@@ -32,6 +33,7 @@ const state = reactive({
   functions: [
     { label: "浏览比赛结果", value: "now" },
     { label: "计算斗力", value: "rating" },
+    { label: "导出比赛结果", value: "exportCsv" },
   ],
   nowfunction: "now",//指定查询功能,默认为now
   skipBegin: 0,//跳过开头对局
@@ -46,20 +48,35 @@ async function sendRequest() {
   if (state.matchId === "") {
     message.warning(t('notification.blankMatchid'));
   } else {
-    state.spinning = true;//图片正在加载
-    state.status = "loading";
-    getMatchInfo();
-    // 图片加载超时切换状态为error,超时限制为1分钟
-    let timer = setTimeout(() => {
-      if (state.status !== "") {
-        state.status = "error";
-        message.warning(t('notification.timeout'));
-        clearTimeout(timer);
-      } else {
-        // 若加载成功,清除定时器
-        clearTimeout(timer);
-      }
-    }, 60000);
+    if (state.nowfunction === "exportCsv") {
+      getMatchCsv({ match: state.matchId }).then(res => {
+        if (res.data) {
+          const blob = new Blob([res.data], { type: 'text/csv' });
+          // 创建下载链接并触发下载
+          const url = window.URL.createObjectURL(blob);
+          const a = document.createElement('a');
+          a.href = url;
+          a.download = `${state.matchId}.csv`;
+          a.click();
+          window.URL.revokeObjectURL(url); // 释放URL对象
+        }
+      });
+    } else {
+      state.spinning = true;//图片正在加载
+      state.status = "loading";
+      getMatchInfo();
+      // 图片加载超时切换状态为error,超时限制为1分钟
+      let timer = setTimeout(() => {
+        if (state.status !== "") {
+          state.status = "error";
+          message.warning(t('notification.timeout'));
+          clearTimeout(timer);
+        } else {
+          // 若加载成功,清除定时器
+          clearTimeout(timer);
+        }
+      }, 60000);
+    }
   }
 };
 //修改查询状态(emit)
@@ -89,18 +106,18 @@ function getMatchInfo() {
     f: state.includeFail,
     r: state.includeRestart
   }
-    state.imgUrl = state.baseUrl + `/match/${state.nowfunction}?id=${paramsObj.id}&k=${paramsObj.k}&d=${paramsObj.d}&f=${paramsObj.f}&r=${paramsObj.r}`
+  state.imgUrl = state.baseUrl + `/match/${state.nowfunction}?id=${paramsObj.id}&k=${paramsObj.k}&d=${paramsObj.d}&f=${paramsObj.f}&r=${paramsObj.r}`
 };
 onMounted(() => {
   state.imgUrl = "";
   state.baseUrl = import.meta.env.VITE_BASEURL;
-}); 
+});
 // 国际化
 watch(locale, (val) => {
-	for (let item of state.functions) {
-		item.label = t(`matchRequestOptions.${item.value}`);
-	};
-}, { immediate:true,deep: true })
+  for (let item of state.functions) {
+    item.label = t(`matchRequestOptions.${item.value}`);
+  };
+}, { immediate: true, deep: true })
 </script>
 
 <style></style>

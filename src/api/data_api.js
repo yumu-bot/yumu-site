@@ -53,3 +53,11 @@ export const getUserInfo = params => {
 		params
 	});
 };
+// 获取比赛结果csv
+export const getMatchCsv = params => {
+	return axios({
+		method: "get",
+		url: `/match/rating/csv`,
+		params,
+	});
+};

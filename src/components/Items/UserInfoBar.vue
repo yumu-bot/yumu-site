@@ -20,7 +20,7 @@
 						</option>
 					</select> -->
             <a-button type="text" v-model="$i18n.locale" @click="toggleLang($i18n.locale)">{{ locale
-                }}</a-button>
+            }}</a-button>
         </div>
         <span class="user-name">{{ user.name }}</span>
         <!-- 用户菜单 -->
@@ -90,8 +90,8 @@
             <a-avatar :size="48" :src="aimUser.avatar_url"></a-avatar>
             <span style="margin-left: 20px;">{{ aimUser.username }}</span>
         </div>
-        <div class="user-result-error" v-show="aimUser===null&&!isLoading">
-            <a-empty image="/img/component/Index_Error.svg" description="玩家不存在"/>
+        <div class="user-result-error" v-show="aimUser === null && !isLoading">
+            <a-empty image="/img/component/Index_Error.svg" description="玩家不存在" />
         </div>
     </a-drawer>
 </template>
@@ -120,7 +120,7 @@ let user = ref({
     avatar: "",// 头像
     cover: "",// 主页封面
     description: "",// 简介，展示pp
-    uid:"",// id
+    uid: "",// id
 });
 let isVisible = ref(false);// 全局通知窗口是否显示
 let isOpen = ref();// 下拉菜单是否弹出
@@ -181,7 +181,7 @@ function showUserData() {
                 avatar: res.data.avatar_url,
                 cover: res.data.cover_url,
                 description: res.data.pp + " pp ",
-                uid:res.data.uid,
+                uid: res.data.user_id,
             };
             userInfoStore.$state = { isLogin: true };
         };
@@ -194,7 +194,7 @@ function logout() {
         avatar: guestAvatar,
         cover: null,
         description: null,
-        uid:null
+        uid: null
     }
     userInfoStore.$state = { isLogin: false };
     isVisible.value = false;
@@ -227,10 +227,10 @@ function searchUser() {
     };
 };
 // 
-function jumpUserInfo(){
-    const uid=aimUser.value.uid;
-    router.push({name:"info",params:{uid}});
-    drawerVisible.value=false;
+function jumpUserInfo() {
+    const uid = aimUser.value.user_id;
+    router.push({ name: "info", params: { uid } });
+    drawerVisible.value = false;
     // window.history.go(0);
     // location.reload();
 }

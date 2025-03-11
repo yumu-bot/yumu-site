@@ -100,7 +100,8 @@ export default {
 	},
 	matchRequestOptions: {
 		"now": "浏览比赛结果",
-		"rating":"计算斗力"
+		"rating":"计算斗力",
+		"exportCsv":"导出比赛结果",
 	},
 	userInfo:{
 		"previousUsernames":"曾用名",
